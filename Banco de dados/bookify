@@ -1,0 +1,40 @@
+create table aluno (matricula varchar(20) primary key,
+				   nome varchar(100) not null,
+				   turma varchar(50) not null,
+				   curso varchar(50) not null,
+				   telefone varchar(15) not null unique)
+				   
+
+create table professor(cpf varchar(11) primary key,
+				   	   nome varchar(100) not null,
+				       disciplina varchar(30) not null,
+				       telefone varchar(15) not null unique)
+					   
+create table livro (num_registro varchar(15) primary key,
+				   data_livro date not null,
+				   autor varchar(100) not null,
+				   titulo varchar(100) not null,
+				   volume varchar(3) not null,
+				   exemplar varchar(3) not null,
+				   lugar varchar(2) not null,
+				   editora varchar(30) not null,
+				   ano_publicacao varchar(4) not null,
+				   forma_aquisicao varchar(30) not null,
+				   observacao text)
+				   
+create table emprestimo (num_emprestimo serial primary key,
+						data_inicio date not null,
+						data_devolucao date not null,
+						num_registro_livro varchar(15),
+						constraint reg_livro_fk 
+							foreign key (num_registro_livro)
+						 	references livro(num_registro),
+						id_aluno varchar(20),
+						constraint alu_fk
+							foreign key (id_aluno)
+							references aluno(matricula),
+						id_professor varchar(11),
+						constraint prof_fk
+							foreign key (id_professor)
+							references professor(cpf)) 
+
