@@ -1,0 +1,95 @@
+create table aluno (matricula varchar(20) primary key,
+				   nome varchar(100) not null,
+				   turma varchar(50) not null,
+				   curso varchar(50) not null,
+				   telefone varchar(15) not null unique)
+				   
+
+create table professor(cpf varchar(11) primary key,
+				   	   nome varchar(100) not null,
+				       disciplina varchar(30) not null,
+				       telefone varchar(15) not null unique)
+					   
+create table livro (num_registro varchar(15) primary key,
+				   data_livro date not null,
+				   autor varchar(100) not null,
+				   titulo varchar(100) not null,
+				   volume varchar(3) not null,
+				   exemplar varchar(3) not null,
+				   lugar varchar(2) not null,
+				   editora varchar(30) not null,
+				   ano_publicacao varchar(4) not null,
+				   forma_aquisicao varchar(30) not null,
+				   observacao text)
+				   
+create table emprestimo (num_emprestimo serial primary key,
+						data_inicio date not null,
+						data_devolucao date not null,
+						num_registro_livro varchar(15),
+						constraint reg_livro_fk 
+							foreign key (num_registro_livro)
+						 	references livro(num_registro),
+						id_aluno varchar(20),
+						constraint alu_fk
+							foreign key (id_aluno)
+							references aluno(matricula),
+						id_professor varchar(11),
+						constraint prof_fk
+							foreign key (id_professor)
+							references professor(cpf)) 
+
+-- Populando a tabela "aluno"
+INSERT INTO aluno (matricula, nome, turma, curso, telefone)
+VALUES
+    ('001', 'João Silva', 'Turma A', 'Engenharia', '1234567890'),
+    ('002', 'Maria Santos', 'Turma B', 'Medicina', '9876543210'),
+    ('003', 'Carlos Souza', 'Turma C', 'Direito', '5555555555'),
+    ('004', 'Ana Oliveira', 'Turma A', 'Administração', '7777777777'),
+    ('005', 'Pedro Ferreira', 'Turma B', 'Informática', '9999999999'),
+    ('006', 'Julia Rodrigues', 'Turma C', 'Psicologia', '1111111111'),
+    ('007', 'Luiz Gomes', 'Turma A', 'Arquitetura', '4444444444'),
+    ('008', 'Mariana Pereira', 'Turma B', 'Economia', '6666666666'),
+    ('009', 'Fernando Alves', 'Turma C', 'Enfermagem', '2222222222'),
+    ('010', 'Larissa Costa', 'Turma A', 'Ciências Sociais', '8888888888');
+
+-- Populando a tabela "professor"
+INSERT INTO professor (cpf, nome, disciplina, telefone)
+VALUES
+    ('11111111111', 'Prof. Silva', 'Matemática', '5555555555'),
+    ('22222222222', 'Prof. Santos', 'História', '6666666666'),
+    ('33333333333', 'Prof. Souza', 'Química', '7777777777'),
+    ('44444444444', 'Prof. Oliveira', 'Física', '8888888888'),
+    ('55555555555', 'Prof. Ferreira', 'Biologia', '9999999999'),
+    ('66666666666', 'Prof. Rodrigues', 'Geografia', '1111111111'),
+    ('77777777777', 'Prof. Gomes', 'Português', '2222222222'),
+    ('88888888888', 'Prof. Pereira', 'Inglês', '3333333333'),
+    ('99999999999', 'Prof. Alves', 'Educação Física', '4444444444'),
+    ('12345678901', 'Prof. Costa', 'Artes', '1234567890');
+
+-- Populando a tabela "livro"
+INSERT INTO livro (num_registro, data_livro, autor, titulo, volume, exemplar, lugar, editora, ano_publicacao, forma_aquisicao, observacao)
+VALUES
+    ('001', '2020-01-15', 'Autor 1', 'Livro 1', '1', '1', 'BR', 'Editora A', '2019', 'Compra', NULL),
+    ('002', '2019-05-20', 'Autor 2', 'Livro 2', '1', '2', 'BR', 'Editora B', '2018', 'Doação', 'Livro em bom estado'),
+    ('003', '2021-08-10', 'Autor 3', 'Livro 3', '2', '1', 'PT', 'Editora C', '2020', 'Compra', 'Novo livro'),
+    ('004', '2018-11-25', 'Autor 4', 'Livro 4', '2', '2', 'PT', 'Editora D', '2017', 'Compra', NULL),
+    ('005', '2020-03-12', 'Autor 5', 'Livro 5', '1', '1', 'US', 'Editora E', '2019', 'Doação', 'Edição especial'),
+    ('006', '2019-06-30', 'Autor 6', 'Livro 6', '1', '2', 'US', 'Editora F', '2018', 'Compra', NULL),
+    ('007', '2021-09-05', 'Autor 7', 'Livro 7', '3', '1', 'FR', 'Editora G', '2020', 'Compra', 'Livro raro'),
+    ('008', '2018-12-18', 'Autor 8', 'Livro 8', '3', '2', 'FR', 'Editora H', '2017', 'Doação', NULL),
+    ('009', '2020-02-08', 'Autor 9', 'Livro 9', '2', '1', 'ES', 'Editora I', '2019', 'Compra', NULL),
+    ('010', '2019-07-22', 'Autor 10', 'Livro 10', '2', '2', 'ES', 'Editora J', '2018', 'Compra', 'Livro interessante');
+
+-- Populando a tabela "emprestimo"
+INSERT INTO emprestimo (data_inicio, data_devolucao, num_registro_livro, id_aluno, id_professor)
+VALUES
+    ('2023-01-02', '2023-01-16', '001', '001', NULL),
+    ('2023-02-15', '2023-03-01', '002', '002', NULL),
+    ('2023-03-10', '2023-03-24', '003', '003', NULL),
+    ('2023-04-05', '2023-04-19', '004', '004', NULL),
+    ('2023-05-20', '2023-06-03', '005', '005', NULL),
+    ('2023-06-15', '2023-06-30', '006', '006', NULL),
+    ('2023-07-10', '2023-07-24', '007', NULL, '11111111111'),
+    ('2023-08-05', '2023-08-19', '008', NULL, '22222222222'),
+    ('2023-09-10', '2023-09-24', '009', NULL, '33333333333'),
+    ('2023-10-01', '2023-10-15', '010', NULL, '44444444444');
