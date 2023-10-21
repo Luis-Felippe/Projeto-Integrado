@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\felip\\Downloads\\postgresql-42.6.0.jar"
+    ],
+    "java.project.sourcePaths": [
+        "Bookify.api/models",
+        "Bookify.api/DbContext",
+        "Bookify.api/Main"
+    ]
+}
