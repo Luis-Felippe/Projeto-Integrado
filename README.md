@@ -20,9 +20,6 @@ Nossa proposta visa implementar uma solução tecnológica eficiente que unifiqu
 ## Funcionalidades do sistema
 
 - Adicionar, editar e excluir livros
-- Adicionar, editar e excluir mutuários
 - Confira e faça check-in de livros
 - Ver histórico de empréstimos
-- Gerar relatórios
-
-
+- Gerar relatórios mensais
