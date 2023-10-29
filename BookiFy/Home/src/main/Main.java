@@ -17,7 +17,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             System.out.println("Opa");
-            var resource = getClass().getResource("Login.fxml");
+            var resource = getClass().getResource("Home.fxml");
             Parent root = FXMLLoader.load(resource);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

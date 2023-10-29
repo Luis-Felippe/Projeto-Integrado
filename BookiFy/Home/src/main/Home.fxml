@@ -62,15 +62,16 @@
                   </ImageView>
                   <Pane prefHeight="40.0" prefWidth="640.0" style="-fx-background-color: #164C64;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Text fill="WHITE" layoutX="10.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BF" textAlignment="CENTER" wrappingWidth="29.4453125">
-                           <font>
-                              <Font name="System Bold" size="22.0" />
-                           </font>
-                        </Text>
                         <Button layoutX="547.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: null;" text="Empréstimos" textAlignment="CENTER" textFill="WHITE" />
                         <Button layoutX="459.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: null;" text="Professores" textAlignment="CENTER" textFill="WHITE" />
                         <Button layoutX="397.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: null;" text="Alunos" textAlignment="CENTER" textFill="WHITE" />
                         <Button layoutX="335.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: null;" text="Livros" textAlignment="CENTER" textFill="WHITE" />
+                        <Pane layoutY="3.0" prefHeight="35.0" prefWidth="33.0" />
+                        <ImageView fitHeight="35.0" fitWidth="47.0" layoutX="10.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/BF.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </Pane>
                   <Button layoutY="40.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="77.0" style="-fx-background-color: null;" text="Home &gt;" textAlignment="CENTER" textFill="WHITE">
