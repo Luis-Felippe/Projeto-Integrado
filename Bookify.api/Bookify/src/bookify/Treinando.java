@@ -18,6 +18,7 @@ public class Treinando extends Application {
     private static Scene AlunosMenuScene;
     private static Scene LivrosScene;
     private static Scene AlunoCadastroScene;
+    private static Scene telaAtual;
     
     
     
@@ -31,6 +32,7 @@ public class Treinando extends Application {
         Parent alunoCadastrofxml = FXMLLoader.load(getClass().getResource("View/Alunos-cadastro-window.fxml"));
         AlunoCadastroScene = new Scene(alunoCadastrofxml);
         this.stage.setScene(AlunosMenuScene);
+        //AlunoCadastroScene.setRoot(alunoMenufxml);
         stage.show();
         /*
         System.out.println("Opa");
