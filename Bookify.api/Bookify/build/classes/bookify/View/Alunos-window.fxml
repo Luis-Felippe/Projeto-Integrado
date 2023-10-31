@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
+         <children>
+            <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+               <image>
+                  <Image url="@images/image.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <VBox layoutX="149.0" layoutY="98.0" styleClass="options-container">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="66.0">
+               <image>
+                  <Image url="@images/BookifyLogo.png" />
+               </image>
+            </ImageView>
+            <Button mnemonicParsing="false" text="CADASTRAR ALUNOS">
+               <styleClass>
+                  <String fx:value="button-on-container" />
+                  <String fx:value="button-on-container-text" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="243.0" text="LISTAR ALUNOS">
+               <styleClass>
+                  <String fx:value="button-on-container" />
+                  <String fx:value="button-on-container-text" />
+               </styleClass>
+            </Button>
+         </children>
+      </VBox>
+      <HBox fillHeight="false" layoutY="22.0" prefHeight="25.0" prefWidth="600.0" spacing="200.0" styleClass="toolbar" />
+      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" styleClass="button-on-container-text" text="Alunos &gt;" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
