@@ -5,6 +5,8 @@
 package bookify.Controller;
 
 import bookify.Treinando;
+import bookify.model.dao.BookifyDatabase;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -16,7 +18,21 @@ public class AlunosCadastroController {
     
     @FXML
     
-    protected void voltar(ActionEvent e){
+    protected void voltar(ActionEvent e) throws SQLException{
+        try{
+            var n = new BookifyDatabase();
+            var x = n.get("Usuario");
+            while(x.next()){
+                System.out.println(x.getString("nome"));
+            }
+            if(!x.isClosed()){
+                x.close();
+            }
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
         Treinando.mudarTela(1);
     }
     
