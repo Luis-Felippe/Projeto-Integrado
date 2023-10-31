@@ -17,13 +17,13 @@
          <children>
             <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
                <children>
-                  <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
-                  <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
-                  <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+                  <Button mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
                </children>
             </HBox>
-            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+            <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
                <image>
                   <Image url="@images/image.png" />
                </image>
@@ -42,27 +42,27 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <TextField fx:id="LivTextCod" layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="011245" />
+      <TextField layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="011245" />
       <Text layoutX="31.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título" />
-      <TextField fx:id="LivTextTitulo" layoutX="24.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="Jabuti Jabuticaba" />
+      <TextField layoutX="24.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="Jabuti Jabuticaba" />
       <Text layoutX="31.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" />
-      <TextField fx:id="LivTextAutor" layoutX="24.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="Daniel Francoy" />
+      <TextField layoutX="24.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="Daniel Francoy" />
       <Text layoutX="29.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplar" />
-      <TextField fx:id="LivTextExemplar" layoutX="24.0" layoutY="256.0" prefHeight="25.0" prefWidth="223.0" promptText="joao123@gmail.com" />
+      <TextField layoutX="24.0" layoutY="256.0" prefHeight="25.0" prefWidth="223.0" promptText="joao123@gmail.com" />
       <Text layoutX="323.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF/Matrícula" />
-      <TextField fx:id="LivTextMatrcula" layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="555321" />
+      <TextField layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="555321" />
       <Text layoutX="328.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
-      <TextField fx:id="LivTextNome" layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="João Silva" />
+      <TextField layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="João Silva" />
       <Text layoutX="329.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" />
-      <TextField fx:id="LivTextTelefone" layoutX="319.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
-      <Button fx:id="btnCancelar" layoutX="31.0" layoutY="352.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
-      <Button fx:id="btnCadastrar" layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
-      <Button fx:id="btnVoltar" layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-" />
+      <TextField layoutX="319.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
+      <Button layoutX="31.0" layoutY="352.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
+      <Button layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
+      <Button layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-" />
       <Text layoutX="29.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora" />
-      <TextField fx:id="LivTextEditora" layoutX="24.0" layoutY="304.0" prefHeight="25.0" prefWidth="223.0" promptText="infantil" />
+      <TextField layoutX="24.0" layoutY="304.0" prefHeight="25.0" prefWidth="223.0" promptText="infantil" />
       <Text layoutX="328.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Início" />
-      <DatePicker fx:id="LivDateInicio" layoutX="319.0" layoutY="256.0" prefHeight="25.0" prefWidth="223.0" promptText="12/05/2023" />
+      <DatePicker layoutX="319.0" layoutY="256.0" prefHeight="25.0" prefWidth="223.0" promptText="12/05/2023" />
       <Text layoutX="325.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Devolução" />
-      <DatePicker fx:id="LivDateDevolucao" layoutX="319.0" layoutY="304.0" prefHeight="25.0" prefWidth="223.0" promptText="17/05/2023" />
+      <DatePicker layoutX="319.0" layoutY="304.0" prefHeight="25.0" prefWidth="223.0" promptText="17/05/2023" />
    </children>
 </Pane>
