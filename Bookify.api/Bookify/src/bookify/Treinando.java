@@ -14,22 +14,48 @@ import javafx.stage.StageStyle;
 public class Treinando extends Application {
     
     private static Stage stage;
-    private static Stage Menustage;
-    private static Stage Livrosstage;
+    private static Scene MenuScene;
+    private static Scene AlunosMenuScene;
+    private static Scene LivrosScene;
+    private static Scene AlunoCadastroScene;
+    
     
     
     @Override
     public void start(Stage primaryStage) throws Exception {
      
+        
+        this.stage = primaryStage;
+        Parent alunoMenufxml = FXMLLoader.load(getClass().getResource("View/Alunos-window.fxml"));
+        AlunosMenuScene = new Scene( alunoMenufxml);
+        Parent alunoCadastrofxml = FXMLLoader.load(getClass().getResource("View/Alunos-cadastro-window.fxml"));
+        AlunoCadastroScene = new Scene(alunoCadastrofxml);
+        this.stage.setScene(AlunosMenuScene);
+        stage.show();
+        /*
         System.out.println("Opa");
         primaryStage.setTitle("BOOKIFY");
-        var resource = getClass().getResource("View/Livros-window2.fxml");
-        Parent root = FXMLLoader.load(resource);
+        var resource = getClass().getResource("View/Alunos-window.fxml");
+        Parent root = FXMLLoader.load(resource); 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
         primaryStage.show();
-       
+       */
+    }
+    
+    public static void mudarTela(int i){
+        switch(i){
+            case 0:
+                stage.setScene(AlunoCadastroScene);
+                break;
+            case 1:
+                stage.setScene(AlunosMenuScene);
+                break;
+            default:
+                System.out.println("teste");
+                break;
+        }
     }
 
     public static void main(String[] args) {
