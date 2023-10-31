@@ -42,7 +42,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.AlunosWindowController">
    <children>
       <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
          <children>
@@ -68,13 +68,13 @@
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" text="CADASTRAR ALUNOS">
+            <Button fx:id="setAluno" mnemonicParsing="false" onAction="#cadastrar_aluno" text="CADASTRAR ALUNOS">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="243.0" text="LISTAR ALUNOS">
+            <Button fx:id="listAluno" mnemonicParsing="false" prefHeight="37.0" prefWidth="243.0" text="LISTAR ALUNOS">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
