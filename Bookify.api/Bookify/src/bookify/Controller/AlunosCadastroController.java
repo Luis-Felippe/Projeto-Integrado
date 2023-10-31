@@ -6,6 +6,7 @@ package bookify.Controller;
 
 import bookify.Treinando;
 import bookify.model.dao.BookifyDatabase;
+import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +19,8 @@ public class AlunosCadastroController {
     
     @FXML
     
-    protected void voltar(ActionEvent e) throws SQLException{
-        try{
+    protected void voltar(ActionEvent e) throws SQLException, IOException{
+        /*try{
             var n = new BookifyDatabase();
             var x = n.get("Usuario");
             while(x.next()){
@@ -32,7 +33,7 @@ public class AlunosCadastroController {
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-
+        */
         Treinando.mudarTela(1);
     }
     
