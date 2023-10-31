@@ -1,0 +1,56 @@
+.header-anchor {
+    -fx-background-color: none;
+    -fx-text-fill: #EEE;
+    -fx-font-family: "Inter";
+    -fx-font-style: normal;
+    -fx-font-weight: 500;
+    -fx-line-height: normal;
+    -fx-text-transform: capitalize;
+}
+
+.options-container {
+    -fx-display: flex;
+    -fx-padding: 40px 30px;
+    -fx-flex-direction: column;
+    -fx-justify-content: center;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 0);
+}
+
+.button-on-container-text {
+    -fx-text-fill: #EEE;
+    -fx-font-family: "Inter";
+    -fx-font-style: normal;
+    -fx-font-weight: 700;
+    -fx-line-spacing: 0;
+}
+
+.button-on-container {
+    -fx-display: flex;
+    -fx-padding: 10px 60px;
+    -fx-justify-content: center;
+    -fx-align-items: center;
+    -fx-gap: 10px;
+    -fx-align-self: stretch;
+    -fx-border-radius: 10px;
+    -fx-background-color: #7BBBAD;
+    -fx-background-radius: 10px;
+}
+
+.toolbar{
+    -fx-display: flex;
+    -fx-padding: 10px 40px; 
+    -fx-hgap: 20px;
+}
+.toolbar-anchor-itens{
+    -fx-hgap: 20px;
+}
+
+.bg-styles {
+    -fx-background-image: url('\images/background.jpg');
+    -fx-background-size: 100% 100%;
+}
