@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
+         <children>
+            <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
+                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+               <image>
+                  <Image url="@images/image.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <HBox fillHeight="false" layoutY="22.0" prefHeight="25.0" prefWidth="600.0" spacing="200.0" styleClass="toolbar" />
+      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="PROFESSOR &gt;" textFill="#111111">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Text layoutX="24.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome Completo" />
+      <Text layoutX="104.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="João Silva" />
+      <Text layoutX="30.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço" />
+      <TextField layoutX="24.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="Rua minino" />
+      <Text layoutX="30.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <TextField layoutX="24.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="joao123@gmail.com" />
+      <Text layoutX="319.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF" />
+      <TextField layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="706.015.350-06" />
+      <Text layoutX="319.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" />
+      <TextField layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
+      <Button layoutX="31.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
+      <Button layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
+      <Button layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+   </children>
+</Pane>
