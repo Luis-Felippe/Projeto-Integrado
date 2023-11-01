@@ -16,13 +16,13 @@
          <children>
             <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
                <children>
-                  <Button mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+                  <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
+                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
+                  <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
                </children>
             </HBox>
-            <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
                <image>
                   <Image url="@images/image.png" />
                </image>
@@ -41,18 +41,18 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="João Silva" />
+      <TextField fx:id="profTextNome" layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="João Silva" />
       <Text layoutX="30.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço" />
-      <TextField layoutX="24.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="Rua minino" />
+      <TextField fx:id="profTextEndereco" layoutX="24.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="Rua minino" />
       <Text layoutX="30.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <TextField layoutX="24.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="joao123@gmail.com" />
+      <TextField fx:id="profTextEmail" layoutX="24.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="joao123@gmail.com" />
       <Text layoutX="319.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF" />
-      <TextField layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="706.015.350-06" />
+      <TextField fx:id="profTextCpf" layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="706.015.350-06" />
       <Text layoutX="319.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" />
-      <TextField layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
-      <Button layoutX="31.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
-      <Button layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
-      <Button layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-">
+      <TextField fx:id="profTextTelefone" layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
+      <Button fx:id="btnCaneclar" layoutX="31.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
+      <Button fx:id="btnCadastrar" layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
+      <Button fx:id="btnVoltar" layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
