@@ -48,13 +48,13 @@
          <children>
             <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
                <children>
-                  <Button mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+                  <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
+                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
+                  <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
                </children>
             </HBox>
-            <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
                <image>
                   <Image url="@images/image.png" />
                </image>
@@ -68,13 +68,13 @@
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
-            <Button fx:id="setAluno" mnemonicParsing="false" onAction="#cadastrar_aluno" text="CADASTRAR ALUNOS">
+            <Button fx:id="btnCadAluno" mnemonicParsing="false" onAction="#cadastrar_aluno" text="CADASTRAR ALUNOS">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
             </Button>
-            <Button fx:id="listAluno" mnemonicParsing="false" prefHeight="37.0" prefWidth="243.0" text="LISTAR ALUNOS">
+            <Button fx:id="btnListAluno" mnemonicParsing="false" prefHeight="37.0" prefWidth="243.0" text="LISTAR ALUNOS">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />

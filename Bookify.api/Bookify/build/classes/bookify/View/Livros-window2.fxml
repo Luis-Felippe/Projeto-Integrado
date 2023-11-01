@@ -48,13 +48,13 @@
          <children>
             <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
                <children>
-                  <Button fx:id="butLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button fx:id="butAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
-                  <Button fx:id="butEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
-                  <Button fx:id="butProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+                  <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
+                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
+                  <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
                </children>
             </HBox>
-            <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
                <image>
                   <Image url="@images/image.png" />
                </image>
@@ -68,19 +68,19 @@
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
-            <Button fx:id="butEmprestLiv" mnemonicParsing="false" text="Emprestar Livro">
+            <Button fx:id="btnEmprestarLivro" mnemonicParsing="false" text="Emprestar Livro">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
             </Button>
-            <Button fx:id="butCadLiv" mnemonicParsing="false" text="Cadastrar Livro">
+            <Button fx:id="btnCadLivro" mnemonicParsing="false" text="Cadastrar Livro">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
             </Button>
-            <Button fx:id="butGetAcervo" mnemonicParsing="false" text="Acessar Acervo">
+            <Button fx:id="btnGetAcervo" mnemonicParsing="false" text="Acessar Acervo">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
