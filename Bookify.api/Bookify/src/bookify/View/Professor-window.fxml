@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.AlunosWindowController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.ProfessorWindowController">
    <children>
       <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
          <children>
             <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
                <children>
                   <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button fx:id="btnAlunos" mnemonicParsing="false" onAction="#menuAluno" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
                   <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
                   <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
                </children>
@@ -36,7 +36,7 @@
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnCadProfessores" mnemonicParsing="false" onAction="#cadastrar_aluno" text="CADASTRAR PROFESSORES">
+            <Button fx:id="btnCadProfessores" mnemonicParsing="false" onAction="#cadastrarProfessor" text="CADASTRAR PROFESSORES">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />

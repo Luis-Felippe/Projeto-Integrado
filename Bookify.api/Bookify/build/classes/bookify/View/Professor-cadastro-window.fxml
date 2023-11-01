@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.ProfessorCadastroController">
    <children>
       <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
          <children>
             <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
                <children>
                   <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
+                  <Button fx:id="btnAlunos" mnemonicParsing="false" onAction="#menuAluno" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
                   <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
                   <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
                </children>
@@ -50,7 +50,7 @@
       <TextField fx:id="profTextCpf" layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="706.015.350-06" />
       <Text layoutX="319.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" />
       <TextField fx:id="profTextTelefone" layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
-      <Button fx:id="btnCaneclar" layoutX="31.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
+      <Button fx:id="btnCaneclar" layoutX="31.0" layoutY="352.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
       <Button fx:id="btnCadastrar" layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
       <Button fx:id="btnVoltar" layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-">
          <font>

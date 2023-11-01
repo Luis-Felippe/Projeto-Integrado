@@ -71,6 +71,12 @@ public class AlunosCadastroController {
         }
     }
 
+    
+    @FXML
+    protected void menuProfessor(ActionEvent e){
+        Treinando.mudarTela(2);
+    }
+    
     @FXML
     protected void voltar(ActionEvent e) throws SQLException, IOException {
         /*try{
