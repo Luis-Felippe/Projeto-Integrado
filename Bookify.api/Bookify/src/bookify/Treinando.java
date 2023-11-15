@@ -37,6 +37,7 @@ public class Treinando extends Application {
         Parent professorCadastrofxml = FXMLLoader.load(getClass().getResource("View/Professor-cadastro-window.fxml"));
         ProfessorCadastroScene = new Scene(professorCadastrofxml);
         this.stage.setScene(AlunosMenuScene);
+        stage.setResizable(false);
         //AlunoCadastroScene.setRoot(alunoMenufxml);
         stage.show();
         /*
