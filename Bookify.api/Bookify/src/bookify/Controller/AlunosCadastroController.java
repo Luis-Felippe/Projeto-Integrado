@@ -47,7 +47,6 @@ public class AlunosCadastroController {
     protected void cadastrarAluno(ActionEvent e) throws SQLException {
         if (this.aluTextCurso.getText().isEmpty()
                 || this.aluTextEmail.getText().isEmpty()
-                || this.aluTextEndereco.getText().isEmpty()
                 || this.aluTextMatricula.getText().isEmpty()
                 || this.aluTextNome.getText().isEmpty()
                 || this.aluTextSerie.getText().isEmpty()
@@ -70,30 +69,21 @@ public class AlunosCadastroController {
             repository.save("usuario", columns, values);
         }
     }
-
-    
+   
     @FXML
-    protected void menuProfessor(ActionEvent e){
+    protected void alunoMenu(){
+       Treinando.mudarTela(1); 
+    }
+     @FXML
+    protected void professorMenu(){
         Treinando.mudarTela(2);
     }
-    
-    @FXML
-    protected void voltar(ActionEvent e) throws SQLException, IOException {
-        /*try{
-            var n = new BookifyDatabase();
-            var x = n.get("Usuario");
-            while(x.next()){
-                System.out.println(x.getString("nome"));
-            }
-            if(!x.isClosed()){
-                x.close();
-            }
-            
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-         */
-        Treinando.mudarTela(1);
+     @FXML
+    protected void homeMenu(){
+        Treinando.mudarTela(4);
     }
-
+    @FXML
+    protected void livroMenu(){
+       Treinando.mudarTela(7); 
+    }
 }

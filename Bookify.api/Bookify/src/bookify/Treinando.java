@@ -20,7 +20,8 @@ public class Treinando extends Application {
     private static Scene AlunoCadastroScene;
     private static Scene ProfessorMenuScene;    
     private static Scene ProfessorCadastroScene;
-    
+    private static Scene LoginScene;
+    private static Scene RealizarEmprestimoScene;
     
     
     @Override
@@ -28,28 +29,38 @@ public class Treinando extends Application {
      
         
         this.stage = primaryStage;
+        
         Parent alunoMenufxml = FXMLLoader.load(getClass().getResource("View/Alunos-window.fxml"));
         AlunosMenuScene = new Scene( alunoMenufxml);
+        
         Parent alunoCadastrofxml = FXMLLoader.load(getClass().getResource("View/Alunos-cadastro-window.fxml"));
         AlunoCadastroScene = new Scene(alunoCadastrofxml);
+        
         Parent professorMenufxml = FXMLLoader.load(getClass().getResource("View/Professor-window.fxml"));
         ProfessorMenuScene = new Scene( professorMenufxml);
+        
         Parent professorCadastrofxml = FXMLLoader.load(getClass().getResource("View/Professor-cadastro-window.fxml"));
         ProfessorCadastroScene = new Scene(professorCadastrofxml);
-        this.stage.setScene(AlunosMenuScene);
+        
+        
+        Parent menufxml = FXMLLoader.load(getClass().getResource("View/Home-window.fxml"));;
+        MenuScene = new Scene(menufxml);
+
+        Parent emprestimoRealizarfxml = FXMLLoader.load(getClass().getResource("View/Realizar-emprestimo.fxml"));
+        RealizarEmprestimoScene = new Scene(emprestimoRealizarfxml);
+        
+      Parent loginfxml = FXMLLoader.load(getClass().getResource("View/Login-window.fxml"));
+      LoginScene = new Scene(loginfxml);
+        
+        Parent livrosfxml = FXMLLoader.load(getClass().getResource("View/Livros-window2.fxml"));
+        LivrosScene = new Scene(livrosfxml);
+        
+        
+        
+        this.stage.setScene(MenuScene);
         stage.setResizable(false);
-        //AlunoCadastroScene.setRoot(alunoMenufxml);
         stage.show();
-        /*
-        System.out.println("Opa");
-        primaryStage.setTitle("BOOKIFY");
-        var resource = getClass().getResource("View/Alunos-window.fxml");
-        Parent root = FXMLLoader.load(resource); 
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(true);
-        primaryStage.show();
-       */
+       
     }
     
     public static void mudarTela(int i){
@@ -65,6 +76,18 @@ public class Treinando extends Application {
                 break;
             case 3:
                 stage.setScene(ProfessorCadastroScene);
+                break;
+            case 4:
+                stage.setScene(MenuScene);
+                break;
+            case 5:;
+                stage.setScene(LoginScene);
+                break;
+            case 6:
+                stage.setScene(RealizarEmprestimoScene);
+                break;
+            case 7: 
+                stage.setScene(LivrosScene);
                 break;
             default:
                 System.out.println("teste");

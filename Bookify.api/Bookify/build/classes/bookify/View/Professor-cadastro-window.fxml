@@ -16,11 +16,11 @@
          <children>
             <HBox layoutX="885.0" layoutY="16.0" styleClass="header-anchor">
                <children>
-                  <Button fx:id="btnLivros" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Livros">
+                  <Button fx:id="btnLivros" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#livroMenu" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Livros">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
-                  <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#menuAluno" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
+                  <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#alunoMenu" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
@@ -28,13 +28,13 @@
                      <font>
                         <Font size="16.0" />
                      </font></Button>
-                  <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
+                  <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#professorMenu" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
                </children>
             </HBox>
-            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0" onMouseClicked="#homeMenu">
                <image>
                   <Image url="@images/image.png" />
                </image>
@@ -91,7 +91,7 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="btnCaneclar" layoutX="155.0" layoutY="567.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE">
+      <Button fx:id="btnCaneclar" layoutX="155.0" layoutY="567.0" mnemonicParsing="false" onAction="#professorMenu" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font></Button>
