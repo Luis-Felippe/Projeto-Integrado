@@ -42,16 +42,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
+      <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
-            <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
+            <HBox layoutX="885.0" layoutY="16.0" styleClass="header-anchor">
                <children>
-                  <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
-                  <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
-                  <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+                  <Button fx:id="btnLivros" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Livros">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="btnEmprestimos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
                </children>
             </HBox>
             <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
@@ -61,37 +73,45 @@
             </ImageView>
          </children>
       </Pane>
-      <VBox layoutX="172.0" layoutY="73.0" styleClass="options-container" stylesheets="@styles.css">
+      <VBox layoutX="425.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="430.0" styleClass="options-container" stylesheets="@styles.css">
          <children>
-            <ImageView fitHeight="43.0" fitWidth="66.0">
+            <ImageView fitHeight="63.0" fitWidth="98.0">
                <image>
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnEmprestarLivro" mnemonicParsing="false" text="Emprestar Livro">
+            <Button fx:id="btnEmprestarLivro" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" text="Emprestar Livro">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Button>
-            <Button fx:id="btnCadLivro" mnemonicParsing="false" text="Cadastrar Livro">
+            <Button fx:id="btnCadLivro" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" text="Cadastrar Livro">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Button>
-            <Button fx:id="btnGetAcervo" mnemonicParsing="false" text="Acessar Acervo">
+            <Button fx:id="btnGetAcervo" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" text="Acessar Acervo">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
                </styleClass>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Button>
          </children>
       </VBox>
-      <HBox fillHeight="false" layoutY="22.0" prefHeight="25.0" prefWidth="600.0" spacing="200.0" styleClass="toolbar" />
       <Label accessibleRole="IMAGE_VIEW" alignment="TOP_LEFT" layoutX="21.0" layoutY="54.0" styleClass="toolbar-anchor-itens" text="Livros &gt;" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
    </children>
