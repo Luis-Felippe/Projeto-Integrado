@@ -33,6 +33,7 @@
 -->
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -42,7 +43,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.LivrosWindowController">
    <children>
       <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
@@ -52,7 +53,7 @@
                      <font>
                         <Font size="16.0" />
                      </font></Button>
-                  <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
+                  <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#alunoMenu" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
@@ -60,13 +61,13 @@
                      <font>
                         <Font size="16.0" />
                      </font></Button>
-                  <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
+                  <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#professorMenu" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
                </children>
             </HBox>
-            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
+            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0" onMouseClicked="#homeMenu">
                <image>
                   <Image url="@images/image.png" />
                </image>
@@ -80,7 +81,7 @@
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnEmprestarLivro" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" text="Emprestar Livro">
+            <Button fx:id="btnEmprestarLivro" mnemonicParsing="false" onAction="#realizarEmprestimo" prefHeight="45.0" prefWidth="350.0" text="Emprestar Livro">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
@@ -88,6 +89,9 @@
                <font>
                   <Font size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
             </Button>
             <Button fx:id="btnCadLivro" mnemonicParsing="false" prefWidth="350.0" text="Cadastrar Livro">
                <styleClass>
@@ -97,6 +101,9 @@
                <font>
                   <Font size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
             </Button>
             <Button fx:id="btnGetAcervo" mnemonicParsing="false" prefWidth="350.0" text="Acessar Acervo">
                <styleClass>
@@ -109,7 +116,7 @@
             </Button>
          </children>
       </VBox>
-      <Label accessibleRole="IMAGE_VIEW" alignment="TOP_LEFT" layoutX="21.0" layoutY="54.0" styleClass="toolbar-anchor-itens" text="Livros &gt;" textFill="WHITE">
+      <Label accessibleRole="IMAGE_VIEW" alignment="TOP_LEFT" layoutX="21.0" layoutY="54.0" styleClass="toolbar-anchor-itens" text="LIVROS &gt;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

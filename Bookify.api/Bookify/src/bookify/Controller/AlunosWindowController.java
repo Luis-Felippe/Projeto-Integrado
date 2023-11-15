@@ -1,15 +1,22 @@
 package bookify.Controller;
 import bookify.Treinando;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class AlunosWindowController {
     @FXML
-    protected void cadastrar_aluno(ActionEvent e){
+    protected void cadastrarAluno(){
         Treinando.mudarTela(0);
     }
+     @FXML
+    protected void professorMenu(){
+        Treinando.mudarTela(2);
+    }
+     @FXML
+    protected void homeMenu(){
+        Treinando.mudarTela(4);
+    }
     @FXML
-    protected void menuProfessor(ActionEvent e){
-       Treinando.mudarTela(2); 
+    protected void livroMenu(){
+       Treinando.mudarTela(7); 
     }
 }
