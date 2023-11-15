@@ -58,19 +58,25 @@ public class AlunosCadastroController {
                 "nome", "telefone", "tipo", "matricula", "turma", "curso", "email"
             };
             String[] values = {
-                this.aluTextCurso.getText(),
-                this.aluTextEmail.getText(),
+                this.aluTextNome.getText(),
+                this.aluTextTelefone.getText(),
                 "A",
                 this.aluTextMatricula.getText(),
-                this.aluTextNome.getText(),
                 this.aluTextSerie.getText(),
-                this.aluTextTelefone.getText()
+                this.aluTextCurso.getText(),
+                this.aluTextEmail.getText()
             };
 
             repository.save("usuario", columns, values);
         }
     }
 
+    
+    @FXML
+    protected void menuProfessor(ActionEvent e){
+        Treinando.mudarTela(2);
+    }
+    
     @FXML
     protected void voltar(ActionEvent e) throws SQLException, IOException {
         /*try{

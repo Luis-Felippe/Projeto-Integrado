@@ -8,4 +8,8 @@ public class AlunosWindowController {
     protected void cadastrar_aluno(ActionEvent e){
         Treinando.mudarTela(0);
     }
+    @FXML
+    protected void menuProfessor(ActionEvent e){
+       Treinando.mudarTela(2); 
+    }
 }

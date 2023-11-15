@@ -9,4 +9,14 @@ import javafx.fxml.FXML;
 
 public class ProfessorCadastroController {
     
+    @FXML
+    protected void menuAluno(ActionEvent e){
+        Treinando.mudarTela(1);
+    }
+    
+    @FXML
+    protected void voltar(ActionEvent e){
+        Treinando.mudarTela(2);
+    }
+    
 }

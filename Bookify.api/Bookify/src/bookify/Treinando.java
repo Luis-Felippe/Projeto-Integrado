@@ -18,7 +18,8 @@ public class Treinando extends Application {
     private static Scene AlunosMenuScene;
     private static Scene LivrosScene;
     private static Scene AlunoCadastroScene;
-    private static Scene telaAtual;
+    private static Scene ProfessorMenuScene;    
+    private static Scene ProfessorCadastroScene;
     
     
     
@@ -31,7 +32,12 @@ public class Treinando extends Application {
         AlunosMenuScene = new Scene( alunoMenufxml);
         Parent alunoCadastrofxml = FXMLLoader.load(getClass().getResource("View/Alunos-cadastro-window.fxml"));
         AlunoCadastroScene = new Scene(alunoCadastrofxml);
+        Parent professorMenufxml = FXMLLoader.load(getClass().getResource("View/Professor-window.fxml"));
+        ProfessorMenuScene = new Scene( professorMenufxml);
+        Parent professorCadastrofxml = FXMLLoader.load(getClass().getResource("View/Professor-cadastro-window.fxml"));
+        ProfessorCadastroScene = new Scene(professorCadastrofxml);
         this.stage.setScene(AlunosMenuScene);
+        stage.setResizable(false);
         //AlunoCadastroScene.setRoot(alunoMenufxml);
         stage.show();
         /*
@@ -53,6 +59,12 @@ public class Treinando extends Application {
                 break;
             case 1:
                 stage.setScene(AlunosMenuScene);
+                break;
+            case 2:
+                stage.setScene(ProfessorMenuScene);
+                break;
+            case 3:
+                stage.setScene(ProfessorCadastroScene);
                 break;
             default:
                 System.out.println("teste");
