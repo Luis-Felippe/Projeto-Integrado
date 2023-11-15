@@ -43,35 +43,35 @@
       </Pane>
       <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="PROFESSOR &gt;" textFill="#111111">
          <font>
-            <Font size="13.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-      <Text layoutX="45.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome Completo">
+      <Text layoutX="57.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome Completo">
          <font>
             <Font size="16.0" />
          </font></Text>
-      <Text layoutX="104.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
+      <Text layoutX="147.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="profTextNome" layoutX="43.0" layoutY="151.0" prefHeight="30.0" prefWidth="440.0" promptText="João Silva">
+      <TextField fx:id="profTextNome" layoutX="55.0" layoutY="149.0" prefHeight="30.0" prefWidth="440.0" promptText="João Silva">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Text layoutX="43.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disciplina">
+      <Text layoutX="55.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disciplina">
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="profTextDisciplina" layoutX="43.0" layoutY="221.0" prefHeight="30.0" prefWidth="440.0" promptText="Biologia">
+      <TextField fx:id="profTextDisciplina" layoutX="55.0" layoutY="219.0" prefHeight="30.0" prefWidth="440.0" promptText="Biologia">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Text layoutX="45.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+      <Text layoutX="57.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="profTextEmail" layoutX="43.0" layoutY="292.0" prefHeight="30.0" prefWidth="440.0" promptText="joao123@gmail.com">
+      <TextField fx:id="profTextEmail" layoutX="55.0" layoutY="290.0" prefHeight="30.0" prefWidth="440.0" promptText="joao123@gmail.com">
          <font>
             <Font size="14.0" />
          </font></TextField>

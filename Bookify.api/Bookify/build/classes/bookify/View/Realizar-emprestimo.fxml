@@ -11,16 +11,28 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="410.0" prefWidth="600.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.AlunosCadastroController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.AlunosCadastroController">
    <children>
-      <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="607.0" style="-fx-background-color: #164C64;">
+      <Pane layoutX="-3.0" layoutY="-12.0" prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
-            <HBox layoutX="313.0" layoutY="19.0" styleClass="header-anchor">
+            <HBox layoutX="885.0" layoutY="16.0" styleClass="header-anchor">
                <children>
-                  <Button fx:id="btnLivros" mnemonicParsing="false" styleClass="header-anchor" text="Livros" />
-                  <Button fx:id="btnAlunos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos" />
-                  <Button fx:id="btnEmprestimos" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos" />
-                  <Button fx:id="btnProfessores" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores" />
+                  <Button fx:id="btnLivros" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Livros">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="btnEmprestimos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
                </children>
             </HBox>
             <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0">
@@ -30,39 +42,97 @@
             </ImageView>
          </children>
       </Pane>
-      <HBox fillHeight="false" layoutY="22.0" prefHeight="25.0" prefWidth="600.0" spacing="200.0" styleClass="toolbar" />
       <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="LIVROS &gt; " textFill="#111111">
          <font>
-            <Font size="13.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-      <Text layoutX="33.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cód.Livro" />
-      <Text layoutX="72.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EMPRÉSTIMO">
+      <Text layoutX="59.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cód.Livro">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font size="16.0" />
+         </font></Text>
+      <Text layoutX="103.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EMPRÉSTIMO">
+         <font>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="LivTextCod" layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="011245" />
-      <Text layoutX="31.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título" />
-      <TextField fx:id="LivTextTitulo" layoutX="24.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="Jabuti Jabuticaba" />
-      <Text layoutX="31.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" />
-      <TextField fx:id="LivTextAutor" layoutX="24.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="Daniel Francoy" />
-      <Text layoutX="29.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplar" />
-      <TextField fx:id="LivTextExemplar" layoutX="24.0" layoutY="256.0" prefHeight="25.0" prefWidth="223.0" promptText="joao123@gmail.com" />
-      <Text layoutX="323.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF/Matrícula" />
-      <TextField fx:id="LivTextMatrcula" layoutX="319.0" layoutY="104.0" prefHeight="25.0" prefWidth="223.0" promptText="555321" />
-      <Text layoutX="328.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
-      <TextField fx:id="LivTextNome" layoutX="319.0" layoutY="156.0" prefHeight="25.0" prefWidth="223.0" promptText="João Silva" />
-      <Text layoutX="329.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" />
-      <TextField fx:id="LivTextTelefone" layoutX="319.0" layoutY="208.0" prefHeight="25.0" prefWidth="223.0" promptText="88940028922" />
-      <Button fx:id="btnCancelar" layoutX="31.0" layoutY="352.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE" />
-      <Button fx:id="btnCadastrar" layoutX="319.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE" />
-      <Button fx:id="btnVoltar" layoutX="542.0" layoutY="51.0" mnemonicParsing="false" styleClass="botao-voltar-style" text="&lt;-" />
-      <Text layoutX="29.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora" />
-      <TextField fx:id="LivTextEditora" layoutX="24.0" layoutY="304.0" prefHeight="25.0" prefWidth="223.0" promptText="infantil" />
-      <Text layoutX="328.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Início" />
-      <DatePicker fx:id="LivDateInicio" layoutX="319.0" layoutY="256.0" prefHeight="25.0" prefWidth="223.0" promptText="12/05/2023" />
-      <Text layoutX="325.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Devolução" />
-      <DatePicker fx:id="LivDateDevolucao" layoutX="319.0" layoutY="304.0" prefHeight="25.0" prefWidth="223.0" promptText="17/05/2023" />
+      <TextField fx:id="LivTextCod" layoutX="59.0" layoutY="134.0" prefHeight="30.0" prefWidth="440.0" promptText="011245">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="59.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextTitulo" layoutX="56.0" layoutY="201.0" prefHeight="30.0" prefWidth="440.0" promptText="Jabuti Jabuticaba">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="59.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextAutor" layoutX="56.0" layoutY="271.0" prefHeight="30.0" prefWidth="440.0" promptText="Daniel Francoy">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="60.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplar">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextExemplar" layoutX="59.0" layoutY="345.0" prefHeight="30.0" prefWidth="440.0" promptText="01">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="731.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF/Matrícula">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextMatrcula" layoutX="731.0" layoutY="134.0" prefHeight="30.0" prefWidth="440.0" promptText="555321">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="734.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextNome" layoutX="731.0" layoutY="201.0" prefHeight="30.0" prefWidth="440.0" promptText="João Silva">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="734.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextTelefone" layoutX="731.0" layoutY="271.0" prefHeight="30.0" prefWidth="440.0" promptText="88940028922">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Button fx:id="btnCancelar" layoutX="167.0" layoutY="622.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="217.0" styleClass="cancel-style" text="CANCELAR" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+      <Button fx:id="btnCadastrar" layoutX="842.0" layoutY="622.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+      <Text layoutX="60.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <TextField fx:id="LivTextEditora" layoutX="59.0" layoutY="426.0" prefHeight="30.0" prefWidth="440.0" promptText="infantil">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Text layoutX="734.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Início">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <DatePicker fx:id="LivDateInicio" layoutX="731.0" layoutY="348.0" prefHeight="30.0" prefWidth="440.0" promptText="12/05/2023" />
+      <Text layoutX="731.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Devolução">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <DatePicker fx:id="LivDateDevolucao" layoutX="731.0" layoutY="429.0" prefHeight="30.0" prefWidth="440.0" promptText="17/05/2023" />
    </children>
 </Pane>
