@@ -19,6 +19,7 @@
                </image>
             </ImageView>
             <Text layoutX="40.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+
             <TextField fx:id="txtLogin" layoutX="40.0" layoutY="129.0" prefHeight="25.0" prefWidth="203.0" promptText="exemple@gmail.com" />
             <Text layoutX="38.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha:" />
             <TextField fx:id="txtSenha" layoutX="40.0" layoutY="186.0" prefHeight="25.0" prefWidth="203.0" promptText="**********" />
