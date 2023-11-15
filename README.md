@@ -1,5 +1,5 @@
 # Projeto-Integrado
-## Bookify
+## Bookify: Sistema de gerenciamento de biblioteca
 
 Este projeto surgiu da observação de limitações no contexto bibliotecário, tanto durante o período de ensino médio dos integrantes da equipe, quanto nas interações atuais com docentes e alunos da Escola Estadual de Ensino Profissional Dr. José Alves da Silveira, localizada na cidade de Quixeramobim, Ceará.
 
