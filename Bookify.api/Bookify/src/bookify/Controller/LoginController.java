@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 
 public class LoginController {
     @FXML
-    protected void homeMenu(){
-        Treinando.mudarTela(4);
+    protected void homeMenu(){;
+        Treinando.mudarTela(4);;
     }
 }

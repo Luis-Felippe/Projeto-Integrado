@@ -1,16 +1,19 @@
 .header-anchor {
     -fx-background-color: none;
     -fx-text-fill: #EEE;
-    -fx-font-family: "Inter";
-    -fx-font-style: normal;
-    -fx-font-weight: 500;
-    -fx-line-height: normal;
-    -fx-text-transform: capitalize;
+    -fx-text-size:16px;
+}
+
+.header-anchor:hover {
+    -fx-background-color: none;
+    -fx-text-fill: #FFF;
+    -fx-text-size:16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(11,48,64,0.9), 10, 0, 3, 3);
 }
 
 .options-container {
     -fx-display: flex;
-    -fx-padding: 40px 30px;
+    -fx-padding: 40px 40px;
     -fx-flex-direction: column;
     -fx-justify-content: center;
     -fx-alignment: center;
@@ -39,6 +42,22 @@
     -fx-border-radius: 10px;
     -fx-background-color: #7BBBAD;
     -fx-background-radius: 10px;
+    -fx-font-size: 16px;
+    -fx-transition: 1s;
+}
+
+.button-on-container:hover {
+    -fx-display: flex;
+    -fx-padding: 10px 60px;
+    -fx-justify-content: center;
+    -fx-align-items: center;
+    -fx-gap: 10px;
+    -fx-align-self: stretch;
+    -fx-border-radius: 10px;
+    -fx-background-color: #467369;
+    -fx-background-radius: 10px;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 3, 3);
 }
 
 .toolbar{

@@ -11,17 +11,17 @@
 <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.LoginController">
    <children>
       <HBox fillHeight="false" layoutY="22.0" prefHeight="25.0" prefWidth="600.0" spacing="200.0" styleClass="toolbar" />
-      <Pane layoutX="152.0" layoutY="49.0" prefHeight="321.0" prefWidth="297.0" styleClass="home-container">
+      <Pane layoutX="155.0" layoutY="40.0" prefHeight="321.0" prefWidth="291.0" styleClass="home-container">
          <children>
-            <ImageView fitHeight="67.0" fitWidth="98.0" layoutX="100.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="67.0" fitWidth="98.0" layoutX="100.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/BookifyLogo.png" />
                </image>
             </ImageView>
             <Text layoutX="40.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
-            <TextField fx:id="txtLogin" layoutX="40.0" layoutY="129.0" prefHeight="25.0" prefWidth="203.0" promptText="exemple@gmail.com" />
+            <TextField fx:id="txtLogin" layoutX="40.0" layoutY="129.0" prefHeight="25.0" prefWidth="217.0" promptText="exemple@gmail.com" />
             <Text layoutX="38.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha:" />
-            <TextField fx:id="txtSenha" layoutX="40.0" layoutY="186.0" prefHeight="25.0" prefWidth="203.0" promptText="**********" />
+            <TextField fx:id="txtSenha" layoutX="40.0" layoutY="186.0" prefHeight="25.0" prefWidth="217.0" promptText="**********" />
             <Button fx:id="btnLogin" layoutX="40.0" layoutY="236.0" mnemonicParsing="false" onAction="#homeMenu" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="LOGIN" textFill="WHITE" />
          </children>
       </Pane>
