@@ -25,4 +25,8 @@ public class LivrosWindowController {
     protected void livroMenu(){
        Treinando.mudarTela(7); 
     }
+    @FXML
+    protected void cadastrarLivro(){
+        Treinando.mudarTela(8);
+    }
 }
