@@ -34,6 +34,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -52,25 +53,40 @@
                   <Button fx:id="btnLivros" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Livros">
                      <font>
                         <Font size="16.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="btnAlunos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#alunoMenu" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Alunos">
                      <font>
                         <Font size="16.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="btnEmprestimos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" styleClass="header-anchor" text="Empréstimos">
                      <font>
                         <Font size="16.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="btnProfessores" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#professorMenu" prefHeight="35.0" prefWidth="120.0" styleClass="header-anchor" text="Professores">
                      <font>
                         <Font size="16.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </HBox>
             <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="13.0" layoutY="21.0" onMouseClicked="#homeMenu">
                <image>
                   <Image url="@images/image.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
@@ -92,6 +108,9 @@
                <VBox.margin>
                   <Insets bottom="7.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnCadLivro" mnemonicParsing="false" onAction="#cadastrarLivro" prefWidth="350.0" text="Cadastrar Livro">
                <styleClass>
@@ -104,6 +123,9 @@
                <VBox.margin>
                   <Insets bottom="7.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnGetAcervo" mnemonicParsing="false" prefWidth="350.0" text="Acessar Acervo">
                <styleClass>
@@ -113,6 +135,9 @@
                <font>
                   <Font size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </VBox>
