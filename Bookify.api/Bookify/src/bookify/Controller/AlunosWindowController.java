@@ -19,4 +19,8 @@ public class AlunosWindowController {
     protected void livroMenu(){
        Treinando.mudarTela(7); 
     }
+    @FXML
+    protected void listarAluno(){
+        Treinando.mudarTela(9);
+    }
 }
