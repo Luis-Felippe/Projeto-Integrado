@@ -57,6 +57,9 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="btnAlunos" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Alunos">
                      <font>
@@ -65,6 +68,9 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="btnEmprestimos" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos">
                      <font>
@@ -73,11 +79,17 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="btnProfessores" mnemonicParsing="false" onAction="#professorMenu" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Professores">
                      <font>
                         <Font size="16.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </HBox>
@@ -85,6 +97,9 @@
                <image>
                   <Image url="@images/image.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
@@ -123,6 +138,9 @@
                <font>
                   <Font size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </VBox>
