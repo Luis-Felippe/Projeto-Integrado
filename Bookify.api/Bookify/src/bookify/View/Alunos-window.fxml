@@ -130,7 +130,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnListAluno" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" text="LISTAR ALUNOS">
+            <Button fx:id="btnListAluno" mnemonicParsing="false" onAction="#listarAluno" prefHeight="45.0" prefWidth="350.0" text="LISTAR ALUNOS">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />

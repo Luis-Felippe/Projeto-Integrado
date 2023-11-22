@@ -23,6 +23,7 @@ public class Treinando extends Application {
     private static Scene LoginScene;
     private static Scene RealizarEmprestimoScene;
     private static Scene LivroCadastroScene;
+    private static Scene AlunoListagemScene;
     
     
     @Override
@@ -58,6 +59,9 @@ public class Treinando extends Application {
         
         Parent livroCadastrofxml = FXMLLoader.load(getClass().getResource("View/Livros-cadastro-window.fxml"));
         LivroCadastroScene = new Scene(livroCadastrofxml);
+
+        Parent alunoListagemfxml = FXMLLoader.load(getClass().getResource("View/Aluno-listagem-window.fxml"));;
+        AlunoListagemScene = new Scene(alunoListagemfxml);
         
         this.stage.setScene(MenuScene);
         stage.setResizable(false);
@@ -93,6 +97,9 @@ public class Treinando extends Application {
                 break;
             case 8:
                 stage.setScene(LivroCadastroScene);
+                break;
+            case 9:
+                stage.setScene(AlunoListagemScene);
                 break;
             default:
                 System.out.println("teste");
