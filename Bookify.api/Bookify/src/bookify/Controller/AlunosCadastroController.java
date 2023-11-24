@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bookify.Controller;
 
 import bookify.Treinando;
@@ -14,14 +10,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-/**
- *
- * @author Luis Felippe
- */
 public class AlunosCadastroController {
 
     private BookifyDatabase repository = new BookifyDatabase();
 
+    private TelasController tela = new TelasController();
+    
     @FXML
     private TextField aluTextCurso;
 
@@ -71,19 +65,19 @@ public class AlunosCadastroController {
     }
    
     @FXML
-    protected void alunoMenu(){
-       Treinando.mudarTela(1); 
+    protected void alunoMenu() throws IOException{
+        tela.switchScreen(1);
     }
      @FXML
-    protected void professorMenu(){
-        Treinando.mudarTela(2);
+    protected void professorMenu() throws IOException{
+        tela.switchScreen(2);
     }
      @FXML
-    protected void homeMenu(){
-        Treinando.mudarTela(4);
+    protected void homeMenu() throws IOException{
+        tela.switchScreen(4);
     }
     @FXML
-    protected void livroMenu(){
-       Treinando.mudarTela(7); 
+    protected void livroMenu() throws IOException{
+        tela.switchScreen(7);
     }
 }

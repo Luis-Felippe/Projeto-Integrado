@@ -10,7 +10,7 @@ public class DatabasePostgreSQL {
     super();
 
     hostName = "localhost";
-    userName = "Renan";
+    userName = "postgres";
     password = "1234";
     jdbcDriver = "org.postgresql.Driver";
     dataBaseName = "Bookify";

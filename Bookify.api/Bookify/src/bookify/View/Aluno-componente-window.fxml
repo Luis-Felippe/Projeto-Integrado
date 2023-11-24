@@ -35,7 +35,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="editarButton" layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" styleClass=".botao-redondo">
                <image>

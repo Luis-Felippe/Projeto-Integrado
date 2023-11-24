@@ -59,9 +59,9 @@
          </font>
       </Text>
       <TextField fx:id="pesquisarText" layoutX="58.0" layoutY="113.0" prefHeight="40.0" prefWidth="1123.0" />
-      <Button fx:id="pesquisarButton" layoutX="1198.0" layoutY="113.0" mnemonicParsing="false" onAction="#search" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button fx:id="pesquisarButton" layoutX="1188.0" layoutY="108.0" mnemonicParsing="false" onAction="#search" styleClass="botao-redondo" stylesheets="@styles.css">
          <graphic>
-            <ImageView fx:id="pesquisarBtn" fitHeight="43.0" fitWidth="39.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="pesquisarBtn" fitHeight="50.0" fitWidth="47.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/pesquisar%201.png" />
                </image>
