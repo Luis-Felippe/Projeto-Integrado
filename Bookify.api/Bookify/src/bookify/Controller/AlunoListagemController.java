@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
 import java.sql.ResultSet;
+import javafx.scene.control.TextField;
 
 
 public class AlunoListagemController implements Initializable {
@@ -44,6 +45,9 @@ public class AlunoListagemController implements Initializable {
     
     @FXML
     private Button editarButton;
+    
+    @FXML
+    private TextField pesquisarText;
   
 
     @FXML
@@ -66,7 +70,6 @@ public class AlunoListagemController implements Initializable {
         Treinando.mudarTela(2);
     }
 
-
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
@@ -83,28 +86,59 @@ public class AlunoListagemController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        var repository = new BookifyDatabase();
+        search();
+//        var repository = new BookifyDatabase();
         
-        try {
-            var response = repository.get("Usuario", "Tipo = 'A'");
-            HBox box = null;
-            boolean status = true;
-            while(response.next()){
-                if(status){
-                   box = new HBox();
-                   render_box_elements.getChildren().add(box);
-                   status = false;
-                   addComponent(box, response);
-                } else{
-                   status = true;
-                   addComponent(box, response);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            var response = repository.get("Usuario", "Tipo = 'A'");
+//            HBox box = null;
+//            boolean status = true;
+//            while(response.next()){
+//                if(status){
+//                   box = new HBox();
+//                   render_box_elements.getChildren().add(box);
+//                   status = false;
+//                   addComponent(box, response);
+//                } else{
+//                   status = true;
+//                   addComponent(box, response);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
-}
+    public void search(){
+        System.out.println("Cuida papae");
+        render_box_elements.getChildren().clear();
+        var repository = new BookifyDatabase();
+        String searchBar = pesquisarText.getText().toUpperCase();
+        String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR (UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
+//                " AND ((UPPER(nome) LIKE 'L%') OR (UPPER(curso) LIKE 'A%') OR (UPPER(turma) LIKE 'K%') OR (UPPER(email) LIKE '%@GMAIL%'))";
+        
+        try {
+        var response = repository.get("Usuario", consult);
+        HBox box = null;
+        boolean status = true;
+        while(response.next()){
+            if(status){
+               box = new HBox();
+               render_box_elements.getChildren().add(box);
+               status = false;
+               addComponent(box, response);
+            } else{
+               status = true;
+               addComponent(box, response);
+            }
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+    }
+

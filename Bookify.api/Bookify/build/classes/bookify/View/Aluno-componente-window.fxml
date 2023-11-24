@@ -24,16 +24,16 @@
       <Text fx:id="turmaText" layoutX="78.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3-B" />
       <Text fx:id="telefoneText" layoutX="207.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="88 99233-1092" />
       <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" styleClass="botao-redondo" stylesheets="@styles.css">
-         <graphic>
-            <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/deletar.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/excluir.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <Button fx:id="editarButton" layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
          <graphic>
