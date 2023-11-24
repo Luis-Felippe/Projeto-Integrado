@@ -1,6 +1,8 @@
 package bookify;
 
+import bookify.Controller.TelasController;
 import java.io.IOException;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -14,7 +16,7 @@ import javafx.stage.StageStyle;
 public class Treinando extends Application {
     
     private static Stage stage;
-    private static Scene MenuScene;
+   /* private static Scene MenuScene;
     private static Scene AlunosMenuScene;
     private static Scene LivrosScene;
     private static Scene AlunoCadastroScene;
@@ -24,14 +26,17 @@ public class Treinando extends Application {
     private static Scene RealizarEmprestimoScene;
     private static Scene LivroCadastroScene;
     private static Scene AlunoListagemScene;
-    
+    */
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-     
         
         this.stage = primaryStage;
-        
+        TelasController tela = new TelasController();
+        tela.switchScreen(5);
+        stage.setResizable(false);
+        stage.show();
+       /* 
         Parent alunoMenufxml = FXMLLoader.load(getClass().getResource("View/Alunos-window.fxml"));
         AlunosMenuScene = new Scene( alunoMenufxml);
         
@@ -60,15 +65,17 @@ public class Treinando extends Application {
         Parent livroCadastrofxml = FXMLLoader.load(getClass().getResource("View/Livros-cadastro-window.fxml"));
         LivroCadastroScene = new Scene(livroCadastrofxml);
 
-        Parent alunoListagemfxml = FXMLLoader.load(getClass().getResource("View/Aluno-listagem-window.fxml"));;
+        Parent alunoListagemfxml = FXMLLoader.load(getClass().getResource("View/Aluno-listagem-window.fxml"));
         AlunoListagemScene = new Scene(alunoListagemfxml);
-        
-        this.stage.setScene(MenuScene);
-        stage.setResizable(false);
-        stage.show();
+        */
+
        
     }
-    
+  
+    public void setStage(Scene cena){
+        stage.setScene(cena);
+    }
+    /*
     public static void mudarTela(int i){
         switch(i){
             case 0:
@@ -106,7 +113,7 @@ public class Treinando extends Application {
                 break;
         }
     }
-
+*/
     public static void main(String[] args) {
         launch(args);
     }

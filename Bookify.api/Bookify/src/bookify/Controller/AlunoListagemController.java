@@ -3,6 +3,7 @@ package bookify.Controller;
 import bookify.Treinando;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
+import java.lang.invoke.MethodHandle;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -23,6 +24,8 @@ import javafx.scene.layout.Pane;
 
 public class AlunoListagemController implements Initializable {
 
+    private TelasController tela = new TelasController();
+    
     @FXML
     private Button btnAlunos;
 
@@ -42,23 +45,23 @@ public class AlunoListagemController implements Initializable {
     private VBox render_box_elements;
 
     @FXML
-    void alunoMenu(ActionEvent event) {
-        Treinando.mudarTela(1);
+    void alunoMenu(ActionEvent event) throws IOException {
+        tela.switchScreen(1);
     }
 
     @FXML
-    void homeMenu(MouseEvent event) {
-        Treinando.mudarTela(4);
+    void homeMenu(MouseEvent event) throws IOException {
+        tela.switchScreen(4);
     }
 
     @FXML
-    void livroMenu(ActionEvent event) {
-        Treinando.mudarTela(7);
+    void livroMenu(ActionEvent event) throws IOException {
+        tela.switchScreen(7);
     }
 
     @FXML
-    void professorMenu(ActionEvent event) {
-        Treinando.mudarTela(2);
+    void professorMenu(ActionEvent event) throws IOException {
+        tela.switchScreen(2);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class AlunoListagemController implements Initializable {
         
         
         try {
-
+                    
   
             var response = repository.get("Usuario", "Tipo = 'A'");
             while (response.next()) {

@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package bookify.Models;
 
 import java.util.Date;
 
-/**
- *
- * @author felip
- */
+
 public class Emprestimo {
     private Date dataInicio;
     private Date dataDevolucao;
