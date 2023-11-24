@@ -19,6 +19,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class AlunoListagemController implements Initializable {
@@ -40,6 +42,31 @@ public class AlunoListagemController implements Initializable {
 
     @FXML
     private VBox render_box_elements;
+    
+    @FXML
+    private TextField nomeTxt;
+    
+     @FXML
+    private TextField telefoneTxt;
+
+    @FXML
+    private TextField turmaTxt;
+    
+     @FXML
+    private TextField cursoTxt;
+
+    @FXML
+    private TextField emailTxt;
+    
+     @FXML
+    private TextField matriculaTxt;
+     
+     @FXML
+     private Button btnCancelarEdit;
+     
+     @FXML
+     private Button btnConfirmarEdit;
+
 
     @FXML
     void alunoMenu(ActionEvent event) {
@@ -60,18 +87,35 @@ public class AlunoListagemController implements Initializable {
     void professorMenu(ActionEvent event) {
         Treinando.mudarTela(2);
     }
+    
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var repository = new BookifyDatabase();
         AlunoComponenteController componente;
+        nomeTxt.setDisable(true);
+        emailTxt.setDisable(true);
+        cursoTxt.setDisable(true);
+        turmaTxt.setDisable(true);
+        telefoneTxt.setDisable(true);
+        matriculaTxt.setDisable(true);
+        
         
         
         try {
 
   
             var response = repository.get("Usuario", "Tipo = 'A'");
+            HBox aux = new HBox();
+            int i = -1;
+            render_box_elements.getChildren().add(aux);
             while (response.next()) {
+                if(i == 1){
+                    i = -1;
+                    aux = new HBox();
+                    render_box_elements.getChildren().add(aux);
+                }
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
                 Pane painel = loader.load();
@@ -85,8 +129,9 @@ public class AlunoListagemController implements Initializable {
                 
                 String Nome = response.getString("Nome");
                 Label label = new Label(Nome);
-                render_box_elements.getChildren().add(painel);
-               
+                aux.getChildren().add(painel);
+                System.out.println(aux);
+               i++;
                 
                 
             }

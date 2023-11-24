@@ -45,7 +45,7 @@ public class Treinando extends Application {
         ProfessorCadastroScene = new Scene(professorCadastrofxml);
         
         
-        Parent menufxml = FXMLLoader.load(getClass().getResource("View/Home-window.fxml"));;
+        Parent menufxml = FXMLLoader.load(getClass().getResource("View/Home-window.fxml"));
         MenuScene = new Scene(menufxml);
 
         Parent emprestimoRealizarfxml = FXMLLoader.load(getClass().getResource("View/Realizar-emprestimo.fxml"));
@@ -60,10 +60,10 @@ public class Treinando extends Application {
         Parent livroCadastrofxml = FXMLLoader.load(getClass().getResource("View/Livros-cadastro-window.fxml"));
         LivroCadastroScene = new Scene(livroCadastrofxml);
 
-        Parent alunoListagemfxml = FXMLLoader.load(getClass().getResource("View/Aluno-listagem-window.fxml"));;
+        Parent alunoListagemfxml = FXMLLoader.load(getClass().getResource("View/Aluno-listagem-window.fxml"));
         AlunoListagemScene = new Scene(alunoListagemfxml);
         
-        this.stage.setScene(MenuScene);
+        this.stage.setScene(LoginScene);
         stage.setResizable(false);
         stage.show();
        

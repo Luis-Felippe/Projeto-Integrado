@@ -23,6 +23,11 @@ public class AlunoComponenteController{
     private Text turmaText;
 
     @FXML
+    protected void testando(){
+        System.out.println("ta funcionando, sou o aluno: "+nomeText.getText());
+    }
+    
+    @FXML
     protected void setTexto(String nome, String matricula, String curso, String telefone, String turma){
         nomeText.setText(nome);
         matriculaText.setText(matricula);
