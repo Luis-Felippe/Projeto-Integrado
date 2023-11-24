@@ -1,9 +1,7 @@
 package bookify.Controller;
 
-import bookify.Treinando;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
-import java.lang.invoke.MethodHandle;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -13,16 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Pane; 
+import java.sql.ResultSet;
+import javafx.scene.control.TextField;
+
 
 public class AlunoListagemController implements Initializable {
 
@@ -47,6 +44,9 @@ public class AlunoListagemController implements Initializable {
     private VBox render_box_elements;
     
     @FXML
+    private TextField pesquisarText;
+  
+    @FXML
     private TextField nomeTxt;
     
      @FXML
@@ -63,12 +63,6 @@ public class AlunoListagemController implements Initializable {
     
      @FXML
     private TextField matriculaTxt;
-     
-     @FXML
-     private Button btnCancelarEdit;
-     
-     @FXML
-     private Button btnConfirmarEdit;
 
 
     @FXML
@@ -91,59 +85,55 @@ public class AlunoListagemController implements Initializable {
         tela.switchScreen(2);
     }
     
-    
+    private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
+        Pane painel = loader.load();
+        AlunoComponenteController componente = loader.getController();
+        componente.setTexto(res.getString("nome"), 
+        res.getString("matricula"), 
+        res.getString("curso"), 
+        res.getString("telefone"), 
+        res.getString("turma"));
+        
+        box.getChildren().add(painel);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        var repository = new BookifyDatabase();
-        AlunoComponenteController componente;
-        nomeTxt.setDisable(true);
-        emailTxt.setDisable(true);
-        cursoTxt.setDisable(true);
-        turmaTxt.setDisable(true);
-        telefoneTxt.setDisable(true);
-        matriculaTxt.setDisable(true);
-        
-        
-        
-        try {
-                    
-  
-            var response = repository.get("Usuario", "Tipo = 'A'");
-            HBox aux = new HBox();
-            int i = -1;
-            render_box_elements.getChildren().add(aux);
-            while (response.next()) {
-                if(i == 1){
-                    i = -1;
-                    aux = new HBox();
-                    render_box_elements.getChildren().add(aux);
-                }
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
-                Pane painel = loader.load();
-                componente = loader.getController();
-                
-                componente.setTexto(response.getString("nome"), 
-                        response.getString("matricula"), 
-                        response.getString("curso"), 
-                        response.getString("telefone"), 
-                        response.getString("turma"));
-                
-                String Nome = response.getString("Nome");
-                Label label = new Label(Nome);
-                aux.getChildren().add(painel);
-                System.out.println(aux);
-               i++;
-                
-                
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            System.out.println("printa ai pai");
-            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        search();
     }
 
+    public void search(){
+        render_box_elements.getChildren().clear();
+        var repository = new BookifyDatabase();
+        String searchBar = pesquisarText.getText().toUpperCase();
+        String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
+                + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
+                + "(UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
+        
+        try {
+        var response = repository.get("Usuario", consult);
+        HBox box = null;
+        boolean status = true;
+        while(response.next()){
+            if(status){
+               box = new HBox();
+               render_box_elements.getChildren().add(box);
+               status = false;
+               addComponent(box, response);
+            } else{
+               status = true;
+               addComponent(box, response);
+            }
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
 }
+
+
+
