@@ -3,6 +3,7 @@ package bookify.Controller;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -12,17 +13,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane; 
-import java.sql.ResultSet;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-
-public class AlunoListagemController implements Initializable {
-
+public class LivroListagemController implements Initializable {
     private TelasController tela = new TelasController();
     
     @FXML
@@ -41,29 +39,16 @@ public class AlunoListagemController implements Initializable {
     private Button btnProfessores;
 
     @FXML
-    private VBox render_box_elements;
-    
+    private ImageView pesquisarBtn;
+
+    @FXML
+    private Button pesquisarButton;
+
     @FXML
     private TextField pesquisarText;
-  
-    @FXML
-    private TextField nomeTxt;
-    
-     @FXML
-    private TextField telefoneTxt;
 
     @FXML
-    private TextField turmaTxt;
-    
-    @FXML
-    private TextField cursoTxt;
-
-    @FXML
-    private TextField emailTxt;
-    
-    @FXML
-    private TextField matriculaTxt;
-
+    private VBox render_box_elements;
 
     @FXML
     void alunoMenu(ActionEvent event) throws IOException {
@@ -84,20 +69,21 @@ public class AlunoListagemController implements Initializable {
     void professorMenu(ActionEvent event) throws IOException {
         tela.switchScreen(2);
     }
-    
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
+        loader.setLocation(getClass().getResource("../View/Livro-componente-window.fxml"));
         Pane painel = loader.load();
-        AlunoComponenteController componente = loader.getController();
-        componente.setTexto(res.getString("nome"), 
-        res.getString("matricula"), 
-        res.getString("curso"), 
-        res.getString("telefone"), 
-        res.getString("turma"));
-        
+        LivroComponenteController componente = loader.getController();
+        componente.setTexto(res.getString("titulo"), 
+        res.getString("num_registro"), 
+        res.getString("autor"),
+        res.getString("volume"), 
+        res.getString("exemplar"), 
+        res.getString("data"),
+        res.getString("observacao"));
         box.getChildren().add(painel);
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,12 +94,10 @@ public class AlunoListagemController implements Initializable {
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
-        String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
-                + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
-                + "(UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
+        String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%')",searchBar, searchBar);
         
         try {
-        var response = repository.get("Usuario", consult);
+        var response = repository.get("Livro", consult);
         HBox box = null;
         boolean status = true;
         while(response.next()){
@@ -134,6 +118,3 @@ public class AlunoListagemController implements Initializable {
     }
     }
 }
-
-
-
