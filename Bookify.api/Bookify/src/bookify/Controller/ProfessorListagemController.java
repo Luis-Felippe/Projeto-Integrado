@@ -90,7 +90,7 @@ public class ProfessorListagemController implements Initializable {
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'P' AND ((UPPER(nome) LIKE '%%%s%%') OR"
-                + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
+                + " (UPPER(disciplina) LIKE '%%%s%%') OR "
                 + "(UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
         
         try {
