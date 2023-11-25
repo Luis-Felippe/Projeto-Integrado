@@ -20,8 +20,7 @@ import javafx.scene.layout.Pane;
 import java.sql.ResultSet;
 import javafx.scene.control.TextField;
 
-
-public class AlunoListagemController implements Initializable {
+public class ProfessorListagemController implements Initializable {
 
     private TelasController tela = new TelasController();
     
@@ -45,25 +44,7 @@ public class AlunoListagemController implements Initializable {
     
     @FXML
     private TextField pesquisarText;
-  
-    @FXML
-    private TextField nomeTxt;
-    
-     @FXML
-    private TextField telefoneTxt;
-
-    @FXML
-    private TextField turmaTxt;
-    
-     @FXML
-    private TextField cursoTxt;
-
-    @FXML
-    private TextField emailTxt;
-    
-    @FXML
-    private TextField matriculaTxt;
-
+ 
 
     @FXML
     void alunoMenu(ActionEvent event) throws IOException {
@@ -87,14 +68,14 @@ public class AlunoListagemController implements Initializable {
     
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
+        loader.setLocation(getClass().getResource("../View/Professor-componente-window.fxml"));
         Pane painel = loader.load();
-        AlunoComponenteController componente = loader.getController();
+       ProfessorComponenteController componente = loader.getController();
         componente.setTexto(res.getString("nome"), 
-        res.getString("matricula"), 
-        res.getString("curso"), 
+        res.getString("cpf"), 
+        res.getString("disciplina"), 
         res.getString("telefone"), 
-        res.getString("turma"));
+        res.getString("email"));
         
         box.getChildren().add(painel);
     }
@@ -108,8 +89,8 @@ public class AlunoListagemController implements Initializable {
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
-        String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
-                + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
+        String consult = String.format("Tipo = 'P' AND ((UPPER(nome) LIKE '%%%s%%') OR"
+                + " (UPPER(disciplina) LIKE '%%%s%%') OR "
                 + "(UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
         
         try {
@@ -134,6 +115,3 @@ public class AlunoListagemController implements Initializable {
     }
     }
 }
-
-
-

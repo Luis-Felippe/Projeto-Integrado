@@ -27,8 +27,6 @@ public class AlunoComponenteController{
         cursoText.setText(curso);
         telefoneText.setText(telefone);
         turmaText.setText(turma);
-
-
     }
     
 }

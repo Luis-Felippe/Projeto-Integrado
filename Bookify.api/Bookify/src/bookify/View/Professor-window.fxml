@@ -80,7 +80,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnGetProfessores" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" text="LISTAR PROFESSORES">
+            <Button fx:id="btnGetProfessores" mnemonicParsing="false" onAction="#listarProfessor" prefHeight="45.0" prefWidth="350.0" text="LISTAR PROFESSORES">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
