@@ -45,6 +45,9 @@ public class TelasController{
             case 10:
                 fxmlloader.setLocation(getClass().getResource("../View/Professor-listagem-window.fxml"));
                 break;
+            case 12:
+                fxmlloader.setLocation(getClass().getResource("../View/Livro-listagem-window.fxml"));
+                break;
             default:
                 System.out.println("teste");
                 break;

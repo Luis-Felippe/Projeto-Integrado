@@ -34,4 +34,8 @@ public class LivrosWindowController {
     protected void livroMenu() throws IOException{
         tela.switchScreen(7);
     }
+    @FXML
+    protected void listarLivro() throws IOException{
+        tela.switchScreen(12);
+    }
 }

@@ -127,7 +127,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnGetAcervo" mnemonicParsing="false" prefWidth="350.0" text="Acessar Acervo">
+            <Button fx:id="btnGetAcervo" mnemonicParsing="false" onAction="#listarLivro" prefWidth="350.0" text="Acessar Acervo">
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
