@@ -3,8 +3,6 @@ package bookify.Controller;
 import bookify.Treinando;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadListener;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class TelasController{
@@ -63,10 +61,21 @@ public class TelasController{
         switch (i) {
             case 13:
                 fxmlloader.setLocation(getClass().getResource("../View/Professor-edicao-window.fxml"));
-                Parent parent = fxmlloader.load();
-                ProfessorEdicaoController controller = fxmlloader.getController();
-                teste = new Scene(parent);
-                controller.setParams(obj);
+                teste = new Scene(fxmlloader.load());
+                ProfessorEdicaoController professorController = fxmlloader.getController();
+                professorController.setParams(obj);
+                break;
+            case 14:
+                fxmlloader.setLocation(getClass().getResource("../View/Aluno-edicao-window.fxml"));
+                teste = new Scene(fxmlloader.load());
+                AlunosEditController alunosController = fxmlloader.getController();
+                alunosController.setParams(obj);
+                break;
+            case 15:
+                fxmlloader.setLocation(getClass().getResource("../View/Livros-edicao-window.fxml"));
+                teste = new Scene(fxmlloader.load());
+                LivrosEditController livrosController = fxmlloader.getController();
+                livrosController.setParams(obj);
                 break;
             default:
                 throw new AssertionError();

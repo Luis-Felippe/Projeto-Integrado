@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="581.0" styleClass="borda-discreta" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.AlunoComponenteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="581.0" styleClass="borda-discreta" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.AlunoComponenteController">
    <children>
       <Text fx:id="nomeText" layoutX="25.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Aluno">
          <font>
@@ -35,7 +35,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" onAction="#edit" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" styleClass=".botao-redondo">
                <image>

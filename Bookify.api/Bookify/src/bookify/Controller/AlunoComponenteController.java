@@ -7,6 +7,8 @@ import javafx.scene.text.Text;
 public class AlunoComponenteController{
     private IButtonHandler deleteEvent; 
     
+    IButtonHandler editEvent;
+    
     @FXML
     private Text cursoText;
 
@@ -38,6 +40,15 @@ public class AlunoComponenteController{
     @FXML
     protected void delete(){
         deleteEvent.handler();
+    }
+    
+    protected void setEditHandler(IButtonHandler event){
+        this.editEvent = event;
+    }
+    
+    @FXML
+    protected void edit(){
+        editEvent.handler();
     }
     
 }

@@ -2,17 +2,12 @@ package bookify.Controller;
 
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 public class ProfessorEdicaoController{
     BookifyDatabase repository = new BookifyDatabase();
