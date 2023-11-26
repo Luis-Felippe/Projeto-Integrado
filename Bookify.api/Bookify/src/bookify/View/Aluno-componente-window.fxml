@@ -23,7 +23,7 @@
       <Text fx:id="cursoText" layoutX="216.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="informática" />
       <Text fx:id="turmaText" layoutX="78.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3-B" />
       <Text fx:id="telefoneText" layoutX="207.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="88 99233-1092" />
-      <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" onAction="#delete" styleClass="botao-redondo" stylesheets="@styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
