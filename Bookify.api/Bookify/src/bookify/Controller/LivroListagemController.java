@@ -24,19 +24,7 @@ public class LivroListagemController implements Initializable {
     private TelasController tela = new TelasController();
     
     @FXML
-    private Button btnAlunos;
-
-    @FXML
-    private Button btnEmprestimos;
-
-    @FXML
-    private ImageView btnHome;
-
-    @FXML
-    private Button btnLivros;
-
-    @FXML
-    private Button btnProfessores;
+    private Pane mainContainer;
 
     @FXML
     private ImageView pesquisarBtn;
@@ -82,9 +70,52 @@ public class LivroListagemController implements Initializable {
         res.getString("data"),
         res.getString("observacao"));
         box.getChildren().add(painel);
+        
+        String id = res.getString("num_registro");
+        
+        componente.setDeleteHandler(()->{
+            deleteLivroHandler(id, mainContainer);
+        });
     }
 
 
+    private void deleteLivroHandler(String id, Pane mainContainer){
+        try {
+            FXMLLoader loaderPopup = new FXMLLoader();
+            loaderPopup.setLocation(getClass().getResource("../View/Popup-livro.fxml"));
+            Pane popup = loaderPopup.load();
+
+            mainContainer.getChildren().add(popup);
+
+            PopupLivroController popupController = loaderPopup.getController();
+
+            popupController.setCancelHandler(()->{
+                cancelHandler(popup, mainContainer);
+            });
+
+            popupController.setConfirmHandler(()->{
+                confirmHandler(id, mainContainer, popupController, popup);
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(LivroListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void confirmHandler(String id, Pane mainContainer, PopupLivroController controlador, Pane popup){
+        var repository = new BookifyDatabase();
+        try {
+            repository.delete("livro", String.format("num_registro = %s", id));
+            mainContainer.getChildren().remove(popup);
+            search();
+            } catch (SQLException ex) {
+                controlador.erro();
+            }
+    }
+    
+    private void cancelHandler(Pane popup, Pane mainContainer){
+        mainContainer.getChildren().remove(popup);
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         search();
