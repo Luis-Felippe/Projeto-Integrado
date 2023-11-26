@@ -1,10 +1,12 @@
 package bookify.Controller;
 
+import bookify.Interface.IButtonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 public class ProfessorComponenteController {
     
+    IButtonHandler event;
 
     @FXML
     private Text cpfText;
@@ -28,5 +30,14 @@ public class ProfessorComponenteController {
         disciplinaText.setText(disciplina);
         telefoneText.setText(telefone);
         emailText.setText(email);
+    }
+    
+    protected void setHandler(IButtonHandler event){
+        this.event = event;
+    }
+    
+    @FXML
+    protected void delete(){
+        event.handler();
     }
 }

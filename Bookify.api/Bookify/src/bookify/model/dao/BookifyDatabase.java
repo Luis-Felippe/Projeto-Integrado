@@ -32,8 +32,18 @@ public class BookifyDatabase implements IRepository {
     }
 
     @Override
-    public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void delete(String table, String id) throws SQLException{
+        
+        Statement statement = conection.createStatement();
+        String query = String.format("DELETE FROM %s where %s",
+            table,
+            id);
+        System.out.print(query);
+        statement.execute(query);
+        statement.close();
+        
+        
+        
     }
 
     @Override
