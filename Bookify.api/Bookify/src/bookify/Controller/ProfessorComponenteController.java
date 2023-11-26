@@ -6,7 +6,9 @@ import javafx.scene.text.Text;
 
 public class ProfessorComponenteController {
     
-    IButtonHandler event;
+    IButtonHandler deleteEvent;
+    IButtonHandler editEvent;
+    
 
     @FXML
     private Text cpfText;
@@ -32,12 +34,21 @@ public class ProfessorComponenteController {
         emailText.setText(email);
     }
     
-    protected void setHandler(IButtonHandler event){
-        this.event = event;
+    protected void setDeleteHandler(IButtonHandler event){
+        this.deleteEvent = event;
+    }
+    
+    protected void setEditHandler(IButtonHandler event){
+        this.editEvent = event;
     }
     
     @FXML
     protected void delete(){
-        event.handler();
+        deleteEvent.handler();
+    }
+    
+    @FXML
+    protected void edit(){
+        editEvent.handler();
     }
 }
