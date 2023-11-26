@@ -26,7 +26,6 @@ public class BookifyDatabase implements IRepository {
                 table,
                 String.join(",", columns),
                 String.join(",", listaComAspas));
-        System.out.print(query);
         statement.execute(query);
         statement.close();
     }
@@ -38,7 +37,6 @@ public class BookifyDatabase implements IRepository {
         String query = String.format("DELETE FROM %s where %s",
             table,
             id);
-        System.out.print(query);
         statement.execute(query);
         statement.close();
         
@@ -47,8 +45,23 @@ public class BookifyDatabase implements IRepository {
     }
 
     @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(String table, String[] columns, String[] values, String filter) throws SQLException{
+        List<String> listaComAspas = new ArrayList<>();
+        for (int i = 0; i < columns.length; i++){
+            String formatado = String.format("%s = '%s'", columns[i], values[i]);
+//            String strComAspas = columns[i] +  " = " + "'" + values[i] + "'";
+            listaComAspas.add(formatado);
+        }
+        
+
+        Statement statement = conection.createStatement();
+        String query = String.format("update %s set %s where %s",
+                table,
+                String.join(",", listaComAspas), 
+                filter
+                );
+        statement.execute(query);
+        statement.close();
     }
 
     @Override

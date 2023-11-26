@@ -3,13 +3,15 @@ package bookify.Controller;
 import bookify.Treinando;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadListener;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class TelasController{
-    
+    FXMLLoader fxmlloader = new FXMLLoader();
     
     public void switchScreen(int i) throws IOException{
-        FXMLLoader fxmlloader = new FXMLLoader();
+        
         
         switch(i){
             case 0:
@@ -54,7 +56,23 @@ public class TelasController{
         }
         Treinando main = new Treinando();
         main.setStage(new Scene(fxmlloader.load()));
-        
+    }
+    
+    public void switchScreen(int i, Object obj) throws IOException{
+        Scene teste;
+        switch (i) {
+            case 13:
+                fxmlloader.setLocation(getClass().getResource("../View/Professor-edicao-window.fxml"));
+                Parent parent = fxmlloader.load();
+                ProfessorEdicaoController controller = fxmlloader.getController();
+                teste = new Scene(parent);
+                controller.setParams(obj);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        Treinando main = new Treinando();
+        main.setStage(teste);
     }
     
 }

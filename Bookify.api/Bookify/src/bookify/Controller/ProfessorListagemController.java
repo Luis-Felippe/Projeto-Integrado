@@ -22,6 +22,8 @@ public class ProfessorListagemController implements Initializable {
 
     private TelasController tela = new TelasController();
     
+    private String currentEditProfessor;
+    
     @FXML
     private Pane mainContainer;
 
@@ -52,6 +54,19 @@ public class ProfessorListagemController implements Initializable {
         tela.switchScreen(2);
     }
     
+    public String getCurrentEditId(){
+        return currentEditProfessor;
+    }
+    
+    private void editProfessorHandler(String id) {
+        this.currentEditProfessor = id;
+        try {
+            tela.switchScreen(13, currentEditProfessor);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Professor-componente-window.fxml"));
@@ -65,8 +80,13 @@ public class ProfessorListagemController implements Initializable {
         
         String id = res.getString("id_usuario");
         
-        componente.setHandler(()->{
+        componente.setDeleteHandler(()->{
             mainPopupHandler(id, mainContainer);
+        });
+        
+        componente.setEditHandler(()->{
+            editProfessorHandler(id);
+            
         });
         
         box.getChildren().add(painel);
