@@ -23,6 +23,8 @@ import javafx.scene.layout.VBox;
 public class LivroListagemController implements Initializable {
     private TelasController tela = new TelasController();
     
+    private String currentEditLivro;
+    
     @FXML
     private Button btnAlunos;
 
@@ -69,6 +71,16 @@ public class LivroListagemController implements Initializable {
     void professorMenu(ActionEvent event) throws IOException {
         tela.switchScreen(2);
     }
+    
+    private void editLivroHandler(String id) {
+        this.currentEditLivro = id;
+        try {
+            tela.switchScreen(15, currentEditLivro);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Livro-componente-window.fxml"));
@@ -81,6 +93,13 @@ public class LivroListagemController implements Initializable {
         res.getString("exemplar"), 
         res.getString("data"),
         res.getString("observacao"));
+
+        String id = res.getString("num_registro");
+        
+        componente.setEditHandler(()->{
+            editLivroHandler(id);    
+        });
+        
         box.getChildren().add(painel);
     }
 

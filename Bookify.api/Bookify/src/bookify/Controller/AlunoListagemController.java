@@ -25,6 +25,8 @@ public class AlunoListagemController implements Initializable {
 
     private TelasController tela = new TelasController();
     
+    private String currentEditAluno;
+    
     @FXML
     private Button btnAlunos;
 
@@ -85,6 +87,15 @@ public class AlunoListagemController implements Initializable {
         tela.switchScreen(2);
     }
     
+     private void editAlunoHandler(String id) {
+        this.currentEditAluno = id;
+        try {
+            tela.switchScreen(14, currentEditAluno);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
@@ -95,6 +106,12 @@ public class AlunoListagemController implements Initializable {
         res.getString("curso"), 
         res.getString("telefone"), 
         res.getString("turma"));
+        
+        String id = res.getString("id_usuario");
+        
+        componente.setEditHandler(()->{
+            editAlunoHandler(id);    
+        });
         
         box.getChildren().add(painel);
     }

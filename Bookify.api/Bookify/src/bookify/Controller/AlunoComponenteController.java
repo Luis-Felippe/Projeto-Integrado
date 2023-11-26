@@ -1,9 +1,12 @@
 package bookify.Controller;
 
+import bookify.Interface.IButtonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 public class AlunoComponenteController{
+    
+    IButtonHandler editEvent;
     
     @FXML
     private Text cursoText;
@@ -27,6 +30,15 @@ public class AlunoComponenteController{
         cursoText.setText(curso);
         telefoneText.setText(telefone);
         turmaText.setText(turma);
+    }
+    
+    protected void setEditHandler(IButtonHandler event){
+        this.editEvent = event;
+    }
+    
+    @FXML
+    protected void edit(){
+        editEvent.handler();
     }
     
 }

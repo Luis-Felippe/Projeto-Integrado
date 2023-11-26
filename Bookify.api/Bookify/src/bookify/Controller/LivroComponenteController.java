@@ -1,9 +1,12 @@
 package bookify.Controller;
 
+import bookify.Interface.IButtonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 public class LivroComponenteController {
+    
+    IButtonHandler editEvent;
     
     @FXML
     private Text autorText;
@@ -35,5 +38,14 @@ public class LivroComponenteController {
         exemplarText.setText(exemplar);
         dataText.setText(data);
         observacaoText.setText(observacao);
+    }
+    
+    protected void setEditHandler(IButtonHandler event){
+        this.editEvent = event;
+    }
+    
+    @FXML
+    protected void edit(){
+        editEvent.handler();
     }
 }
