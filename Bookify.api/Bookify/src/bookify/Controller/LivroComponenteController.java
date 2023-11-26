@@ -4,9 +4,11 @@ import bookify.Interface.IButtonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class LivroComponenteController {
-    
-    IButtonHandler editEvent;
+public class LivroComponenteController {  
+
+    private IButtonHandler editEvent;
+
+    private IButtonHandler deleteEvent;
     
     @FXML
     private Text autorText;
@@ -28,6 +30,7 @@ public class LivroComponenteController {
 
     @FXML
     private Text volumeText;
+
     
     @FXML
     protected void setTexto(String titulo, String numReg, String autor, String volume, String exemplar, String data, String observacao){
@@ -40,6 +43,7 @@ public class LivroComponenteController {
         observacaoText.setText(observacao);
     }
     
+
     protected void setEditHandler(IButtonHandler event){
         this.editEvent = event;
     }
@@ -47,5 +51,14 @@ public class LivroComponenteController {
     @FXML
     protected void edit(){
         editEvent.handler();
+    }
+    
+    protected void setDeleteHandler(IButtonHandler event){
+        this.deleteEvent = event;
+    }
+        
+    @FXML
+    protected void delete(){
+        deleteEvent.handler();
     }
 }

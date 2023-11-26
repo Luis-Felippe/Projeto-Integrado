@@ -23,7 +23,7 @@
       <Text fx:id="autorText" layoutX="216.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clarisse Lispector" />
       <Text fx:id="volumeText" layoutX="74.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
       <Text fx:id="exemplarText" layoutX="216.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
-      <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" onAction="#delete" styleClass="botao-redondo" stylesheets="@styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

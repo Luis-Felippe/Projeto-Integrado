@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 public class AlunoComponenteController{
+    private IButtonHandler deleteEvent; 
     
     IButtonHandler editEvent;
     
@@ -22,6 +23,7 @@ public class AlunoComponenteController{
 
     @FXML
     private Text turmaText;
+
     
     @FXML
     protected void setTexto(String nome, String matricula, String curso, String telefone, String turma){
@@ -30,6 +32,14 @@ public class AlunoComponenteController{
         cursoText.setText(curso);
         telefoneText.setText(telefone);
         turmaText.setText(turma);
+    }
+    protected void setDeleteHandler(IButtonHandler event){
+        this.deleteEvent = event;
+    }
+    
+    @FXML
+    protected void delete(){
+        deleteEvent.handler();
     }
     
     protected void setEditHandler(IButtonHandler event){

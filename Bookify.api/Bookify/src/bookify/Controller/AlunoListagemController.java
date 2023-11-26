@@ -11,8 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -28,19 +26,7 @@ public class AlunoListagemController implements Initializable {
     private String currentEditAluno;
     
     @FXML
-    private Button btnAlunos;
-
-    @FXML
-    private Button btnEmprestimos;
-
-    @FXML
-    private ImageView btnHome;
-
-    @FXML
-    private Button btnLivros;
-
-    @FXML
-    private Button btnProfessores;
+    private Pane mainContainer;
 
     @FXML
     private VBox render_box_elements;
@@ -109,11 +95,51 @@ public class AlunoListagemController implements Initializable {
         
         String id = res.getString("id_usuario");
         
+
         componente.setEditHandler(()->{
             editAlunoHandler(id);    
         });
+        componente.setDeleteHandler(()->{
+            deleteAlunoHandler(id, mainContainer);
+        });
         
         box.getChildren().add(painel);
+    }
+    
+    private void deleteAlunoHandler(String id, Pane mainContainer){
+        try {
+                FXMLLoader loaderPopup = new FXMLLoader();
+                loaderPopup.setLocation(getClass().getResource("../View/Popup-aluno.fxml"));
+                Pane popup = loaderPopup.load();
+                
+                mainContainer.getChildren().add(popup);
+                
+                PopupAlunoController popupController = loaderPopup.getController();
+                
+                popupController.setCancelHandler(()->{
+                    cancelHandler(popup, mainContainer);
+                });
+                
+                popupController.setConfirmHandler(()->{
+                    confirmHandler(id, mainContainer, popupController, popup);
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
+    private void confirmHandler(String id, Pane mainContainer, PopupAlunoController controlador, Pane popup){
+        var repository = new BookifyDatabase();
+        try {
+            repository.delete("Usuario", String.format("id_usuario = %s", id));
+            mainContainer.getChildren().remove(popup);
+            search();
+        } catch (SQLException ex) {
+            controlador.erro();
+        }
+    }
+    private void cancelHandler(Pane popup, Pane mainContainer){
+        mainContainer.getChildren().remove(popup);
     }
 
     @Override
