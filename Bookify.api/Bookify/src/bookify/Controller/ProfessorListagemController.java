@@ -140,7 +140,7 @@ public class ProfessorListagemController implements Initializable {
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'P' AND ((UPPER(nome) LIKE '%%%s%%') OR"
                 + " (UPPER(disciplina) LIKE '%%%s%%') OR "
-                + "(UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
+                + "(UPPER(email) LIKE '%%%s%%')) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
         var response = repository.get("Usuario", consult);

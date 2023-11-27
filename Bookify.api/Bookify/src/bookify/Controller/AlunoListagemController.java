@@ -153,7 +153,7 @@ public class AlunoListagemController implements Initializable {
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
                 + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
-                + "(UPPER(email) LIKE '%%%s%%'))",searchBar, searchBar, searchBar, searchBar );
+                + "(UPPER(email) LIKE '%%%s%%' )) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
         var response = repository.get("Usuario", consult);
