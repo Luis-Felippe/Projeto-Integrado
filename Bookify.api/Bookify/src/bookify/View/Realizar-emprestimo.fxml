@@ -104,7 +104,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextMatrcula" layoutX="731.0" layoutY="134.0" prefHeight="30.0" prefWidth="440.0" promptText="555321">
+      <TextField fx:id="LivTextMatricula" layoutX="731.0" layoutY="134.0" prefHeight="30.0" prefWidth="440.0" promptText="555321">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -131,7 +131,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnCadastrar" layoutX="842.0" layoutY="622.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE">
+      <Button fx:id="btnCadastrar" layoutX="842.0" layoutY="622.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="EMPRESTAR" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
@@ -156,5 +156,15 @@
             <Font size="16.0" />
          </font></Text>
       <DatePicker fx:id="LivDateDevolucao" layoutX="731.0" layoutY="429.0" prefHeight="30.0" prefWidth="440.0" promptText="17/05/2023" />
+      <Text layoutX="60.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observação">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="LivTextObservacao" layoutX="59.0" layoutY="505.0" prefHeight="30.0" prefWidth="440.0" promptText="-------">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
    </children>
 </Pane>
