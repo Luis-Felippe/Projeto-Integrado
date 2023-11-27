@@ -30,7 +30,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos">
+                  <Button mnemonicParsing="false" onAction="#emprestimoMenu" prefHeight="35.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: none;" styleClass="header-anchor" text="Empréstimos">
                      <font>
                         <Font size="16.0" />
                      </font>

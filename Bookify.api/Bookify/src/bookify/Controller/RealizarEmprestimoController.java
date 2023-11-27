@@ -85,8 +85,8 @@ public class RealizarEmprestimoController {
     protected void register(){
        try{
             if(!currentLiv.isEmpty() && !currentUser.isEmpty()){
-                var result = repository.get("emprestimo",String.format("num_registro_livro = '%s'", currentLiv));
-                if(result == null){
+                var result = repository.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLiv, currentUser));
+                if(!result.next()){
                     String[] values = {currentLiv, currentUser, 
                         LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText()
                     };
@@ -99,7 +99,8 @@ public class RealizarEmprestimoController {
                     LivTextMatricula.setText("");
                 }else{
                     error.setText("Não foi possivel realizar o emprestimo,"
-                            + " verifique se o livro não pertence a outro emprestimo");
+                            + " verifique se o livro não pertence\n a outro emprestimo ou se "
+                            + "o usuário já possui empréstimo vinculado");
                 }
             }
         }catch(SQLException ex){

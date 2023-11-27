@@ -75,4 +75,10 @@ public class BookifyDatabase implements IRepository {
         String query = String.format("select * from %s where %s", table, filter);
         return statement.executeQuery(query);
     }
+    
+    public ResultSet get(String search, String table, String filter) throws SQLException {
+        Statement statement = conection.createStatement();
+        String query = String.format("select %s from %s %s", search, table, filter);
+        return statement.executeQuery(query);
+    }
 }
