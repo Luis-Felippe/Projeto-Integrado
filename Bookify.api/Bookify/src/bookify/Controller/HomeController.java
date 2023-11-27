@@ -27,4 +27,9 @@ public class HomeController {
     protected void livroMenu() throws IOException{
         tela.switchScreen(7);
     }
+    
+    @FXML
+    protected void realizarEmprestimo() throws IOException{
+        tela.switchScreen(17);
+    }
 }
