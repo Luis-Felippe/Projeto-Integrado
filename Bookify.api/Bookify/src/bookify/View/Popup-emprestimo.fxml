@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.7);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.PopupEmprestimoController">
+   <children>
+      <Pane layoutX="429.0" layoutY="167.0" prefHeight="342.0" prefWidth="465.0" style="-fx-background-color: EEEEEE; -fx-border-radius: 20px;" styleClass="options-container" stylesheets="@styles.css">
+         <children>
+            <Button fx:id="cancelButton" layoutX="43.0" layoutY="278.0" mnemonicParsing="false" onAction="#renovar" styleClass="renovar-style" stylesheets="@styles.css" text="RENOVAR " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Text layoutX="33.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Button layoutX="257.0" layoutY="280.0" mnemonicParsing="false" onAction="#encerrar" styleClass="renovar-style" stylesheets="@styles.css" text="ENCERRAR" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Text fx:id="errorText" fill="#e10505" layoutX="6.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Num de registro:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Responsável:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="34.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matrícula/CPF:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data empréstimo:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data devolução:" wrappingWidth="298.436767578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="tituloText" layoutX="225.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text fx:id="numRegText" layoutX="183.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1212" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="autorText" layoutX="95.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rapaz menino" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="responsavelText" layoutX="151.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rapaz menino" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="idText" layoutX="166.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="536040" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="dataInicioText" layoutX="193.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01/11/2023" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="dataDevolucaoText" layoutX="193.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="08/11/2023" wrappingWidth="298.436767578125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</Pane>

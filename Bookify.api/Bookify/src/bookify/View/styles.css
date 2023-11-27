@@ -142,3 +142,14 @@
     -fx-border-opacity: 0.5;
 
 }
+.renovar-style{
+    -fx-border-radius: 10px;
+    -fx-background-color: #164C64;
+    -fx-display: flex;
+    -fx-min-width: 150px;
+    -fx-padding: 5px 10px;
+    -fx-justify-content: center;
+    -fx-align-items: center;
+    -fx-spacing: 10px; 
+    -fx-align-self: stretch;
+}
