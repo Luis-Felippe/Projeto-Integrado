@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.LivroListagemController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.LivroListagemController">
    <children>
       <Pane prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
@@ -73,7 +73,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="pesquisarText" layoutX="58.0" layoutY="113.0" prefHeight="40.0" prefWidth="1123.0" />
+      <TextField fx:id="pesquisarText" layoutX="58.0" layoutY="113.0" onKeyPressed="#searchKeyListener" prefHeight="40.0" prefWidth="1123.0" />
       <Button fx:id="pesquisarButton" layoutX="1188.0" layoutY="108.0" mnemonicParsing="false" onAction="#search" styleClass="botao-redondo" stylesheets="@styles.css">
          <graphic>
             <ImageView fx:id="pesquisarBtn" fitHeight="50.0" fitWidth="47.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
