@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
 import java.sql.ResultSet;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 public class ProfessorListagemController implements Initializable {
 
@@ -133,7 +134,17 @@ public class ProfessorListagemController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         search();
     }
-
+    
+    @FXML
+    protected void searchKeyListener(){
+        pesquisarText.setOnKeyPressed(event->{
+            if(event.getCode() == KeyCode.ENTER){
+                search();
+            }
+        });
+    }
+    
+    @FXML
     public void search(){
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();

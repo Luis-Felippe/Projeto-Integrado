@@ -9,12 +9,14 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -137,8 +139,18 @@ public class LivroListagemController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         search();
     }
-
-    public void search(){
+    
+    @FXML
+    protected void searchKeyListener(){
+        pesquisarText.setOnKeyPressed(event->{
+            if(event.getCode() == KeyCode.ENTER){
+                search();
+            }
+        });
+    }
+    
+    @FXML
+    protected void search(){
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
@@ -165,4 +177,6 @@ public class LivroListagemController implements Initializable {
         Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
+    
+    
 }

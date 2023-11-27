@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
 import java.sql.ResultSet;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 
 public class AlunoListagemController implements Initializable {
@@ -146,8 +147,18 @@ public class AlunoListagemController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         search();
     }
-
-    public void search(){
+    
+    @FXML
+    protected void searchKeyListener(){
+        pesquisarText.setOnKeyPressed(event->{
+            if(event.getCode() == KeyCode.ENTER){
+                search();
+            }
+        });
+    }
+    
+    @FXML
+    protected void search(){
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
