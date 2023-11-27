@@ -51,6 +51,9 @@ public class TelasController{
             case 16:
                 fxmlloader.setLocation(getClass().getResource("../View/Emprestimo-listagem-window.fxml"));
                 break;
+            case 17:
+                fxmlloader.setLocation(getClass().getResource("../View/Realizar-emprestimo.fxml"));
+                break;
             default:
                 System.out.println("teste");
                 break;
