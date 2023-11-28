@@ -62,7 +62,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="LIVRO&gt;" textFill="#111111">
+      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="LIVROS &gt;" textFill="#111111">
          <font>
             <Font size="20.0" />
          </font>
@@ -72,7 +72,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="89.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
+      <Text layoutX="99.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -194,7 +194,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Text fx:id="erroText" fill="#ec0404" layoutX="1052.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+      <Text fx:id="erroText" fill="#ec0404" layoutX="953.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>

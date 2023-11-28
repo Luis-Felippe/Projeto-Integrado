@@ -5,6 +5,8 @@ import bookify.model.dao.BookifyDatabase;
 import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +60,7 @@ public class LivrosCadastroController {
     private TextField livroTextObservacao;
     
     @FXML
-    protected void cadastrarLivro(ActionEvent e) throws SQLException, IOException{
+    protected void cadastrarLivro(ActionEvent e) throws IOException{
         if(this.livroTextNumReg.getText().isEmpty() ||
            this.livroTextTitulo.getText().isEmpty() ||
            this.livroTextAutor.getText().isEmpty() ||
@@ -89,7 +91,12 @@ public class LivrosCadastroController {
                 this.livroTextFormaAquisicao.getText(),
                 this.livroTextObservacao.getText()
            };
-            repository.save("livro",columns, values);
+            try {
+                repository.save("livro",columns, values);
+            } catch (SQLException ex) {
+                erroText.setText("Erro: código do livro já existe");
+                return;
+            }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupCadastrarMsgController controller = loader.getController();

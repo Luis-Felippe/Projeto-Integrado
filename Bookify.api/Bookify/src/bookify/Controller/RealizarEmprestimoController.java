@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class RealizarEmprestimoController {
@@ -24,6 +26,9 @@ public class RealizarEmprestimoController {
     private BookifyDatabase repository = new BookifyDatabase();
     
     private TelasController tela = new TelasController();
+    
+    @FXML
+    private Pane mainContainer;
     
     @FXML
     private DatePicker LivDateDevolucao;
@@ -102,6 +107,13 @@ public class RealizarEmprestimoController {
                     loadInformation(null, null);
                     LivTextCod.setText("");
                     LivTextMatricula.setText("");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
+                    Pane popupConfirm = loader.load();
+                    PopupAcaoMsgController controller = loader.getController();
+                    controller.setHandler(()->{
+                        mainContainer.getChildren().remove(popupConfirm);
+                    });
+                    mainContainer.getChildren().add(popupConfirm);
                 }else{
                     error.setText("Não foi possivel realizar o emprestimo,"
                             + " verifique se o livro não pertence\n a outro emprestimo ou se "
@@ -113,6 +125,8 @@ public class RealizarEmprestimoController {
                 
         }catch(SQLException ex){
             error.setText(ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

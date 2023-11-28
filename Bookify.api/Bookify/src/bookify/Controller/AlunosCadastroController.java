@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +49,7 @@ public class AlunosCadastroController {
     private TextField aluTextTelefone;
 
     @FXML
-    protected void cadastrarAluno(ActionEvent e) throws SQLException, IOException {
+    protected void cadastrarAluno(ActionEvent e) throws IOException {
         if (this.aluTextCurso.getText().isEmpty()
             || this.aluTextEmail.getText().isEmpty()
             || this.aluTextMatricula.getText().isEmpty()
@@ -69,7 +71,12 @@ public class AlunosCadastroController {
                 this.aluTextEmail.getText()
             };
 
-            repository.save("usuario", columns, values);
+            try {
+                repository.save("usuario", columns, values);
+            } catch (SQLException ex) {
+                erroText.setText("Erro: matricula já vinculada");
+                return;
+            }
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
             Pane popupConfirm = loader.load();
