@@ -8,13 +8,22 @@ import java.util.List;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class AlunosCadastroController {
 
     private BookifyDatabase repository = new BookifyDatabase();
 
     private TelasController tela = new TelasController();
+    
+    @FXML
+    private Text erroText;
+    
+    @FXML
+    private Pane mainContainer;
     
     @FXML
     private TextField aluTextCurso;
@@ -38,14 +47,14 @@ public class AlunosCadastroController {
     private TextField aluTextTelefone;
 
     @FXML
-    protected void cadastrarAluno(ActionEvent e) throws SQLException {
+    protected void cadastrarAluno(ActionEvent e) throws SQLException, IOException {
         if (this.aluTextCurso.getText().isEmpty()
-                || this.aluTextEmail.getText().isEmpty()
-                || this.aluTextMatricula.getText().isEmpty()
-                || this.aluTextNome.getText().isEmpty()
-                || this.aluTextSerie.getText().isEmpty()
-                || this.aluTextTelefone.getText().isEmpty()) {
-            System.out.print("Não foi possivel cadastrar aluno");
+            || this.aluTextEmail.getText().isEmpty()
+            || this.aluTextMatricula.getText().isEmpty()
+            || this.aluTextNome.getText().isEmpty()
+            || this.aluTextSerie.getText().isEmpty()
+            || this.aluTextTelefone.getText().isEmpty()) {
+            this.erroText.setText("Preencha todos os campos !");   
         } else {
             String[] columns = {
                 "nome", "telefone", "tipo", "matricula", "turma", "curso", "email"
@@ -61,6 +70,23 @@ public class AlunosCadastroController {
             };
 
             repository.save("usuario", columns, values);
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
+            Pane popupConfirm = loader.load();
+            PopupCadastrarMsgController controller = loader.getController();
+            controller.setHandler(()->{
+                mainContainer.getChildren().remove(popupConfirm);
+            });
+            mainContainer.getChildren().add(popupConfirm);
+            
+            this.aluTextNome.setText("");
+            this.aluTextTelefone.setText("");
+            this.aluTextMatricula.setText("");
+            this.aluTextSerie.setText("");
+            this.aluTextCurso.setText("");
+            this.aluTextEmail.setText("");
+            this.erroText.setText("");
+
         }
     }
    

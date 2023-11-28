@@ -7,13 +7,22 @@ import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class ProfessorCadastroController {
     
     private BookifyDatabase repository = new BookifyDatabase();
     
     private TelasController tela = new TelasController();
+    
+    @FXML
+    private Text erroText;
+    
+    @FXML
+    private Pane mainContainer;
     
     @FXML
     private TextField profTextNome;
@@ -31,13 +40,13 @@ public class ProfessorCadastroController {
     private TextField profTextTelefone;
     
     @FXML
-    protected void cadastrarProfessor(ActionEvent e) throws SQLException{
+    protected void cadastrarProfessor(ActionEvent e) throws SQLException, IOException{
         if(this.profTextNome.getText().isEmpty() ||
            this.profTextTelefone.getText().isEmpty() ||
            this.profTextCpf.getText().isEmpty() ||
            this.profTextDisciplina.getText().isEmpty() ||
            this.profTextEmail.getText().isEmpty()){
-           System.out.println("Não foi possível cadastrar o professor");
+           erroText.setText("Preencha todos os campos !");
         }
         else {
             String [] columns = {
@@ -53,6 +62,21 @@ public class ProfessorCadastroController {
             };
             
             repository.save("usuario", columns, values);
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
+            Pane popupConfirm = loader.load();
+            PopupCadastrarMsgController controller = loader.getController();
+            controller.setHandler(()->{
+                mainContainer.getChildren().remove(popupConfirm);
+            });
+            mainContainer.getChildren().add(popupConfirm);
+            
+            this.profTextNome.setText("");
+            this.profTextTelefone.setText("");
+            this.profTextCpf.setText("");
+            this.profTextDisciplina.setText("");
+            this.profTextEmail.setText("");
+            this.erroText.setText("");
         }
     }
 

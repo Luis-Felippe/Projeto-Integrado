@@ -117,13 +117,22 @@ public class ProfessorListagemController implements Initializable {
     
     private void confirmHandler(String id, Pane mainContainer, PopupController controlador, Pane popup){
         var repository = new BookifyDatabase();
-                    try {
-                        repository.delete("Usuario", String.format("id_usuario = %s", id));
-                        mainContainer.getChildren().remove(popup);
-                        search();
-                    } catch (SQLException ex) {
-                        controlador.erro();
-                    }
+        try {
+            repository.delete("Usuario", String.format("id_usuario = %s", id));
+            mainContainer.getChildren().remove(popup);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
+            Pane popupConfirm = loader.load();
+            PopupExcluirMsgController controller = loader.getController();
+            controller.setHandler(()->{
+                mainContainer.getChildren().remove(popupConfirm);
+            });
+            mainContainer.getChildren().add(popupConfirm);
+            search();
+        } catch (SQLException ex) {
+            controlador.erro();
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void cancelHandler(Pane popup, Pane mainContainer){
