@@ -72,6 +72,12 @@ public class LivrosEditController {
     void professorMenu(ActionEvent event) throws IOException {
         tela.switchScreen(2);
     }
+    
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
     @FXML
     protected void listarLivro() throws IOException{
         tela.switchScreen(12);

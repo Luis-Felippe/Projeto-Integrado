@@ -61,6 +61,11 @@ public class LivroListagemController implements Initializable {
         tela.switchScreen(2);
     }
     
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
     private void editLivroHandler(String id) {
         this.currentEditLivro = id;
         try {

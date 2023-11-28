@@ -25,4 +25,8 @@ public class AlunosWindowController {
     protected void listarAluno() throws IOException{
         tela.switchScreen(9);
     }
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
 }

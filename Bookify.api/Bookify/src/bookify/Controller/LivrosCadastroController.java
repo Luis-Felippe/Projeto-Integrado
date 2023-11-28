@@ -100,5 +100,8 @@ public class LivrosCadastroController {
     protected void livroMenu() throws IOException{
         tela.switchScreen(7);
     }
-    
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
 }
