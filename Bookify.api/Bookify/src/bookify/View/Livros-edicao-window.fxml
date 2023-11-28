@@ -62,7 +62,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="LIVRO&gt;" textFill="#111111">
+      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="LIVROS &gt;" textFill="#111111">
          <font>
             <Font size="20.0" />
          </font>
@@ -72,7 +72,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="89.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDITAR">
+      <Text layoutX="99.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDITAR">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

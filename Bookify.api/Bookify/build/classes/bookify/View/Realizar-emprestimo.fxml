@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.RealizarEmprestimoController">
+<Pane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.RealizarEmprestimoController">
    <children>
       <Pane layoutY="-15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
@@ -72,7 +72,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="LivTextCod" layoutX="59.0" layoutY="134.0" onKeyPressed="#searchKeyListener" prefHeight="30.0" prefWidth="440.0" promptText="011245">
+      <TextField fx:id="LivTextCod" layoutX="59.0" layoutY="134.0" onKeyPressed="#searchKeyListener" prefHeight="30.0" prefWidth="440.0" promptText="01234">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -80,7 +80,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextTitulo" editable="false" layoutX="56.0" layoutY="201.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="Jabuti Jabuticaba">
+      <TextField fx:id="LivTextTitulo" editable="false" layoutX="56.0" layoutY="201.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -88,7 +88,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextAutor" editable="false" layoutX="56.0" layoutY="271.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="Daniel Francoy">
+      <TextField fx:id="LivTextAutor" editable="false" layoutX="56.0" layoutY="271.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -96,7 +96,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextExemplar" editable="false" layoutX="59.0" layoutY="345.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="01">
+      <TextField fx:id="LivTextExemplar" editable="false" layoutX="59.0" layoutY="345.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -112,7 +112,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextNome" editable="false" layoutX="731.0" layoutY="201.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="João Silva">
+      <TextField fx:id="LivTextNome" editable="false" layoutX="731.0" layoutY="201.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -120,7 +120,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextTelefone" editable="false" layoutX="731.0" layoutY="271.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="88940028922">
+      <TextField fx:id="LivTextTelefone" editable="false" layoutX="731.0" layoutY="271.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -142,7 +142,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <TextField fx:id="LivTextEditora" editable="false" layoutX="59.0" layoutY="426.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="infantil">
+      <TextField fx:id="LivTextEditora" editable="false" layoutX="59.0" layoutY="426.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -150,18 +150,18 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <DatePicker fx:id="LivDateInicio" editable="false" layoutX="731.0" layoutY="348.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="12/05/2023" />
+      <DatePicker fx:id="LivDateInicio" editable="false" layoutX="731.0" layoutY="348.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" />
       <Text layoutX="731.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Devolução">
          <font>
             <Font size="16.0" />
          </font></Text>
-      <DatePicker fx:id="LivDateDevolucao" editable="false" layoutX="731.0" layoutY="429.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="17/05/2023" />
+      <DatePicker fx:id="LivDateDevolucao" editable="false" layoutX="731.0" layoutY="429.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" />
       <Text layoutX="60.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observação">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="LivTextObservacao" editable="false" layoutX="59.0" layoutY="505.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0" promptText="-------">
+      <TextField fx:id="LivTextObservacao" editable="false" layoutX="59.0" layoutY="505.0" opacity="0.6" prefHeight="30.0" prefWidth="440.0">
          <font>
             <Font size="14.0" />
          </font>

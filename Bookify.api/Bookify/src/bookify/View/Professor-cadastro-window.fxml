@@ -57,7 +57,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="PROFESSOR &gt;" textFill="#111111">
+      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="PROFESSORES &gt;" textFill="#111111">
          <font>
             <Font size="20.0" />
          </font>
@@ -66,7 +66,7 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <Text layoutX="147.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
+      <Text layoutX="159.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
