@@ -63,6 +63,19 @@ public class BookifyDatabase implements IRepository {
         statement.execute(query);
         statement.close();
     }
+    
+    
+    public void update(String table, String column, String value, String filter) throws SQLException{
+        Statement statement = conection.createStatement();
+        String query = String.format("update %s set %s = '%s' where '%s'",
+                table,
+                column,
+                value,
+                filter
+                );
+        statement.execute(query);
+        statement.close();
+    }
 
     @Override
     public ResultSet get(String table) throws SQLException {

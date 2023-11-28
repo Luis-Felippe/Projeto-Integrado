@@ -194,5 +194,10 @@
             <Font size="14.0" />
          </font>
       </TextField>
+      <Text fx:id="erroText" fill="#ec0404" layoutX="863.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="343.69842529296875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

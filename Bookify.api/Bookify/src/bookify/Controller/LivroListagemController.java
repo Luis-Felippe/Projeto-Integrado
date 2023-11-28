@@ -88,7 +88,7 @@ public class LivroListagemController implements Initializable {
         res.getString("data"),
         res.getString("observacao"));
 
-        String id = res.getString("num_registro");
+        String id = res.getString("id_livro");
         
         componente.setEditHandler(()->{
             editLivroHandler(id);    
@@ -127,7 +127,7 @@ public class LivroListagemController implements Initializable {
     private void confirmHandler(String id, Pane mainContainer, PopupLivroController controlador, Pane popup){
         var repository = new BookifyDatabase();
         try {
-            repository.delete("livro", String.format("num_registro = '%s'", id));
+            repository.delete("livro", String.format("id_livro = '%s'", id));
             mainContainer.getChildren().remove(popup);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
             Pane popupConfirm = loader.load();

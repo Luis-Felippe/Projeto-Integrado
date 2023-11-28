@@ -72,7 +72,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="99.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
+      <Text layoutX="101.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -194,7 +194,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Text fx:id="erroText" fill="#ec0404" layoutX="953.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+      <Text fx:id="erroText" fill="#ec0404" layoutX="939.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="257.2984619140625">
          <font>
             <Font size="18.0" />
          </font>

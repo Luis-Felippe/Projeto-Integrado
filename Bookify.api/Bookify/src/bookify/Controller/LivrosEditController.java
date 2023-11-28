@@ -4,7 +4,6 @@ import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -12,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class LivrosEditController {
     TelasController tela = new TelasController();
@@ -19,6 +19,9 @@ public class LivrosEditController {
     BookifyDatabase repository = new BookifyDatabase();
     
     private Object params;
+    
+    @FXML
+    private Text erroText;
     
     @FXML
     private TextField livroTextAnoPublicacao;
@@ -89,7 +92,7 @@ public class LivrosEditController {
     }
     
     @FXML
-    protected void update() throws SQLException, IOException{
+    protected void update() throws  IOException{
         String [] values = {   livroTextAnoPublicacao.getText(),
             livroTextAutor.getText(),
             livroTextData.getEditor().getText(),
@@ -105,14 +108,19 @@ public class LivrosEditController {
         String [] columns = {"ano_publicacao", "autor", "data", "editora", "exemplar", "forma_aquisicao",
                             "local", "num_registro", "observacao", "titulo", "volume"};
         
-        repository.update("livro", columns, values, String.format("num_registro = '%s'", params));
+        try {
+            repository.update("livro", columns, values, String.format("id_livro = '%s'", params));
+        } catch (SQLException ex) {
+            erroText.setText("Erro: número de exemplar já existe!");
+            return;
+        }
         listarLivro();
     }
     
    
     private void loadInformation(){
         try {
-            ResultSet result = repository.get("Livro", String.format("num_registro = '%s'", params));
+            ResultSet result = repository.get("Livro", String.format("id_livro = '%s'", params));
             result.next();
 
             livroTextAnoPublicacao.setText(result.getString("ano_publicacao"));

@@ -10,9 +10,18 @@ import bookify.model.dao.BookifyDatabase;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -30,11 +39,16 @@ public class RealizarEmprestimoController {
     @FXML
     private Pane mainContainer;
     
+
+    
     @FXML
     private DatePicker LivDateDevolucao;
 
     @FXML
     private DatePicker LivDateInicio;
+    
+    @FXML
+    private ComboBox<String> menuExemplares;
     
     @FXML
     private Text error;
@@ -65,6 +79,8 @@ public class RealizarEmprestimoController {
 
     @FXML
     private TextField LivTextTitulo;
+    
+    private Map<String, String> currentId;
 
     @FXML
     void alunoMenu(ActionEvent event) throws IOException {
@@ -95,9 +111,11 @@ public class RealizarEmprestimoController {
     protected void register(){
        try{
             if(!currentLiv.isEmpty() && !currentUser.isEmpty()){
-                var result = repository.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLiv, currentUser));
+                String currentLivExe = menuExemplares.getSelectionModel().getSelectedItem();
+                String currentLivId = currentId.get(currentLivExe);
+                var result = repository.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLivId, currentUser));
                 if(!result.next()){
-                    String[] values = {currentLiv, currentUser, 
+                    String[] values = {currentLivId, currentUser, 
                         LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText()
                     };
                     String [] columns = {"num_registro_livro","id_usuario",
@@ -107,6 +125,7 @@ public class RealizarEmprestimoController {
                     loadInformation(null, null);
                     LivTextCod.setText("");
                     LivTextMatricula.setText("");
+                    repository.update("livro", "disponibilidade", "false", currentLivId);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
                     Pane popupConfirm = loader.load();
                     PopupAcaoMsgController controller = loader.getController();
@@ -130,6 +149,11 @@ public class RealizarEmprestimoController {
         }
     }
     
+    @FXML
+    protected void teste(ActionEvent e){
+        System.out.println(menuExemplares.getSelectionModel().getSelectedItem());
+    }
+    
     private void loadInformation(ResultSet resLiv, ResultSet resUser) throws SQLException{
         if(resLiv != null){
             resLiv.next();
@@ -139,6 +163,15 @@ public class RealizarEmprestimoController {
             LivTextObservacao.setText(resLiv.getString("observacao"));
             LivTextExemplar.setText(resLiv.getString("exemplar"));
             currentLiv = resLiv.getString("num_registro");
+            
+            ArrayList<String> array = new ArrayList<String>();
+            currentId = new HashMap<>();
+            do{
+                array.add(resLiv.getString("exemplar"));
+                currentId.put(resLiv.getString("exemplar"), resLiv.getString("id_livro"));
+            }while(resLiv.next());
+            ObservableList<String> list = FXCollections.observableArrayList(array);
+            menuExemplares.setItems(list);
         }else{
             LivTextTitulo.setText("");
             LivTextAutor.setText("");
@@ -186,7 +219,7 @@ public class RealizarEmprestimoController {
         try {
             if(!searchLivro.isEmpty()){
                     resultLiv = repository.get("livro",
-                            String.format("num_registro = '%s'",
+                            String.format("num_registro = '%s' AND disponibilidade = 'true' ORDER BY exemplar asc",
                                     searchLivro));
             }
             if(!searchUsuario.isEmpty()){

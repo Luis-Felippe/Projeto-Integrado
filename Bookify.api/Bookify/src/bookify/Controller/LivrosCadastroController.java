@@ -76,7 +76,7 @@ public class LivrosCadastroController {
         } else {
             String [] columns = {
                 "num_registro", "titulo", "autor", "volume", "exemplar", "local", "data", "editora", 
-                "ano_publicacao", "forma_aquisicao", "observacao"
+                "ano_publicacao", "forma_aquisicao", "observacao", "disponibilidade"
             };
             String [] values = {
                 this.livroTextNumReg.getText(),
@@ -89,12 +89,14 @@ public class LivrosCadastroController {
                 this.livroTextEditora.getText(),
                 this.livroTextAnoPublicacao.getText(),
                 this.livroTextFormaAquisicao.getText(),
-                this.livroTextObservacao.getText()
+                this.livroTextObservacao.getText(),
+                "true"
            };
             try {
                 repository.save("livro",columns, values);
             } catch (SQLException ex) {
-                erroText.setText("Erro: código do livro já existe");
+                System.out.println(ex.getMessage());
+                erroText.setText("Erro: exemplar do livro já existe");
                 return;
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
