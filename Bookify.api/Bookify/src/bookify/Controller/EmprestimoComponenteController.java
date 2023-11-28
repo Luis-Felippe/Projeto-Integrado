@@ -33,13 +33,18 @@ public class EmprestimoComponenteController {
     @FXML
     private Text tituloText;
     
+    @FXML
+    private Text clienteText;
+    
     protected void setTexto(String titulo, String nome, String matricula, String cpf ,String dataInicio, String dataDevolucao){
           tituloText.setText(titulo);
           nomeText.setText(nome);
           if(matricula == null){
               idText.setText(cpf);
+              clienteText.setText("Professor:");
           }else {
-              idText.setText(matricula);
+            idText.setText(matricula);
+            clienteText.setText("Aluno:");
           }
           dataInicioText.setText(dataInicio);
           dataDevolucaoText.setText(dataDevolucao);

@@ -98,7 +98,7 @@ public class EmprestimoListagemController implements Initializable{
         else values.replace("matricula", values.get("cpf"));
         String id = res.getString("id_emprestimo");
 
-        boolean status = LocalDate.now().isBefore(LocalDate.parse(res.getString("data_devolucao")));
+        boolean status = LocalDate.now().isBefore(LocalDate.parse(res.getString("data_devolucao")).plusDays(1));
         componente.setStatus(status);  
 
         componente.setEvent(()->{
@@ -112,14 +112,15 @@ public class EmprestimoListagemController implements Initializable{
         try {
                 FXMLLoader loaderPopup = new FXMLLoader();
                 loaderPopup.setLocation(getClass().getResource("../View/Popup-emprestimo.fxml"));
+                
                 Pane popup = loaderPopup.load();
                 
                 mainContainer.getChildren().add(popup);
                 
                 PopupEmprestimoController popupController = loaderPopup.getController();
                 popupController.setInfo(values.get("titulo").toString(),values.get("num_registro").toString(),
-                        values.get("autor").toString(),values.get("nome").toString(),values.get("matricula").toString(),
-                        values.get("cpf").toString(),values.get("data_inicio").toString(),values.get("data_devolucao").toString());
+                        values.get("autor").toString(),values.get("matricula").toString(),values.get("cpf").toString(),
+                        values.get("nome").toString(),values.get("data_inicio").toString(),values.get("data_devolucao").toString());
                 
                 popupController.setRenovarHandler(()->{
                     renovarHandler(popup, mainContainer, id);
@@ -127,6 +128,10 @@ public class EmprestimoListagemController implements Initializable{
                 
                 popupController.setEncerrarHandler(()->{
                     encerrarHandler(popup, mainContainer, id, values);
+                });
+                
+                popupController.setCloseHandler(()->{
+                    mainContainer.getChildren().remove(popup);
                 });
             } catch (IOException ex) {
                 Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,11 +155,20 @@ public class EmprestimoListagemController implements Initializable{
         try {
             repository.save("emprestimos_encerrados", columns, valuesSave);
             repository.delete("emprestimo", String.format("id_emprestimo = '%s'", id));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
+            Pane popupConfirm = loader.load();
+            PopupAcaoMsgController controller = loader.getController();
+            controller.setHandler(()->{
+                mainContainer.getChildren().remove(popupConfirm);
+            });
+            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().remove(popup);
+            search();
         } catch (SQLException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        mainContainer.getChildren().remove(popup);
-        search();
+        } catch (IOException ex) {
+            Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
     
     private void renovarHandler(Pane popup, Pane mainContainer, String id) {
@@ -162,7 +176,18 @@ public class EmprestimoListagemController implements Initializable{
         String[] columns = {"data_devolucao"};
         try {
             repository.update("emprestimo", columns, values, String.format("id_emprestimo = '%s'", id));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
+            Pane popupConfirm = loader.load();
+            PopupAcaoMsgController controller = loader.getController();
+            controller.setHandler(()->{
+                mainContainer.getChildren().remove(popupConfirm);
+            });
+            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().remove(popup);
+            search();
         } catch (SQLException ex) {
+            Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
         mainContainer.getChildren().remove(popup);

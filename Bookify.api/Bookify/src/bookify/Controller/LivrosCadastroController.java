@@ -2,12 +2,16 @@ package bookify.Controller;
 
 import bookify.Treinando;
 import bookify.model.dao.BookifyDatabase;
+import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class LivrosCadastroController {
     private BookifyDatabase repository = new BookifyDatabase();
@@ -15,40 +19,46 @@ public class LivrosCadastroController {
     private TelasController tela = new TelasController();
     
     @FXML
-    protected TextField livroTextNumReg;
+    private Pane mainContainer;
     
     @FXML
-    protected TextField livroTextTitulo;
+    private Text erroText;
     
     @FXML
-    protected TextField livroTextAutor;
+    private TextField livroTextNumReg;
     
     @FXML
-    protected TextField livroTextVolume;
+    private TextField livroTextTitulo;
     
     @FXML
-    protected TextField livroTextExemplar;
+    private TextField livroTextAutor;
     
     @FXML
-    protected TextField livroTextLocal;
+    private TextField livroTextVolume;
     
     @FXML
-    protected DatePicker livroTextData;
+    private TextField livroTextExemplar;
     
     @FXML
-    protected TextField livroTextEditora;
+    private TextField livroTextLocal;
     
     @FXML
-    protected TextField livroTextAnoPublicacao;
+    private DatePicker livroTextData;
     
     @FXML
-    protected TextField livroTextFormaAquisicao;
+    private TextField livroTextEditora;
     
     @FXML
-    protected TextField livroTextObservacao;
+    private TextField livroTextAnoPublicacao;
     
     @FXML
-    protected void cadastrarLivro(ActionEvent e) throws SQLException{
+    private TextField livroTextFormaAquisicao;
+    
+    @FXML
+    private TextField livroTextObservacao;
+    
+    @FXML
+    protected void cadastrarLivro(ActionEvent e) throws SQLException, IOException{
         if(this.livroTextNumReg.getText().isEmpty() ||
            this.livroTextTitulo.getText().isEmpty() ||
            this.livroTextAutor.getText().isEmpty() ||
@@ -60,8 +70,7 @@ public class LivrosCadastroController {
            this.livroTextAnoPublicacao.getText().isEmpty() ||
            this.livroTextFormaAquisicao.getText().isEmpty() ||
            this.livroTextObservacao.getText().isEmpty()){
-        
-            System.out.println("Não foi possível cadastrar o livro");
+           this.erroText.setText("Preencha todos os campos !");
         } else {
             String [] columns = {
                 "num_registro", "titulo", "autor", "volume", "exemplar", "local", "data", "editora", 
@@ -81,6 +90,15 @@ public class LivrosCadastroController {
                 this.livroTextObservacao.getText()
            };
             repository.save("livro",columns, values);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
+            Pane popupConfirm = loader.load();
+            PopupCadastrarMsgController controller = loader.getController();
+            controller.setHandler(()->{
+                mainContainer.getChildren().remove(popupConfirm);
+            });
+            mainContainer.getChildren().add(popupConfirm);
+            this.erroText.setText("");
+
         }
     }
     

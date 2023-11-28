@@ -17,9 +17,9 @@ import javafx.scene.text.Text;
 
 public class RealizarEmprestimoController {
 
-    private String currentUser;
+    private String currentUser = "";
     
-    private String currentLiv;
+    private String currentLiv = "";
     
     private BookifyDatabase repository = new BookifyDatabase();
     
@@ -107,7 +107,10 @@ public class RealizarEmprestimoController {
                             + " verifique se o livro não pertence\n a outro emprestimo ou se "
                             + "o usuário já possui empréstimo vinculado");
                 }
+            }else{
+                error.setText("Preencha todos os campos!");
             }
+                
         }catch(SQLException ex){
             error.setText(ex.getMessage());
         }

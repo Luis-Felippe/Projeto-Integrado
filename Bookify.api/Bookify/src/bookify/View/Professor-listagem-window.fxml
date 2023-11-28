@@ -15,9 +15,9 @@
 
 <Pane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.ProfessorListagemController">
    <children>
-      <Pane prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
+      <Pane prefHeight="40.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
-            <HBox layoutX="885.0" layoutY="8.0" styleClass="header-anchor">
+            <HBox layoutX="885.0" layoutY="2.0" styleClass="header-anchor">
                <children>
                   <Button fx:id="btnLivros" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#livroMenu" prefHeight="35.0" prefWidth="70.0" styleClass="header-anchor" text="Livros">
                      <font>
@@ -53,7 +53,7 @@
                   </Button>
                </children>
             </HBox>
-            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#homeMenu">
+            <ImageView fx:id="btnHome" fitHeight="25.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" onMouseClicked="#homeMenu">
                <image>
                   <Image url="@images/image.png" />
                </image>

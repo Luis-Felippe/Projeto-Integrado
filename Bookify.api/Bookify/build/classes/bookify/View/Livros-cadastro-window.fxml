@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane layoutY="-15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.LivrosCadastroController">
+<Pane fx:id="mainContainer" layoutY="-15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F1F1F1;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.LivrosCadastroController">
    <children>
       <Pane prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
@@ -194,5 +194,10 @@
             <Font size="14.0" />
          </font>
       </TextField>
+      <Text fx:id="erroText" fill="#ec0404" layoutX="1052.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
