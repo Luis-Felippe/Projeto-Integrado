@@ -60,12 +60,12 @@
             </ImageView>
          </children>
       </Pane>
-      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="ALUNO&gt;" textFill="#111111">
+      <Label accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="54.0" opacity="0.5" text="ALUNOS &gt;" textFill="#111111">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Text layoutX="94.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTAGEM">
+      <Text layoutX="110.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTAGEM">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

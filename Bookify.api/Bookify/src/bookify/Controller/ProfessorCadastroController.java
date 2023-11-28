@@ -5,6 +5,8 @@ import bookify.Treinando;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +42,7 @@ public class ProfessorCadastroController {
     private TextField profTextTelefone;
     
     @FXML
-    protected void cadastrarProfessor(ActionEvent e) throws SQLException, IOException{
+    protected void cadastrarProfessor(ActionEvent e) throws IOException{
         if(this.profTextNome.getText().isEmpty() ||
            this.profTextTelefone.getText().isEmpty() ||
            this.profTextCpf.getText().isEmpty() ||
@@ -61,7 +63,12 @@ public class ProfessorCadastroController {
                 this.profTextEmail.getText()
             };
             
-            repository.save("usuario", columns, values);
+            try {
+                repository.save("usuario", columns, values);
+            } catch (SQLException ex) {
+                erroText.setText("Erro: CPF já vinculado");
+                return;
+            }
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
             Pane popupConfirm = loader.load();
