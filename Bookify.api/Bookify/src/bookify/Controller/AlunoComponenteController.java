@@ -27,6 +27,9 @@ public class AlunoComponenteController{
     
     @FXML
     protected void setTexto(String nome, String matricula, String curso, String telefone, String turma){
+        if(nome.length() > 49){
+            nome = nome.substring(0,49) + "...";
+        }
         nomeText.setText(nome);
         matriculaText.setText(matricula);
         cursoText.setText(curso);

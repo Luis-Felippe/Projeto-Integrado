@@ -34,6 +34,9 @@ public class LivroComponenteController {
     
     @FXML
     protected void setTexto(String titulo, String numReg, String autor, String volume, String exemplar, String data, String observacao){
+        if(titulo.length() > 51){
+            titulo = titulo.substring(0,51) + "...";
+        }
         tituloText.setText(titulo);
         numRegText.setText(numReg);
         autorText.setText(autor);

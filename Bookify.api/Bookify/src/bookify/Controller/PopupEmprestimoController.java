@@ -57,6 +57,15 @@ public class PopupEmprestimoController {
         eventEncerrar.handler();
     }
     protected void setInfo(String titulo, String numReg, String autor, String matricula, String cpf, String responsavel, String dataIncio, String dataDevolucao){
+        if(titulo.length() > 40){
+            titulo =titulo.substring(0,40) + "...";
+        }
+         if(responsavel.length() >= 36){
+            responsavel =responsavel.substring(0,36) + "...";
+        }
+         if(autor.length() > 36){
+            autor =autor.substring(0,36) + "...";
+        }
         tituloText.setText(titulo);
         numRegText.setText(numReg);
         autorText.setText(autor);

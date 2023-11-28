@@ -37,7 +37,13 @@ public class EmprestimoComponenteController {
     private Text clienteText;
     
     protected void setTexto(String titulo, String nome, String matricula, String cpf ,String dataInicio, String dataDevolucao){
-          tituloText.setText(titulo);
+        if(titulo.length() > 30){
+            titulo= titulo.substring(0,30) + "...";
+        }  
+        if(nome.length() > 40){
+            nome= nome.substring(0,40) + "...";
+        }  
+        tituloText.setText(titulo);
           nomeText.setText(nome);
           if(matricula == null){
               idText.setText(cpf);

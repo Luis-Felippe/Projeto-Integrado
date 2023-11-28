@@ -9,19 +9,19 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.7);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.PopupEmprestimoController">
    <children>
-      <Pane layoutX="429.0" layoutY="167.0" prefHeight="342.0" prefWidth="465.0" style="-fx-background-color: EEEEEE; -fx-border-radius: 20px;" styleClass="options-container" stylesheets="@styles.css">
+      <Pane layoutX="366.0" layoutY="189.0" prefHeight="342.0" prefWidth="548.0" style="-fx-background-color: EEEEEE; -fx-border-radius: 20px;" styleClass="options-container" stylesheets="@styles.css">
          <children>
-            <Button fx:id="cancelButton" layoutX="43.0" layoutY="278.0" mnemonicParsing="false" onAction="#renovar" styleClass="renovar-style" stylesheets="@styles.css" text="RENOVAR " textFill="WHITE">
+            <Button fx:id="cancelButton" layoutX="59.0" layoutY="278.0" mnemonicParsing="false" onAction="#renovar" styleClass="renovar-style" stylesheets="@styles.css" text="RENOVAR " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Text layoutX="33.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro:" wrappingWidth="298.436767578125">
+            <Text layoutX="33.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro:" wrappingWidth="298.436767578125">
                <font>
-                  <Font name="System Bold" size="26.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Button layoutX="257.0" layoutY="280.0" mnemonicParsing="false" onAction="#encerrar" styleClass="renovar-style" stylesheets="@styles.css" text="ENCERRAR" textFill="WHITE">
+            <Button layoutX="342.0" layoutY="278.0" mnemonicParsing="false" onAction="#encerrar" styleClass="renovar-style" stylesheets="@styles.css" text="ENCERRAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -61,9 +61,9 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="tituloText" layoutX="225.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro" wrappingWidth="298.436767578125">
+            <Text fx:id="tituloText" layoutX="229.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do livro" wrappingWidth="226.436767578125">
                <font>
-                  <Font size="22.0" />
+                  <Font size="20.0" />
                </font>
             </Text>
             <Text fx:id="numRegText" layoutX="183.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1212" wrappingWidth="298.436767578125">
@@ -76,7 +76,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text fx:id="responsavelText" layoutX="151.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rapaz menino" wrappingWidth="298.436767578125">
+            <Text fx:id="responsavelText" layoutX="148.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rapaz menino" wrappingWidth="367.436767578125">
                <font>
                   <Font size="18.0" />
                </font>
@@ -96,7 +96,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="399.0" layoutY="17.0" mnemonicParsing="false" onAction="#close" styleClass="botao-redondo" stylesheets="@styles.css">
+            <Button layoutX="481.0" layoutY="18.0" mnemonicParsing="false" onAction="#close" styleClass="botao-redondo" stylesheets="@styles.css">
                <graphic>
                   <ImageView fitHeight="102.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
