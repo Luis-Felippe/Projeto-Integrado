@@ -55,6 +55,11 @@ public class ProfessorListagemController implements Initializable {
         tela.switchScreen(2);
     }
     
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
     public String getCurrentEditId(){
         return currentEditProfessor;
     }

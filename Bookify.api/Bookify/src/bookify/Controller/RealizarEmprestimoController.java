@@ -82,6 +82,11 @@ public class RealizarEmprestimoController {
     }
     
     @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
+    @FXML
     protected void register(){
        try{
             if(!currentLiv.isEmpty() && !currentUser.isEmpty()){

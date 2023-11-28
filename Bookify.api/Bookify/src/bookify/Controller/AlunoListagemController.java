@@ -68,6 +68,11 @@ public class AlunoListagemController implements Initializable {
     void livroMenu(ActionEvent event) throws IOException {
         tela.switchScreen(7);
     }
+    
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
 
     @FXML
     void professorMenu(ActionEvent event) throws IOException {

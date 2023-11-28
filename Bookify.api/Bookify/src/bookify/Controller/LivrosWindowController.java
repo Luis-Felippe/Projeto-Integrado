@@ -38,4 +38,8 @@ public class LivrosWindowController {
     protected void listarLivro() throws IOException{
         tela.switchScreen(12);
     }
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
 }
