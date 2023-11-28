@@ -64,6 +64,11 @@ public class EmprestimoListagemController implements Initializable{
     }
     
     @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
+    @FXML
     private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Emprestimo-componente-window.fxml"));

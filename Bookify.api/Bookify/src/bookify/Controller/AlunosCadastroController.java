@@ -63,6 +63,11 @@ public class AlunosCadastroController {
             repository.save("usuario", columns, values);
         }
     }
+    
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
    
     @FXML
     protected void alunoMenu() throws IOException{

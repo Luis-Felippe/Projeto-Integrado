@@ -61,6 +61,11 @@ public class AlunosEditController {
         tela.switchScreen(9);
     }
     
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
     
     protected void setParams(Object obj){
         this.params = obj;

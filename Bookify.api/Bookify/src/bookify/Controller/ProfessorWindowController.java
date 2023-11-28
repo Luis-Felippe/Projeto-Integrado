@@ -34,4 +34,9 @@ public class ProfessorWindowController {
         tela.switchScreen(10);
     }
     
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
+    
 }

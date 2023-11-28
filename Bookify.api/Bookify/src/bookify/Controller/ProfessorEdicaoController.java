@@ -47,6 +47,10 @@ public class ProfessorEdicaoController{
     protected void livroMenu() throws IOException{
         tela.switchScreen(7);
     }
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.switchScreen(16);
+    }
     
     @FXML
     protected void listarProfessor() throws IOException{
