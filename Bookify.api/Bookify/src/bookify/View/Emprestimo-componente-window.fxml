@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -7,27 +8,47 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handlerEvent" prefHeight="135.0" prefWidth="581.0" styleClass="borda-discreta" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.EmprestimoComponenteController">
    <children>
-      <Text fx:id="tituloText" layoutX="25.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Livro">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="clienteText" layoutX="25.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cliente:" />
-      <Text layoutX="165.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricula/CPF:" />
       <Text layoutX="25.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data início:" />
       <Text layoutX="165.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data devolução:" />
-      <Text fx:id="nomeText" layoutX="71.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="example" />
-      <Text fx:id="idText" layoutX="249.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1234" />
       <Text fx:id="dataInicioText" layoutX="87.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01/01/2023" />
       <Text fx:id="dataDevolucaoText" layoutX="255.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01/02/2023" />
-      <StackPane fx:id="statusPane" layoutX="177.0" layoutY="14.0" prefHeight="34.0" prefWidth="85.0">
+      <HBox layoutX="24.0" layoutY="51.0" prefHeight="34.0" prefWidth="368.0" style="-fx-spacing: 25;">
          <children>
-            <Text fx:id="statusText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ATIVO" textAlignment="CENTER">
+            <HBox prefHeight="34.0" prefWidth="107.0" style="-fx-spacing: 10;">
+               <children>
+                  <Text fx:id="clienteText" strokeType="OUTSIDE" strokeWidth="0.0" text="Cliente:" />
+                  <Text fx:id="nomeText" strokeType="OUTSIDE" strokeWidth="0.0" text="example">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="151.0" style="-fx-spacing: 10;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Matricula/CPF:" />
+                  <Text fx:id="idText" strokeType="OUTSIDE" strokeWidth="0.0" text="1234" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <HBox layoutX="24.0" layoutY="14.0" prefHeight="34.0" prefWidth="473.0" style="-fx-spacing: 30;">
+         <children>
+            <Text fx:id="tituloText" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Livro">
                <font>
-                  <Font name="System Bold Italic" size="12.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Text>
+            <StackPane fx:id="statusPane" prefHeight="34.0" prefWidth="85.0">
+               <children>
+                  <Text fx:id="statusText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ATIVO" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
          </children>
-      </StackPane>
+      </HBox>
    </children>
 </Pane>

@@ -27,6 +27,9 @@ public class ProfessorComponenteController {
     
     @FXML
     protected void setTexto(String nome, String cpf, String disciplina, String telefone, String email){
+        if(nome.length() > 32){
+            nome = nome.substring(0,32) + "...";
+        }
         nomeText.setText(nome);
         cpfText.setText(cpf);
         disciplinaText.setText(disciplina);
