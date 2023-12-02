@@ -1,6 +1,6 @@
 package bookify.Controller;
 
-import bookify.Treinando;
+import bookify.Main;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -58,7 +58,7 @@ public class TelasController{
                 System.out.println("teste");
                 break;
         }
-        Treinando main = new Treinando();
+        Main main = new Main();
         main.setStage(new Scene(fxmlloader.load()));
     }
     
@@ -86,7 +86,7 @@ public class TelasController{
             default:
                 throw new AssertionError();
         }
-        Treinando main = new Treinando();
+        Main main = new Main();
         main.setStage(teste);
     }
     

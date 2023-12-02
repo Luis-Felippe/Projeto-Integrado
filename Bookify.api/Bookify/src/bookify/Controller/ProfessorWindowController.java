@@ -1,7 +1,7 @@
 
 package bookify.Controller;
 
-import bookify.Treinando;
+import bookify.Main;
 import java.io.IOException;
 import javafx.fxml.FXML;
 

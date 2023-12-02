@@ -1,12 +1,8 @@
 package bookify.Controller;
 
-import bookify.Treinando;
 import bookify.model.dao.BookifyDatabase;
-import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
