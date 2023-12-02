@@ -20,10 +20,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class EmprestimoListagemController implements Initializable{
-
-    TelasController tela = new TelasController();
-    BookifyDatabase repository = new BookifyDatabase();
+public class EmprestimoListagemController extends TelasController implements Initializable{
+    
+    private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     @FXML
     private Pane mainContainer;
@@ -33,28 +32,6 @@ public class EmprestimoListagemController implements Initializable{
 
     @FXML
     private VBox render_box_elements;
-
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-     @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-     @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
     
     @FXML
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
@@ -141,8 +118,8 @@ public class EmprestimoListagemController implements Initializable{
         };
         
         try {
-            repository.save("emprestimos_encerrados", columns, valuesSave);
-            repository.delete("emprestimo", String.format("id_emprestimo = '%s'", id));
+            repositorio.save("emprestimos_encerrados", columns, valuesSave);
+            repositorio.delete("emprestimo", String.format("id_emprestimo = '%s'", id));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupAcaoMsgController controller = loader.getController();
@@ -161,7 +138,7 @@ public class EmprestimoListagemController implements Initializable{
         String[] values = {LocalDate.now().plusDays(5).toString()};
         String[] columns = {"data_devolucao"};
         try {
-            repository.update("emprestimo", columns, values, String.format("id_emprestimo = '%s'", id));
+            repositorio.update("emprestimo", columns, values, String.format("id_emprestimo = '%s'", id));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupAcaoMsgController controller = loader.getController();
@@ -190,7 +167,7 @@ public class EmprestimoListagemController implements Initializable{
                 + "ORDER BY data_inicio asc",searchBar, searchBar);
         
         try {
-            var response = repository.get("l.titulo, u.nome, u.matricula, u.cpf ,"
+            var response = repositorio.get("l.titulo, u.nome, u.matricula, u.cpf ,"
                     + "e.data_inicio, e.data_devolucao, l.num_registro,"
                     + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
             HBox box = null;

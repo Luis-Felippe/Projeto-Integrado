@@ -11,10 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class LivrosCadastroController {
-    private BookifyDatabase repository = new BookifyDatabase();
-    
-    private TelasController tela = new TelasController();
+public class LivrosCadastroController extends TelasLivrosController{
+    private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
     
     @FXML
     private Pane mainContainer;
@@ -56,27 +54,6 @@ public class LivrosCadastroController {
     private TextField livroTextObservacao;
     
     @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
-    
-    @FXML
     protected void cadastrarLivro(ActionEvent e) throws IOException{
         if(this.livroTextNumReg.getText().isEmpty() ||
            this.livroTextTitulo.getText().isEmpty() ||
@@ -109,7 +86,7 @@ public class LivrosCadastroController {
                 this.livroTextObservacao.getText()
            };
             try {
-                repository.save("livro",columns, values);
+                repositorio.save("livro",columns, values);
             } catch (SQLException ex) {
                 erroText.setText("Erro: código do livro já existe");
                 return;

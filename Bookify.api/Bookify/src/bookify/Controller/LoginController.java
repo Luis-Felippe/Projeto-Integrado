@@ -7,11 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-
-
 public class LoginController {
 
-    private TelasController tela = new TelasController();
+    private TelasView tela = new TelasView();
     private String user = "biblioteca";
     private String password = "bookify";
     
@@ -25,7 +23,7 @@ public class LoginController {
     private Label lblError;
     
     @FXML
-    protected void homeMenu() throws IOException{
+    protected void realizarLogin() throws IOException{
         if(user.equals(txtLogin.getText()) && password.equals(txtSenha.getText()) ){
             tela.trocarTela("home");
         }

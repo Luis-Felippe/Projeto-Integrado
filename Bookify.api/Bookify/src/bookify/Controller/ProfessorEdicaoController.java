@@ -9,10 +9,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class ProfessorEdicaoController{
-    BookifyDatabase repository = new BookifyDatabase();
-    
-    TelasController tela = new TelasController();
+public class ProfessorEdicaoController extends TelasProfessorController{
+    BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     private Object params;
     
@@ -30,32 +28,6 @@ public class ProfessorEdicaoController{
 
     @FXML
     private TextField profTextTelefone;
-
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
-    
-    @FXML
-    protected void listarProfessor() throws IOException{
-        tela.trocarTela("professores/listagem");
-    }
     
     protected void setParametros(Object obj){
         this.params = obj;
@@ -72,13 +44,13 @@ public class ProfessorEdicaoController{
         
         String [] columns = {"nome", "disciplina", "cpf", "email", "telefone"};
         
-        repository.update("usuario", columns, values, "id_usuario = " + params);
+        repositorio.update("usuario", columns, values, "id_usuario = " + params);
         listarProfessor();
     }
     
     private void carregarInformacao(){
         try {
-            ResultSet result = repository.get("Usuario", "id_usuario = " + params);
+            ResultSet result = repositorio.get("Usuario", "id_usuario = " + params);
             result.next();
             profTextCpf.setText(result.getString("cpf"));
             profTextNome.setText(result.getString("nome"));

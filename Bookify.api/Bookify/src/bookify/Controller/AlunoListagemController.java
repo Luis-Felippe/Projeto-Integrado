@@ -20,10 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
 
-public class AlunoListagemController implements Initializable {
-
-    private TelasController tela = new TelasController();
-    
+public class AlunoListagemController extends TelasAlunoController implements Initializable {
+    private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+            
     private String currentEditAluno;
     
     @FXML
@@ -52,36 +51,11 @@ public class AlunoListagemController implements Initializable {
     
     @FXML
     private TextField matriculaTxt;
-
-    @FXML
-    protected void alunoMenu(ActionEvent event) throws IOException {
-        tela.trocarTela("alunos/menu");
-    }
-
-    @FXML
-    protected void homeMenu(MouseEvent event) throws IOException {
-        tela.trocarTela("home");
-    }
-
-    @FXML
-    protected void livroMenu(ActionEvent event) throws IOException {
-        tela.trocarTela("livros/menu");
-    }
-    
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
-
-    @FXML
-    protected void professorMenu(ActionEvent event) throws IOException {
-        tela.trocarTela("professores/menu");
-    }
     
      private void editarAlunoManipulador(String id) {
         this.currentEditAluno = id;
         try {
-            tela.trocarTela("alunos/edicao", currentEditAluno);
+            super.editarAluno(currentEditAluno);
         } catch (IOException ex) {
             Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -134,9 +108,8 @@ public class AlunoListagemController implements Initializable {
     }
     
     private void confirmarManipulador(String id, Pane mainContainer, PopupAlunoController controlador, Pane popup){
-        var repository = new BookifyDatabase();
         try {
-            repository.delete("Usuario", String.format("id_usuario = %s", id));
+            repositorio.delete("Usuario", String.format("id_usuario = %s", id));
             mainContainer.getChildren().remove(popup);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
             Pane popupConfirm = loader.load();
@@ -173,14 +146,13 @@ public class AlunoListagemController implements Initializable {
     @FXML
     protected void buscar(){
         render_box_elements.getChildren().clear();
-        var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
                 + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
                 + "(UPPER(email) LIKE '%%%s%%' )) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
-            var response = repository.get("Usuario", consult);
+            var response = repositorio.get("Usuario", consult);
             HBox box = null;
             boolean status = true;
             while(response.next()){

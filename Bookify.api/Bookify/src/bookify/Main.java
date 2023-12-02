@@ -1,6 +1,6 @@
 package bookify;
 
-import bookify.Controller.TelasController;
+import bookify.Controller.TelasView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         this.stage = primaryStage;
-        TelasController tela = new TelasController();
+        TelasView tela = new TelasView();
 //        tela.trocarTela("login");
         tela.trocarTela("home");
         stage.setResizable(false);

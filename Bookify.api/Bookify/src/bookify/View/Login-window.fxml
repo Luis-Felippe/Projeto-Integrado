@@ -24,7 +24,7 @@
             <Text layoutX="42.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário:" />
             <TextField fx:id="txtLogin" layoutX="41.0" layoutY="142.0" prefHeight="25.0" prefWidth="217.0" promptText="Usuário" />
             <Text layoutX="39.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha:" />
-            <Button fx:id="btnLogin" layoutX="40.0" layoutY="254.0" mnemonicParsing="false" onAction="#homeMenu" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="LOGIN" textFill="WHITE">
+            <Button fx:id="btnLogin" layoutX="40.0" layoutY="254.0" mnemonicParsing="false" onAction="#realizarLogin" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="LOGIN" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>

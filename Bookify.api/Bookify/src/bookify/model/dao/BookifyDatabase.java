@@ -9,10 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookifyDatabase implements IRepository {
+    private static BookifyDatabase instancia = null;
+    private DatabasePostgreSQL InstancedDatabasePostgreSQL;
+    private Connection conection;
     
-    private DatabasePostgreSQL InstancedDatabasePostgreSQL = new DatabasePostgreSQL();
-    private Connection conection = InstancedDatabasePostgreSQL.getConnection();
+    private BookifyDatabase(){
+        InstancedDatabasePostgreSQL = new DatabasePostgreSQL();
+        conection = InstancedDatabasePostgreSQL.getConnection();
+    }
     
+    public static BookifyDatabase getInstancia(){
+        if(instancia == null) instancia = new BookifyDatabase();
+        return instancia;
+    } 
+
     @Override
     public void save(String table, String[] columns, String[] values) throws SQLException {
         List<String> listaComAspas = new ArrayList<>();

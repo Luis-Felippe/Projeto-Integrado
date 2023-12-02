@@ -11,11 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class ProfessorCadastroController {
+public class ProfessorCadastroController extends TelasProfessorController{
     
-    private BookifyDatabase repository = new BookifyDatabase();
-    
-    private TelasController tela = new TelasController();
+    private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     @FXML
     private Text erroText;
@@ -37,28 +35,7 @@ public class ProfessorCadastroController {
     
     @FXML
     private TextField profTextTelefone;
-    
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
-    
+
     @FXML
     protected void cadastrarProfessor(ActionEvent e) throws IOException{
         if(this.profTextNome.getText().isEmpty() ||
@@ -82,7 +59,7 @@ public class ProfessorCadastroController {
             };
             
             try {
-                repository.save("usuario", columns, values);
+                repositorio.save("usuario", columns, values);
             } catch (SQLException ex) {
                 erroText.setText("Erro: CPF já vinculado");
                 return;
