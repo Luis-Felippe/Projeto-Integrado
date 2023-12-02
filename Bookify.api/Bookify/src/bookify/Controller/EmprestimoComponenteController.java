@@ -1,10 +1,7 @@
 package bookify.Controller;
 
 import bookify.Interface.IButtonHandler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -71,12 +68,12 @@ public class EmprestimoComponenteController {
             }
     }
 
-    public void setEvent(IButtonHandler event) {
+    public void setEvento(IButtonHandler event) {
         this.event = event;
     }
     
     @FXML
-    protected void handlerEvent(){
+    protected void ManipuladorEvento(){
         event.handler();
     }
 

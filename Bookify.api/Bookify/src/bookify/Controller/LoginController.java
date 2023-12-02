@@ -27,7 +27,7 @@ public class LoginController {
     @FXML
     protected void homeMenu() throws IOException{
         if(user.equals(txtLogin.getText()) && password.equals(txtSenha.getText()) ){
-            tela.switchScreen(4);
+            tela.trocarTela("home");
         }
         else{
             lblError.setText("❌ Usuário ou senha incorretos.");

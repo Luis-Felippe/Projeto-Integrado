@@ -23,12 +23,12 @@
       <Text fx:id="emailText" layoutX="207.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="example@gmail.com" />
       <Text fx:id="disciplinaText" layoutX="87.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inglês" />
       <Text fx:id="telefoneText" layoutX="219.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="88 99233-1092" />
-      <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" onAction="#delete" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" onAction="#deletar" styleClass="botao-redondo" stylesheets="@styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="54.0" fitWidth="49.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="54.0" fitWidth="49.0" onMouseClicked="#deletar" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/excluir.png" />
                </image>
@@ -38,9 +38,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" onAction="#edit" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
+      <Button layoutX="468.0" layoutY="48.0" minHeight="54.0" minWidth="52.0" mnemonicParsing="false" onAction="#editar" prefHeight="54.0" prefWidth="52.0" styleClass="botao-redondo" stylesheets="@styles.css">
          <graphic>
-            <ImageView fitHeight="50.0" fitWidth="51.0" onMouseClicked="#edit" pickOnBounds="true" preserveRatio="true" styleClass=".botao-redondo">
+            <ImageView fitHeight="50.0" fitWidth="51.0" onMouseClicked="#editar" pickOnBounds="true" preserveRatio="true" styleClass=".botao-redondo">
                <image>
                   <Image url="@images/editar.png" />
                </image>

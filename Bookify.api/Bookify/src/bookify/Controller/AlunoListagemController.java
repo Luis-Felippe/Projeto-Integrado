@@ -38,7 +38,7 @@ public class AlunoListagemController implements Initializable {
     @FXML
     private TextField nomeTxt;
     
-     @FXML
+    @FXML
     private TextField telefoneTxt;
 
     @FXML
@@ -53,42 +53,41 @@ public class AlunoListagemController implements Initializable {
     @FXML
     private TextField matriculaTxt;
 
-
     @FXML
-    void alunoMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(1);
+    protected void alunoMenu(ActionEvent event) throws IOException {
+        tela.trocarTela("alunos/menu");
     }
 
     @FXML
-    void homeMenu(MouseEvent event) throws IOException {
-        tela.switchScreen(4);
+    protected void homeMenu(MouseEvent event) throws IOException {
+        tela.trocarTela("home");
     }
 
     @FXML
-    void livroMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(7);
+    protected void livroMenu(ActionEvent event) throws IOException {
+        tela.trocarTela("livros/menu");
     }
     
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
 
     @FXML
-    void professorMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(2);
+    protected void professorMenu(ActionEvent event) throws IOException {
+        tela.trocarTela("professores/menu");
     }
     
-     private void editAlunoHandler(String id) {
+     private void editarAlunoManipulador(String id) {
         this.currentEditAluno = id;
         try {
-            tela.switchScreen(14, currentEditAluno);
+            tela.trocarTela("alunos/edicao", currentEditAluno);
         } catch (IOException ex) {
             Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
+    private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
         Pane painel = loader.load();
@@ -102,17 +101,17 @@ public class AlunoListagemController implements Initializable {
         String id = res.getString("id_usuario");
         
 
-        componente.setEditHandler(()->{
-            editAlunoHandler(id);    
+        componente.setEditarManipulador(()->{
+            editarAlunoManipulador(id);    
         });
-        componente.setDeleteHandler(()->{
-            deleteAlunoHandler(id, mainContainer);
+        componente.setDeletarManipulador(()->{
+            deletarAlunoManipulador(id, mainContainer);
         });
         
         box.getChildren().add(painel);
     }
     
-    private void deleteAlunoHandler(String id, Pane mainContainer){
+    private void deletarAlunoManipulador(String id, Pane mainContainer){
         try {
                 FXMLLoader loaderPopup = new FXMLLoader();
                 loaderPopup.setLocation(getClass().getResource("../View/Popup-aluno.fxml"));
@@ -122,19 +121,19 @@ public class AlunoListagemController implements Initializable {
                 
                 PopupAlunoController popupController = loaderPopup.getController();
                 
-                popupController.setCancelHandler(()->{
-                    cancelHandler(popup, mainContainer);
+                popupController.setCancelarManipulador(()->{
+                    cancelarManipulador(popup, mainContainer);
                 });
                 
-                popupController.setConfirmHandler(()->{
-                    confirmHandler(id, mainContainer, popupController, popup);
+                popupController.setConfirmarManipulador(()->{
+                    confirmarManipulador(id, mainContainer, popupController, popup);
                 });
             } catch (IOException ex) {
                 Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     
-    private void confirmHandler(String id, Pane mainContainer, PopupAlunoController controlador, Pane popup){
+    private void confirmarManipulador(String id, Pane mainContainer, PopupAlunoController controlador, Pane popup){
         var repository = new BookifyDatabase();
         try {
             repository.delete("Usuario", String.format("id_usuario = %s", id));
@@ -142,37 +141,37 @@ public class AlunoListagemController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupExcluirMsgController controller = loader.getController();
-            controller.setHandler(()->{
+            controller.setManipulador(()->{
                 mainContainer.getChildren().remove(popupConfirm);
             });
             mainContainer.getChildren().add(popupConfirm);
-            search();
+            buscar();
         } catch (SQLException ex) {
             controlador.erro();
         } catch (IOException ex) {
             Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void cancelHandler(Pane popup, Pane mainContainer){
+    private void cancelarManipulador(Pane popup, Pane mainContainer){
         mainContainer.getChildren().remove(popup);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        search();
+        buscar();
     }
     
     @FXML
-    protected void searchKeyListener(){
+    protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER){
-                search();
+                buscar();
             }
         });
     }
     
     @FXML
-    protected void search(){
+    protected void buscar(){
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
@@ -181,25 +180,23 @@ public class AlunoListagemController implements Initializable {
                 + "(UPPER(email) LIKE '%%%s%%' )) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
-        var response = repository.get("Usuario", consult);
-        HBox box = null;
-        boolean status = true;
-        while(response.next()){
-            if(status){
-               box = new HBox();
-               render_box_elements.getChildren().add(box);
-               status = false;
-               addComponent(box, response);
-            } else{
-               status = true;
-               addComponent(box, response);
+            var response = repository.get("Usuario", consult);
+            HBox box = null;
+            boolean status = true;
+            while(response.next()){
+                if(status){
+                   box = new HBox();
+                   render_box_elements.getChildren().add(box);
+                   status = false;
+                   adicionarComponente(box, response);
+                } else{
+                   status = true;
+                   adicionarComponente(box, response);
+                }
             }
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }
 }
 

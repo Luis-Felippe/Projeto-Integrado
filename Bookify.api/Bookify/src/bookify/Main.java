@@ -14,17 +14,14 @@ public class Main extends Application {
         
         this.stage = primaryStage;
         TelasController tela = new TelasController();
-        tela.switchScreen(5);
-//        tela.switchScreen(4);
+//        tela.trocarTela("login");
+        tela.trocarTela("home");
         stage.setResizable(false);
         stage.show();
-
     }
-  
-    public void setStage(Scene cena){
+    public void setCena(Scene cena){
         stage.setScene(cena);
     }
-   
     public static void main(String[] args) {
         launch(args);
     }

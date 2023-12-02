@@ -35,15 +35,15 @@ public class PopupEmprestimoController {
     @FXML
     private Text tituloText;
 
-    protected void setRenovarHandler(IButtonHandler event){
+    protected void setRenovarManipulador(IButtonHandler event){
         this.eventRenovar = event;
     }
     
-    protected void setEncerrarHandler(IButtonHandler event){
+    protected void setEncerrarManipulador(IButtonHandler event){
         this.eventEncerrar = event;
     }
     
-    protected void setCloseHandler(IButtonHandler event){
+    protected void setFecharManipulador(IButtonHandler event){
         this.eventClose = event;
     }
     
@@ -80,7 +80,7 @@ public class PopupEmprestimoController {
     }
     
     @FXML
-    public void close(ActionEvent event){
+    public void fechar(ActionEvent event){
         eventClose.handler();
     }
 }

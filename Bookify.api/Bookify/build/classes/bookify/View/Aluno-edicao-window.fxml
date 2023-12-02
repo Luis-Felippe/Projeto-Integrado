@@ -139,7 +139,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="780.0" layoutY="574.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="SALVAR" textFill="WHITE">
+      <Button layoutX="780.0" layoutY="574.0" mnemonicParsing="false" onAction="#atualizar" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="SALVAR" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>

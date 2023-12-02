@@ -39,9 +39,6 @@ public class BookifyDatabase implements IRepository {
             id);
         statement.execute(query);
         statement.close();
-        
-        
-        
     }
 
     @Override
@@ -52,8 +49,6 @@ public class BookifyDatabase implements IRepository {
 //            String strComAspas = columns[i] +  " = " + "'" + values[i] + "'";
             listaComAspas.add(formatado);
         }
-        
-
         Statement statement = conection.createStatement();
         String query = String.format("update %s set %s where %s",
                 table,

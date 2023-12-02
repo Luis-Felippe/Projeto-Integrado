@@ -1,32 +1,32 @@
 package bookify.Controller;
-import bookify.Main;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class AlunosWindowController {
     TelasController tela = new TelasController();
+    
     @FXML
     protected void cadastrarAluno() throws IOException{
-        tela.switchScreen(0);
+        tela.trocarTela("alunos/cadastro");
     }
      @FXML
     protected void professorMenu() throws IOException{
-        tela.switchScreen(2);
+        tela.trocarTela("professores/menu");
     }
      @FXML
     protected void homeMenu() throws IOException{
-        tela.switchScreen(4);
+        tela.trocarTela("home");
     }
     @FXML
     protected void livroMenu() throws IOException{
-        tela.switchScreen(7);
+        tela.trocarTela("livros/menu");
     }
     @FXML
     protected void listarAluno() throws IOException{
-        tela.switchScreen(9);
+        tela.trocarTela("alunos/listagem");
     }
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
 }

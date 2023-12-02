@@ -8,12 +8,12 @@ public class PopupExcluirMsgController {
 
     private IButtonHandler event;
 
-    public void setHandler(IButtonHandler event) {
+    public void setManipulador(IButtonHandler event) {
         this.event = event;
     }
     
     @FXML
-    protected void handlerEvent(){
+    protected void manipuladorEvento(){
         event.handler();
     }
     

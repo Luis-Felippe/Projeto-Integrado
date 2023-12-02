@@ -8,13 +8,12 @@ public class PopupCadastrarMsgController {
 
     private IButtonHandler event;
 
-    public void setHandler(IButtonHandler event) {
+    public void setManipulador(IButtonHandler event) {
         this.event = event;
     }
     
     @FXML
-    protected void handlerEvent(){
+    protected void ManipuladorEvento(){
         event.handler();
     }
-    
 }

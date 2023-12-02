@@ -8,11 +8,11 @@ public class PopupAcaoMsgController {
     IButtonHandler eventHandler;
     
     @FXML
-    protected void handlerEvent(MouseEvent event) {
+    protected void ManipuladorEvento(MouseEvent event) {
         eventHandler.handler();
     }
 
-    public void setHandler(IButtonHandler event){
+    public void setManipulador(IButtonHandler event){
         this.eventHandler = event;
     }
 }

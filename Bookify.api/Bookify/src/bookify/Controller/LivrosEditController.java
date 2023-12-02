@@ -4,7 +4,6 @@ import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -52,44 +51,39 @@ public class LivrosEditController {
 
     @FXML
     private TextField livroTextVolume;
-
-    @FXML
-    void alunoMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(1);
-    }
-
-    @FXML
-    void homeMenu(MouseEvent event) throws IOException {
-        tela.switchScreen(4);
-    }
-
-    @FXML
-    void livroMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(7);
-    }
-
-    @FXML
-    void professorMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(2);
-    }
-    
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
-    }
     
     @FXML
     protected void listarLivro() throws IOException{
-        tela.switchScreen(12);
+        tela.trocarTela("livros/listagem");
+    }
+    @FXML
+    protected void alunoMenu() throws IOException{
+        tela.trocarTela("alunos/menu");
+    }
+    @FXML
+    protected void professorMenu() throws IOException{
+        tela.trocarTela("professores/menu");
+    }
+    @FXML
+    protected void homeMenu() throws IOException{
+        tela.trocarTela("home");
+    }
+    @FXML
+    protected void livroMenu() throws IOException{
+        tela.trocarTela("livros/menu");
+    }
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.trocarTela("emprestimos/listagem");
     }
 
-     protected void setParams(Object obj){
+     protected void setParametros(Object obj){
         this.params = obj;
-        loadInformation();
+        carregarInformacao();
     }
     
     @FXML
-    protected void update() throws SQLException, IOException{
+    protected void atualizar() throws SQLException, IOException{
         String [] values = {   livroTextAnoPublicacao.getText(),
             livroTextAutor.getText(),
             livroTextData.getEditor().getText(),
@@ -110,7 +104,7 @@ public class LivrosEditController {
     }
     
    
-    private void loadInformation(){
+    private void carregarInformacao(){
         try {
             ResultSet result = repository.get("Livro", String.format("num_registro = '%s'", params));
             result.next();
