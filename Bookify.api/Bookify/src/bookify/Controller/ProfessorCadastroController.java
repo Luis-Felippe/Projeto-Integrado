@@ -1,12 +1,9 @@
 
 package bookify.Controller;
 
-import bookify.Main;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +39,27 @@ public class ProfessorCadastroController {
     private TextField profTextTelefone;
     
     @FXML
+    protected void alunoMenu() throws IOException{
+        tela.trocarTela("alunos/menu");
+    }
+    @FXML
+    protected void professorMenu() throws IOException{
+        tela.trocarTela("professores/menu");
+    }
+    @FXML
+    protected void homeMenu() throws IOException{
+        tela.trocarTela("home");
+    }
+    @FXML
+    protected void livroMenu() throws IOException{
+        tela.trocarTela("livros/menu");
+    }
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.trocarTela("emprestimos/listagem");
+    }
+    
+    @FXML
     protected void cadastrarProfessor(ActionEvent e) throws IOException{
         if(this.profTextNome.getText().isEmpty() ||
            this.profTextTelefone.getText().isEmpty() ||
@@ -73,7 +91,7 @@ public class ProfessorCadastroController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupCadastrarMsgController controller = loader.getController();
-            controller.setHandler(()->{
+            controller.setManipulador(()->{
                 mainContainer.getChildren().remove(popupConfirm);
             });
             mainContainer.getChildren().add(popupConfirm);
@@ -85,26 +103,5 @@ public class ProfessorCadastroController {
             this.profTextEmail.setText("");
             this.erroText.setText("");
         }
-    }
-
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.switchScreen(1);
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.switchScreen(2);
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.switchScreen(4);
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.switchScreen(7);
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
     }
 }

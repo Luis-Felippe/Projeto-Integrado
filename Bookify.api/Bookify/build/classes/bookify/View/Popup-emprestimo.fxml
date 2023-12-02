@@ -96,7 +96,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="481.0" layoutY="18.0" mnemonicParsing="false" onAction="#close" styleClass="botao-redondo" stylesheets="@styles.css">
+            <Button layoutX="481.0" layoutY="18.0" mnemonicParsing="false" onAction="#fechar" styleClass="botao-redondo" stylesheets="@styles.css">
                <graphic>
                   <ImageView fitHeight="102.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>

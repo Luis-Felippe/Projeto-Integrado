@@ -67,32 +67,28 @@ public class RealizarEmprestimoController {
     private TextField LivTextTitulo;
 
     @FXML
-    void alunoMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(1);
+    protected void alunoMenu() throws IOException{
+        tela.trocarTela("alunos/menu");
     }
-
     @FXML
-    void homeMenu(MouseEvent event) throws IOException {
-        tela.switchScreen(4);
+    protected void professorMenu() throws IOException{
+        tela.trocarTela("professores/menu");
     }
-
     @FXML
-    void livroMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(7);
+    protected void homeMenu() throws IOException{
+        tela.trocarTela("home");
     }
-
     @FXML
-    void professorMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(2);
+    protected void livroMenu() throws IOException{
+        tela.trocarTela("livros/menu");
     }
-    
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
     
     @FXML
-    protected void register(){
+    protected void emprestar(){
        try{
             if(!currentLiv.isEmpty() && !currentUser.isEmpty()){
                 var result = repository.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLiv, currentUser));
@@ -104,13 +100,13 @@ public class RealizarEmprestimoController {
                         "data_inicio","data_devolucao"
                     };
                     repository.save("emprestimo", columns, values);
-                    loadInformation(null, null);
+                    carregarInformacao(null, null);
                     LivTextCod.setText("");
                     LivTextMatricula.setText("");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
                     Pane popupConfirm = loader.load();
                     PopupAcaoMsgController controller = loader.getController();
-                    controller.setHandler(()->{
+                    controller.setManipulador(()->{
                         mainContainer.getChildren().remove(popupConfirm);
                     });
                     mainContainer.getChildren().add(popupConfirm);
@@ -121,16 +117,15 @@ public class RealizarEmprestimoController {
                 }
             }else{
                 error.setText("Preencha todos os campos!");
-            }
-                
+            }        
         }catch(SQLException ex){
             error.setText(ex.getMessage());
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void loadInformation(ResultSet resLiv, ResultSet resUser) throws SQLException{
+    private void carregarInformacao(ResultSet resLiv, ResultSet resUser) throws SQLException{
         if(resLiv != null){
             resLiv.next();
             LivTextTitulo.setText(resLiv.getString("titulo"));
@@ -165,39 +160,38 @@ public class RealizarEmprestimoController {
     }
     
     @FXML
-    protected void searchKeyListener(){
+    protected void buscarTeclaPressionada(){
         LivTextCod.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER){
-                search();
+                buscar();
             }
         });
         LivTextMatricula.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER){
-                search();
+                buscar();
             }
         });
     }
     
-    
-    private void search(){
+    private void buscar(){
         ResultSet resultLiv = null, resultUser = null;
         String searchLivro = LivTextCod.getText().toUpperCase();
         String searchUsuario = LivTextMatricula.getText().toUpperCase();
         try {
             if(!searchLivro.isEmpty()){
-                    resultLiv = repository.get("livro",
-                            String.format("num_registro = '%s'",
-                                    searchLivro));
+                resultLiv = repository.get("livro",
+                    String.format("num_registro = '%s'",
+                    searchLivro));
             }
             if(!searchUsuario.isEmpty()){
                 resultUser = repository.get("usuario", 
-                        String.format("cpf = '%s' or matricula = '%s'",
-                        searchUsuario, searchUsuario));
+                    String.format("cpf = '%s' or matricula = '%s'",
+                    searchUsuario, searchUsuario));
             }
-            loadInformation(resultLiv, resultUser);
+            carregarInformacao(resultLiv, resultUser);
             error.setText("");
         } catch (SQLException ex) {
-                error.setText("Verifique se as informações Cód.Livro e CPF/MATRICULA estão corretas");
+            error.setText("Verifique se as informações Cód.Livro e CPF/MATRICULA estão corretas");
         }
     }
 }

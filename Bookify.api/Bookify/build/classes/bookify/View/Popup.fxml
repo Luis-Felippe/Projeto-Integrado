@@ -9,7 +9,7 @@
    <children>
       <Pane layoutX="429.0" layoutY="314.0" prefHeight="195.0" prefWidth="450.0" style="-fx-background-color: EEEEEE; -fx-border-radius: 20px;" styleClass="options-container" stylesheets="@styles.css">
          <children>
-            <Button fx:id="cancelButton" layoutX="45.0" layoutY="123.0" mnemonicParsing="false" onAction="#cancel" styleClass="cancel-style" stylesheets="@styles.css" text="CANCELAR" textFill="WHITE">
+            <Button fx:id="cancelButton" layoutX="45.0" layoutY="123.0" mnemonicParsing="false" onAction="#cancelar" styleClass="cancel-style" stylesheets="@styles.css" text="CANCELAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -19,7 +19,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
-            <Button layoutX="259.0" layoutY="125.0" mnemonicParsing="false" onAction="#confirm" styleClass="confirm-style" stylesheets="@styles.css" text="CONFIRMAR" textFill="WHITE">
+            <Button layoutX="259.0" layoutY="125.0" mnemonicParsing="false" onAction="#confirmar" styleClass="confirm-style" stylesheets="@styles.css" text="CONFIRMAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

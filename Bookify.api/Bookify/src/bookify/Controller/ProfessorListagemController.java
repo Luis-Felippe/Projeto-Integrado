@@ -36,44 +36,40 @@ public class ProfessorListagemController implements Initializable {
  
 
     @FXML
-    void alunoMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(1);
+    protected void alunoMenu() throws IOException{
+        tela.trocarTela("alunos/menu");
     }
-
     @FXML
-    void homeMenu(MouseEvent event) throws IOException {
-        tela.switchScreen(4);
+    protected void professorMenu() throws IOException{
+        tela.trocarTela("professores/menu");
     }
-
     @FXML
-    void livroMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(7);
+    protected void homeMenu() throws IOException{
+        tela.trocarTela("home");
     }
-
     @FXML
-    void professorMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(2);
+    protected void livroMenu() throws IOException{
+        tela.trocarTela("livros/menu");
     }
-    
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
     
-    public String getCurrentEditId(){
+    public String getIdAtualEditar(){
         return currentEditProfessor;
     }
     
-    private void editProfessorHandler(String id) {
+    private void editarProfessorManipulador(String id) {
         this.currentEditProfessor = id;
         try {
-            tela.switchScreen(13, currentEditProfessor);
+            tela.trocarTela("professores/edicao", currentEditProfessor);
         } catch (IOException ex) {
             Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
+    private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Professor-componente-window.fxml"));
         Pane painel = loader.load();
@@ -86,19 +82,19 @@ public class ProfessorListagemController implements Initializable {
         
         String id = res.getString("id_usuario");
         
-        componente.setDeleteHandler(()->{
-            mainPopupHandler(id, mainContainer);
+        componente.setDeletarManipulador(()->{
+            principalPopupManipulador(id, mainContainer);
         });
         
-        componente.setEditHandler(()->{
-            editProfessorHandler(id);
+        componente.setEditarManipulador(()->{
+            editarProfessorManipulador(id);
             
         });
         
         box.getChildren().add(painel);
     }
 
-    private void mainPopupHandler(String id, Pane mainContainer){
+    private void principalPopupManipulador(String id, Pane mainContainer){
         try {
                 FXMLLoader loaderPopup = new FXMLLoader();
                 loaderPopup.setLocation(getClass().getResource("../View/Popup.fxml"));
@@ -108,19 +104,19 @@ public class ProfessorListagemController implements Initializable {
                 
                 PopupController popupController = loaderPopup.getController();
                 
-                popupController.setCancelHandler(()->{
-                    cancelHandler(popup, mainContainer);
+                popupController.setCancelarManipulador(()->{
+                    cancelarManipulador(popup, mainContainer);
                 });
                 
-                popupController.setConfirmHandler(()->{
-                    confirmHandler(id, mainContainer, popupController, popup);
+                popupController.setConfirmarManipulador(()->{
+                    confirmarManipulador(id, mainContainer, popupController, popup);
                 });
-            } catch (IOException ex) {
-                Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    private void confirmHandler(String id, Pane mainContainer, PopupController controlador, Pane popup){
+    private void confirmarManipulador(String id, Pane mainContainer, PopupController controlador, Pane popup){
         var repository = new BookifyDatabase();
         try {
             repository.delete("Usuario", String.format("id_usuario = %s", id));
@@ -128,11 +124,11 @@ public class ProfessorListagemController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupExcluirMsgController controller = loader.getController();
-            controller.setHandler(()->{
+            controller.setManipulador(()->{
                 mainContainer.getChildren().remove(popupConfirm);
             });
             mainContainer.getChildren().add(popupConfirm);
-            search();
+            buscar();
         } catch (SQLException ex) {
             controlador.erro();
         } catch (IOException ex) {
@@ -140,26 +136,26 @@ public class ProfessorListagemController implements Initializable {
         }
     }
     
-    private void cancelHandler(Pane popup, Pane mainContainer){
+    private void cancelarManipulador(Pane popup, Pane mainContainer){
         mainContainer.getChildren().remove(popup);
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        search();
+        buscar();
     }
     
     @FXML
-    protected void searchKeyListener(){
+    protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER){
-                search();
+                buscar();
             }
         });
     }
     
     @FXML
-    public void search(){
+    public void buscar(){
         render_box_elements.getChildren().clear();
         var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
@@ -168,24 +164,22 @@ public class ProfessorListagemController implements Initializable {
                 + "(UPPER(email) LIKE '%%%s%%')) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
-        var response = repository.get("Usuario", consult);
-        HBox box = null;
-        boolean status = true;
-        while(response.next()){
-            if(status){
-               box = new HBox();
-               render_box_elements.getChildren().add(box);
-               status = false;
-               addComponent(box, response);
-            } else{
-               status = true;
-               addComponent(box, response);
+            var response = repository.get("Usuario", consult);
+            HBox box = null;
+            boolean status = true;
+            while(response.next()){
+                if(status){
+                   box = new HBox();
+                   render_box_elements.getChildren().add(box);
+                   status = false;
+                   adicionarComponente(box, response);
+                } else{
+                   status = true;
+                   adicionarComponente(box, response);
+                }
             }
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }
 }

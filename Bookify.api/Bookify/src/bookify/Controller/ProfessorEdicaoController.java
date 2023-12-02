@@ -33,37 +33,37 @@ public class ProfessorEdicaoController{
 
     @FXML
     protected void alunoMenu() throws IOException{
-        tela.switchScreen(1);
+        tela.trocarTela("alunos/menu");
     }
     @FXML
     protected void professorMenu() throws IOException{
-        tela.switchScreen(2);
+        tela.trocarTela("professores/menu");
     }
     @FXML
     protected void homeMenu() throws IOException{
-        tela.switchScreen(4);
+        tela.trocarTela("home");
     }
     @FXML
     protected void livroMenu() throws IOException{
-        tela.switchScreen(7);
+        tela.trocarTela("livros/menu");
     }
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
     
     @FXML
     protected void listarProfessor() throws IOException{
-        tela.switchScreen(10);
+        tela.trocarTela("professores/listagem");
     }
     
-    protected void setParams(Object obj){
+    protected void setParametros(Object obj){
         this.params = obj;
-        loadInformation();
+        carregarInformacao();
     }
 
     @FXML
-    protected void update() throws SQLException, IOException{
+    protected void atualizar() throws SQLException, IOException{
         String [] values = {profTextNome.getText(), 
             profTextDisciplina.getText(), 
             profTextCpf.getText(),
@@ -76,7 +76,7 @@ public class ProfessorEdicaoController{
         listarProfessor();
     }
     
-    private void loadInformation(){
+    private void carregarInformacao(){
         try {
             ResultSet result = repository.get("Usuario", "id_usuario = " + params);
             result.next();

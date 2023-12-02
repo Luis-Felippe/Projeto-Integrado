@@ -47,21 +47,21 @@ public class LivroComponenteController {
     }
     
 
-    protected void setEditHandler(IButtonHandler event){
+    protected void setEditarManipulador(IButtonHandler event){
         this.editEvent = event;
     }
     
     @FXML
-    protected void edit(){
+    protected void editar(){
         editEvent.handler();
     }
     
-    protected void setDeleteHandler(IButtonHandler event){
+    protected void setDeletarManipulador(IButtonHandler event){
         this.deleteEvent = event;
     }
         
     @FXML
-    protected void delete(){
+    protected void deletar(){
         deleteEvent.handler();
     }
 }

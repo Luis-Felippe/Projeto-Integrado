@@ -11,17 +11,11 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -33,13 +27,7 @@ public class EmprestimoListagemController implements Initializable{
     
     @FXML
     private Pane mainContainer;
-
-    @FXML
-    private ImageView pesquisarBtn;
-
-    @FXML
-    private Button pesquisarButton;
-
+    
     @FXML
     private TextField pesquisarText;
 
@@ -48,28 +36,28 @@ public class EmprestimoListagemController implements Initializable{
 
     @FXML
     protected void alunoMenu() throws IOException{
-        tela.switchScreen(1);
+        tela.trocarTela("alunos/menu");
     }
      @FXML
     protected void professorMenu() throws IOException{
-        tela.switchScreen(2);
+        tela.trocarTela("professores/menu");
     }
      @FXML
     protected void homeMenu() throws IOException{
-        tela.switchScreen(4);
+        tela.trocarTela("home");
     }
     @FXML
     protected void livroMenu() throws IOException{
-        tela.switchScreen(7);
+        tela.trocarTela("livros/menu");
     }
     
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
     
     @FXML
-    private void addComponent(HBox box, ResultSet res) throws IOException, SQLException{
+    private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Emprestimo-componente-window.fxml"));
         Pane painel = loader.load();
@@ -101,14 +89,14 @@ public class EmprestimoListagemController implements Initializable{
         boolean status = LocalDate.now().isBefore(LocalDate.parse(res.getString("data_devolucao")).plusDays(1));
         componente.setStatus(status);  
 
-        componente.setEvent(()->{
-            emprestimoHandler(id, mainContainer, values);
+        componente.setEvento(()->{
+            emprestimoManipulador(id, mainContainer, values);
         });
         
         box.getChildren().add(painel);
     }
     
-    private void emprestimoHandler(String id, Pane mainContainer, Map values){
+    private void emprestimoManipulador(String id, Pane mainContainer, Map values){
         try {
                 FXMLLoader loaderPopup = new FXMLLoader();
                 loaderPopup.setLocation(getClass().getResource("../View/Popup-emprestimo.fxml"));
@@ -122,15 +110,15 @@ public class EmprestimoListagemController implements Initializable{
                         values.get("autor").toString(),values.get("matricula").toString(),values.get("cpf").toString(),
                         values.get("nome").toString(),values.get("data_inicio").toString(),values.get("data_devolucao").toString());
                 
-                popupController.setRenovarHandler(()->{
-                    renovarHandler(popup, mainContainer, id);
+                popupController.setRenovarManipulador(()->{
+                    renovarManipulador(popup, mainContainer, id);
                 });
                 
-                popupController.setEncerrarHandler(()->{
-                    encerrarHandler(popup, mainContainer, id, values);
+                popupController.setEncerrarManipulador(()->{
+                    encerrarManipulador(popup, mainContainer, id, values);
                 });
                 
-                popupController.setCloseHandler(()->{
+                popupController.setFecharManipulador(()->{
                     mainContainer.getChildren().remove(popup);
                 });
             } catch (IOException ex) {
@@ -138,7 +126,7 @@ public class EmprestimoListagemController implements Initializable{
             }
     }
     
-    private void encerrarHandler(Pane popup, Pane mainContainer, String id, Map values) {
+    private void encerrarManipulador(Pane popup, Pane mainContainer, String id, Map values) {
         String[] columns = {
             "data_emprestimo", 
             "data_devolucao",
@@ -158,20 +146,18 @@ public class EmprestimoListagemController implements Initializable{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupAcaoMsgController controller = loader.getController();
-            controller.setHandler(()->{
+            controller.setManipulador(()->{
                 mainContainer.getChildren().remove(popupConfirm);
             });
             mainContainer.getChildren().add(popupConfirm);
             mainContainer.getChildren().remove(popup);
-            search();
-        } catch (SQLException ex) {
-            Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+            buscar();
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
     
-    private void renovarHandler(Pane popup, Pane mainContainer, String id) {
+    private void renovarManipulador(Pane popup, Pane mainContainer, String id) {
         String[] values = {LocalDate.now().plusDays(5).toString()};
         String[] columns = {"data_devolucao"};
         try {
@@ -179,23 +165,23 @@ public class EmprestimoListagemController implements Initializable{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupAcaoMsgController controller = loader.getController();
-            controller.setHandler(()->{
+            controller.setManipulador(()->{
                 mainContainer.getChildren().remove(popupConfirm);
             });
             mainContainer.getChildren().add(popupConfirm);
             mainContainer.getChildren().remove(popup);
-            search();
+            buscar();
         } catch (SQLException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
         mainContainer.getChildren().remove(popup);
-        search();
+        buscar();
     }
 
     @FXML
-    public void search(){
+    public void buscar(){
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("JOIN emprestimo e ON e.num_registro_livro = l.num_registro\n" +
@@ -204,41 +190,39 @@ public class EmprestimoListagemController implements Initializable{
                 + "ORDER BY data_inicio asc",searchBar, searchBar);
         
         try {
-        var response = repository.get("l.titulo, u.nome, u.matricula, u.cpf ,"
-                + "e.data_inicio, e.data_devolucao, l.num_registro,"
-                + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
-        HBox box = null;
-        boolean status = true;
-        while(response.next()){
-            if(status){
-               box = new HBox();
-               render_box_elements.getChildren().add(box);
-               status = false;
-               addComponent(box, response);
-            } else{
-               status = true;
-               addComponent(box, response);
+            var response = repository.get("l.titulo, u.nome, u.matricula, u.cpf ,"
+                    + "e.data_inicio, e.data_devolucao, l.num_registro,"
+                    + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
+            HBox box = null;
+            boolean status = true;
+            while(response.next()){
+                if(status){
+                   box = new HBox();
+                   render_box_elements.getChildren().add(box);
+                   status = false;
+                   adicionarComponente(box, response);
+                } else{
+                   status = true;
+                   adicionarComponente(box, response);
+                }
             }
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-        Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }
 
     @FXML
-    protected void searchKeyListener(){
+    protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER){
-                search();
+                buscar();
             }
         });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        search();
+        buscar();
     }
 
 }

@@ -8,86 +8,81 @@ import javafx.scene.Scene;
 public class TelasController{
     FXMLLoader fxmlloader = new FXMLLoader();
     
-    public void switchScreen(int i) throws IOException{
-        
-        
-        switch(i){
-            case 0:
+    public void trocarTela(String tela) throws IOException{
+        switch(tela){
+            case "alunos/cadastro":
                 fxmlloader.setLocation(getClass().getResource("../View/Alunos-cadastro-window.fxml"));
                 break;
-            case 1:
+            case "alunos/menu":
                 fxmlloader.setLocation(getClass().getResource("../View/Alunos-window.fxml"));
                 break;
-            case 2:
+            case "professores/menu":
                 fxmlloader.setLocation(getClass().getResource("../View/Professor-window.fxml"));
                 break;
-            case 3:
+            case "professores/cadastro":
                 fxmlloader.setLocation(getClass().getResource("../View/Professor-cadastro-window.fxml"));
                 break;
-            case 4:
+            case "home":
                 fxmlloader.setLocation(getClass().getResource("../View/Home-window.fxml"));
                 break;
-            case 5:;
+            case "login":
                 fxmlloader.setLocation(getClass().getResource("../View/Login-window.fxml"));
                 break;
-            case 6:
+            case "emprestimos/realizar":
                 fxmlloader.setLocation(getClass().getResource("../View/Realizar-emprestimo.fxml"));
                 break;
-            case 7: 
+            case "livros/menu": 
                 fxmlloader.setLocation(getClass().getResource("../View/Livros-window2.fxml"));
                 break;
-            case 8:
+            case "livros/cadastro":
                 fxmlloader.setLocation(getClass().getResource("../View/Livros-cadastro-window.fxml"));
                 break;
-            case 9:
+            case "alunos/listagem":
                 fxmlloader.setLocation(getClass().getResource("../View/Aluno-listagem-window.fxml"));
                 break;
-            case 10:
+            case "professores/listagem":
                 fxmlloader.setLocation(getClass().getResource("../View/Professor-listagem-window.fxml"));
                 break;
-            case 12:
+            case "livros/listagem":
                 fxmlloader.setLocation(getClass().getResource("../View/Livro-listagem-window.fxml"));
                 break;
-            case 16:
+            case "emprestimos/listagem":
                 fxmlloader.setLocation(getClass().getResource("../View/Emprestimo-listagem-window.fxml"));
-                break;
-            case 17:
-                fxmlloader.setLocation(getClass().getResource("../View/Realizar-emprestimo.fxml"));
                 break;
             default:
                 System.out.println("teste");
                 break;
         }
         Main main = new Main();
-        main.setStage(new Scene(fxmlloader.load()));
+        main.setCena(new Scene(fxmlloader.load()));
     }
     
-    public void switchScreen(int i, Object obj) throws IOException{
+    public void trocarTela(String tela, Object obj) throws IOException{
         Scene teste;
-        switch (i) {
-            case 13:
+        switch (tela) {
+            case "professores/edicao":
                 fxmlloader.setLocation(getClass().getResource("../View/Professor-edicao-window.fxml"));
                 teste = new Scene(fxmlloader.load());
                 ProfessorEdicaoController professorController = fxmlloader.getController();
-                professorController.setParams(obj);
+                professorController.setParametros(obj);
                 break;
-            case 14:
+            case "alunos/edicao":
                 fxmlloader.setLocation(getClass().getResource("../View/Aluno-edicao-window.fxml"));
                 teste = new Scene(fxmlloader.load());
                 AlunosEditController alunosController = fxmlloader.getController();
-                alunosController.setParams(obj);
+                alunosController.setParametros(obj);
                 break;
-            case 15:
+            case "livros/edicao":
                 fxmlloader.setLocation(getClass().getResource("../View/Livros-edicao-window.fxml"));
                 teste = new Scene(fxmlloader.load());
                 LivrosEditController livrosController = fxmlloader.getController();
-                livrosController.setParams(obj);
+                livrosController.setParametros(obj);
                 break;
             default:
                 throw new AssertionError();
         }
         Main main = new Main();
-        main.setStage(teste);
+        main.setCena(teste);
     }
     
 }

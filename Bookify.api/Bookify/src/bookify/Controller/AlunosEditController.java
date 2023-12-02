@@ -38,42 +38,42 @@ public class AlunosEditController {
 
 
     @FXML
-    void alunoMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(1);
+    protected void alunoMenu(ActionEvent event) throws IOException {
+        tela.trocarTela("alunos/menu");
     }
 
     @FXML
-    void homeMenu(MouseEvent event) throws IOException {
-        tela.switchScreen(4);
+    protected void homeMenu(MouseEvent event) throws IOException {
+        tela.trocarTela("home");
     }
 
     @FXML
-    void livroMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(7);
+    protected void livroMenu(ActionEvent event) throws IOException {
+        tela.trocarTela("livros/menu");
     }
 
     @FXML
-    void professorMenu(ActionEvent event) throws IOException {
-        tela.switchScreen(2);
+    protected void professorMenu(ActionEvent event) throws IOException {
+        tela.trocarTela("professores/menu");
     }
     @FXML
     protected void listarAluno() throws IOException{
-        tela.switchScreen(9);
+        tela.trocarTela("alunos/listagem");
     }
     
     @FXML
     protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
+        tela.trocarTela("emprestimos/listagem");
     }
     
     
-    protected void setParams(Object obj){
+    protected void setParametros(Object obj){
         this.params = obj;
-        loadInformation();
+        carregarInformacao();
     }
     
     @FXML
-    protected void update() throws SQLException, IOException{
+    protected void atualizar() throws SQLException, IOException{
         String [] values = {  aluTextCurso.getText(),
             aluTextEmail.getText(),
             aluTextMatricula.getText(),
@@ -88,7 +88,7 @@ public class AlunosEditController {
     }
     
    
-    private void loadInformation(){
+    private void carregarInformacao(){
         try {
             ResultSet result = repository.get("Usuario", "id_usuario = " + params);
             result.next();

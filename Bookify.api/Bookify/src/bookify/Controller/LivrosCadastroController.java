@@ -56,6 +56,27 @@ public class LivrosCadastroController {
     private TextField livroTextObservacao;
     
     @FXML
+    protected void alunoMenu() throws IOException{
+        tela.trocarTela("alunos/menu");
+    }
+    @FXML
+    protected void professorMenu() throws IOException{
+        tela.trocarTela("professores/menu");
+    }
+    @FXML
+    protected void homeMenu() throws IOException{
+        tela.trocarTela("home");
+    }
+    @FXML
+    protected void livroMenu() throws IOException{
+        tela.trocarTela("livros/menu");
+    }
+    @FXML
+    protected void emprestimoMenu() throws IOException{
+        tela.trocarTela("emprestimos/listagem");
+    }
+    
+    @FXML
     protected void cadastrarLivro(ActionEvent e) throws IOException{
         if(this.livroTextNumReg.getText().isEmpty() ||
            this.livroTextTitulo.getText().isEmpty() ||
@@ -96,33 +117,11 @@ public class LivrosCadastroController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
             Pane popupConfirm = loader.load();
             PopupCadastrarMsgController controller = loader.getController();
-            controller.setHandler(()->{
+            controller.setManipulador(()->{
                 mainContainer.getChildren().remove(popupConfirm);
             });
             mainContainer.getChildren().add(popupConfirm);
             this.erroText.setText("");
-
         }
-    }
-    
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.switchScreen(1);
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.switchScreen(2);
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.switchScreen(4);
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.switchScreen(7);
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.switchScreen(16);
     }
 }

@@ -23,7 +23,6 @@ public class AlunoComponenteController{
 
     @FXML
     private Text turmaText;
-
     
     @FXML
     protected void setTexto(String nome, String matricula, String curso, String telefone, String turma){
@@ -36,21 +35,21 @@ public class AlunoComponenteController{
         telefoneText.setText(telefone);
         turmaText.setText(turma);
     }
-    protected void setDeleteHandler(IButtonHandler event){
+    protected void setDeletarManipulador(IButtonHandler event){
         this.deleteEvent = event;
     }
     
     @FXML
-    protected void delete(){
+    protected void deletar(){
         deleteEvent.handler();
     }
     
-    protected void setEditHandler(IButtonHandler event){
+    protected void setEditarManipulador(IButtonHandler event){
         this.editEvent = event;
     }
     
     @FXML
-    protected void edit(){
+    protected void editar(){
         editEvent.handler();
     }
     

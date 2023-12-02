@@ -11,21 +11,21 @@ public class PopupLivroController {
     IButtonHandler eventCancel;
     IButtonHandler eventConfirm;
     
-    protected void setCancelHandler(IButtonHandler event){
+    protected void setCancelarManipulador(IButtonHandler event){
         this.eventCancel = event;
     }
     
-    protected void setConfirmHandler(IButtonHandler event){
+    protected void setConfirmarManipulador(IButtonHandler event){
         this.eventConfirm = event;
     }
     
     @FXML
-    protected void cancel(){
+    protected void cancelar(){
         eventCancel.handler();
     }
     
     @FXML
-    protected void confirm(){
+    protected void confirmar(){
         eventConfirm.handler();
     }
     
