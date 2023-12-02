@@ -1,7 +1,7 @@
 
 package bookify.Controller;
 
-import bookify.Treinando;
+import bookify.Main;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.SQLException;

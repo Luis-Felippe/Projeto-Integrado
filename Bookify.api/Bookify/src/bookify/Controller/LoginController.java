@@ -1,6 +1,6 @@
 package bookify.Controller;
 
-import bookify.Treinando;
+import bookify.Main;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -26,11 +26,11 @@ public class LoginController {
     
     @FXML
     protected void homeMenu() throws IOException{
-    if(user.equals(txtLogin.getText()) && password.equals(txtSenha.getText()) ){
-        tela.switchScreen(4);
-    }
-    else{
-        lblError.setText("❌ Usuário ou senha incorretos.");
-    }
+        if(user.equals(txtLogin.getText()) && password.equals(txtSenha.getText()) ){
+            tela.switchScreen(4);
+        }
+        else{
+            lblError.setText("❌ Usuário ou senha incorretos.");
+        }
     }
 }
