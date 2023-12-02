@@ -13,7 +13,7 @@ public class PopupCadastrarMsgController {
     }
     
     @FXML
-    protected void ManipuladorEvento(){
+    protected void manipuladorEvento(){
         event.handler();
     }
 }

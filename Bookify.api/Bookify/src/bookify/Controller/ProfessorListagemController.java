@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
@@ -19,9 +17,9 @@ import java.sql.ResultSet;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-public class ProfessorListagemController implements Initializable {
+public class ProfessorListagemController extends TelasProfessorController implements Initializable {
 
-    private TelasController tela = new TelasController();
+    private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
     
     private String currentEditProfessor;
     
@@ -33,28 +31,6 @@ public class ProfessorListagemController implements Initializable {
     
     @FXML
     private TextField pesquisarText;
- 
-
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
     
     public String getIdAtualEditar(){
         return currentEditProfessor;
@@ -63,7 +39,7 @@ public class ProfessorListagemController implements Initializable {
     private void editarProfessorManipulador(String id) {
         this.currentEditProfessor = id;
         try {
-            tela.trocarTela("professores/edicao", currentEditProfessor);
+            super.editarProfessor(currentEditProfessor);
         } catch (IOException ex) {
             Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,9 +93,8 @@ public class ProfessorListagemController implements Initializable {
     }
     
     private void confirmarManipulador(String id, Pane mainContainer, PopupController controlador, Pane popup){
-        var repository = new BookifyDatabase();
         try {
-            repository.delete("Usuario", String.format("id_usuario = %s", id));
+            repositorio.delete("Usuario", String.format("id_usuario = %s", id));
             mainContainer.getChildren().remove(popup);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
             Pane popupConfirm = loader.load();
@@ -157,14 +132,13 @@ public class ProfessorListagemController implements Initializable {
     @FXML
     public void buscar(){
         render_box_elements.getChildren().clear();
-        var repository = new BookifyDatabase();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'P' AND ((UPPER(nome) LIKE '%%%s%%') OR"
                 + " (UPPER(disciplina) LIKE '%%%s%%') OR "
                 + "(UPPER(email) LIKE '%%%s%%')) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
-            var response = repository.get("Usuario", consult);
+            var response = repositorio.get("Usuario", consult);
             HBox box = null;
             boolean status = true;
             while(response.next()){

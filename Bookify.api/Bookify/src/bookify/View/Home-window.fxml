@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.HomeController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.HomeController">
    <children>
       <Pane layoutY="-15.0" prefHeight="52.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
@@ -105,7 +105,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button layoutX="539.0" layoutY="150.0" mnemonicParsing="false" onAction="#login" prefHeight="137.0" prefWidth="133.0" style="-fx-alignment: BOTTOM_CENTER;" styleClass="options-menu-container" text="SAIR">
+            <Button layoutX="539.0" layoutY="150.0" mnemonicParsing="false" onAction="#sair" prefHeight="137.0" prefWidth="133.0" style="-fx-alignment: BOTTOM_CENTER;" styleClass="options-menu-container" text="SAIR">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -120,7 +120,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="571.0" layoutY="175.0" onMouseClicked="#login" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="571.0" layoutY="175.0" onMouseClicked="#sair" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/log-in-outline.png" />
                </image>

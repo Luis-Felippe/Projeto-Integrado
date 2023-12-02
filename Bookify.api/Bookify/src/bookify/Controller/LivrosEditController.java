@@ -6,16 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
-public class LivrosEditController {
-    TelasController tela = new TelasController();
-    
-    BookifyDatabase repository = new BookifyDatabase();
+public class LivrosEditController extends TelasLivrosController{
+    BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     private Object params;
     
@@ -52,32 +48,7 @@ public class LivrosEditController {
     @FXML
     private TextField livroTextVolume;
     
-    @FXML
-    protected void listarLivro() throws IOException{
-        tela.trocarTela("livros/listagem");
-    }
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
-
-     protected void setParametros(Object obj){
+    protected void setParametros(Object obj){
         this.params = obj;
         carregarInformacao();
     }
@@ -99,14 +70,14 @@ public class LivrosEditController {
         String [] columns = {"ano_publicacao", "autor", "data", "editora", "exemplar", "forma_aquisicao",
                             "local", "num_registro", "observacao", "titulo", "volume"};
         
-        repository.update("livro", columns, values, String.format("num_registro = '%s'", params));
+        repositorio.update("livro", columns, values, String.format("num_registro = '%s'", params));
         listarLivro();
     }
     
    
     private void carregarInformacao(){
         try {
-            ResultSet result = repository.get("Livro", String.format("num_registro = '%s'", params));
+            ResultSet result = repositorio.get("Livro", String.format("num_registro = '%s'", params));
             result.next();
 
             livroTextAnoPublicacao.setText(result.getString("ano_publicacao"));

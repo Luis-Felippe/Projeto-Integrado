@@ -17,15 +17,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class RealizarEmprestimoController {
+public class RealizarEmprestimoController extends TelasController{
 
     private String currentUser = "";
     
     private String currentLiv = "";
     
-    private BookifyDatabase repository = new BookifyDatabase();
-    
-    private TelasController tela = new TelasController();
+    private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
     
     @FXML
     private Pane mainContainer;
@@ -65,33 +63,12 @@ public class RealizarEmprestimoController {
 
     @FXML
     private TextField LivTextTitulo;
-
-    @FXML
-    protected void alunoMenu() throws IOException{
-        tela.trocarTela("alunos/menu");
-    }
-    @FXML
-    protected void professorMenu() throws IOException{
-        tela.trocarTela("professores/menu");
-    }
-    @FXML
-    protected void homeMenu() throws IOException{
-        tela.trocarTela("home");
-    }
-    @FXML
-    protected void livroMenu() throws IOException{
-        tela.trocarTela("livros/menu");
-    }
-    @FXML
-    protected void emprestimoMenu() throws IOException{
-        tela.trocarTela("emprestimos/listagem");
-    }
     
     @FXML
     protected void emprestar(){
        try{
             if(!currentLiv.isEmpty() && !currentUser.isEmpty()){
-                var result = repository.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLiv, currentUser));
+                var result = repositorio.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLiv, currentUser));
                 if(!result.next()){
                     String[] values = {currentLiv, currentUser, 
                         LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText()
@@ -99,7 +76,7 @@ public class RealizarEmprestimoController {
                     String [] columns = {"num_registro_livro","id_usuario",
                         "data_inicio","data_devolucao"
                     };
-                    repository.save("emprestimo", columns, values);
+                    repositorio.save("emprestimo", columns, values);
                     carregarInformacao(null, null);
                     LivTextCod.setText("");
                     LivTextMatricula.setText("");
@@ -179,12 +156,12 @@ public class RealizarEmprestimoController {
         String searchUsuario = LivTextMatricula.getText().toUpperCase();
         try {
             if(!searchLivro.isEmpty()){
-                resultLiv = repository.get("livro",
+                resultLiv = repositorio.get("livro",
                     String.format("num_registro = '%s'",
                     searchLivro));
             }
             if(!searchUsuario.isEmpty()){
-                resultUser = repository.get("usuario", 
+                resultUser = repositorio.get("usuario", 
                     String.format("cpf = '%s' or matricula = '%s'",
                     searchUsuario, searchUsuario));
             }
