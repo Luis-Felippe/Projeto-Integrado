@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IComponente;
+import bookify.Interface.IFabricaComponente;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
@@ -16,6 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
@@ -23,7 +27,8 @@ import javafx.scene.input.KeyCode;
 public class AlunoListagemController extends TelasAlunoController implements Initializable {
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
-            
+    private IFabricaComponente componenteFabrica = new FabricaComponente();
+    
     private String currentEditAluno;
     
     @FXML
@@ -34,24 +39,6 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     
     @FXML
     private TextField pesquisarText;
-  
-    @FXML
-    private TextField nomeTxt;
-    
-    @FXML
-    private TextField telefoneTxt;
-
-    @FXML
-    private TextField turmaTxt;
-    
-    @FXML
-    private TextField cursoTxt;
-
-    @FXML
-    private TextField emailTxt;
-    
-    @FXML
-    private TextField matriculaTxt;
     
      private void editarAlunoManipulador(String id) {
         this.currentEditAluno = id;
@@ -63,15 +50,17 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     }
     
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Aluno-componente-window.fxml"));
-        Pane painel = loader.load();
-        AlunoComponenteController componente = loader.getController();
-        componente.setTexto(res.getString("nome"), 
-        res.getString("matricula"), 
-        res.getString("curso"), 
-        res.getString("telefone"), 
-        res.getString("turma"));
+        
+        IComponente componente = componenteFabrica.criaComponente("AlunoComponente");
+        
+        Map<String, String> atributos = new HashMap<>();
+        atributos.put("nome", res.getString("nome"));
+        atributos.put("matricula", res.getString("matricula"));
+        atributos.put("curso", res.getString("curso"));
+        atributos.put("telefone", res.getString("telefone"));
+        atributos.put("turma", res.getString("turma"));
+        
+        componente.setTexto(atributos);
         
         String id = res.getString("id_usuario");
         
@@ -83,7 +72,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
             deletarAlunoManipulador(id, mainContainer);
         });
         
-        box.getChildren().add(painel);
+        box.getChildren().add(componente.getFxml());
     }
     
     private void deletarAlunoManipulador(String id, Pane mainContainer){

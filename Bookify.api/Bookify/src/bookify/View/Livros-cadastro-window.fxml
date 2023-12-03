@@ -125,7 +125,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnCadastrar" layoutX="851.0" layoutY="567.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE">
+      <Button fx:id="btnCadastrar" layoutX="851.0" layoutY="567.0" mnemonicParsing="false" onAction="#cadastrarLivro" prefHeight="25.0" prefWidth="217.0" styleClass="confirm-style" text="CADASTRAR" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
