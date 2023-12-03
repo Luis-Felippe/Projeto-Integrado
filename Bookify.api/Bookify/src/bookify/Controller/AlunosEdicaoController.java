@@ -1,7 +1,7 @@
 package bookify.Controller;
 
 import bookify.Interface.IEditar;
-import bookify.model.dao.BookifyDatabase;
+import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
