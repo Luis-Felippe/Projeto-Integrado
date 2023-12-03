@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,6 +15,7 @@ import javafx.scene.text.Text;
 public class AlunosCadastroController extends TelasAlunoController {
 
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+    private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     @FXML
     private Text erroText;
@@ -70,14 +73,11 @@ public class AlunosCadastroController extends TelasAlunoController {
                 erroText.setText("Erro: matricula já vinculada");
                 return;
             }
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));
-            Pane popupConfirm = loader.load();
-            PopupCadastrarMsgController controller = loader.getController();
+            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
             controller.setManipulador(()->{
-                mainContainer.getChildren().remove(popupConfirm);
+                mainContainer.getChildren().remove(controller.getPopup());
             });
-            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().add(controller.getPopup());
             
             this.aluTextNome.setText("");
             this.aluTextTelefone.setText("");

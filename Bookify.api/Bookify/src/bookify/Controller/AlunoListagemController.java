@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.net.URL;
@@ -7,11 +9,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
@@ -22,6 +22,7 @@ import javafx.scene.input.KeyCode;
 
 public class AlunoListagemController extends TelasAlunoController implements Initializable {
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+    private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
             
     private String currentEditAluno;
     
@@ -87,6 +88,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     
     private void deletarAlunoManipulador(String id, Pane mainContainer){
         try {
+                
                 FXMLLoader loaderPopup = new FXMLLoader();
                 loaderPopup.setLocation(getClass().getResource("../View/Popup-aluno.fxml"));
                 Pane popup = loaderPopup.load();
@@ -111,18 +113,14 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         try {
             repositorio.delete("Usuario", String.format("id_usuario = %s", id));
             mainContainer.getChildren().remove(popup);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
-            Pane popupConfirm = loader.load();
-            PopupExcluirMsgController controller = loader.getController();
+            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupExcluirMsg");
             controller.setManipulador(()->{
-                mainContainer.getChildren().remove(popupConfirm);
+                mainContainer.getChildren().remove(controller.getPopup());
             });
-            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().add(controller.getPopup());
             buscar();
-        } catch (SQLException ex) {
+        } catch (SQLException ex){
             controlador.erro();
-        } catch (IOException ex) {
-            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void cancelarManipulador(Pane popup, Pane mainContainer){
