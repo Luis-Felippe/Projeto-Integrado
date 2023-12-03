@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +25,7 @@ import javafx.scene.layout.VBox;
 public class EmprestimoListagemController extends TelasController implements Initializable{
     
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+    private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     @FXML
     private Pane mainContainer;
@@ -120,16 +123,14 @@ public class EmprestimoListagemController extends TelasController implements Ini
         try {
             repositorio.save("emprestimos_encerrados", columns, valuesSave);
             repositorio.delete("emprestimo", String.format("id_emprestimo = '%s'", id));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
-            Pane popupConfirm = loader.load();
-            PopupAcaoMsgController controller = loader.getController();
+            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupAcaoMsg");
             controller.setManipulador(()->{
-                mainContainer.getChildren().remove(popupConfirm);
+                mainContainer.getChildren().remove(controller.getPopup());
             });
-            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().add(controller.getPopup());
             mainContainer.getChildren().remove(popup);
             buscar();
-        } catch (SQLException | IOException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
@@ -139,22 +140,16 @@ public class EmprestimoListagemController extends TelasController implements Ini
         String[] columns = {"data_devolucao"};
         try {
             repositorio.update("emprestimo", columns, values, String.format("id_emprestimo = '%s'", id));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
-            Pane popupConfirm = loader.load();
-            PopupAcaoMsgController controller = loader.getController();
+            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupAcaoMsg");
             controller.setManipulador(()->{
-                mainContainer.getChildren().remove(popupConfirm);
+                mainContainer.getChildren().remove(controller.getPopup());
             });
-            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().add(controller.getPopup());
             mainContainer.getChildren().remove(popup);
             buscar();
         } catch (SQLException ex) {
             Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(EmprestimoListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        mainContainer.getChildren().remove(popup);
-        buscar();
     }
 
     @FXML

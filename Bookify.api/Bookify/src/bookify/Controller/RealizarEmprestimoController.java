@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupMsg;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +26,8 @@ public class RealizarEmprestimoController extends TelasController{
     private String currentLiv = "";
     
     private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
+    
+    private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     @FXML
     private Pane mainContainer;
@@ -80,13 +84,11 @@ public class RealizarEmprestimoController extends TelasController{
                     carregarInformacao(null, null);
                     LivTextCod.setText("");
                     LivTextMatricula.setText("");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-acao-confirmar.fxml"));
-                    Pane popupConfirm = loader.load();
-                    PopupAcaoMsgController controller = loader.getController();
+                    IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupAcaoMsg");
                     controller.setManipulador(()->{
-                        mainContainer.getChildren().remove(popupConfirm);
+                        mainContainer.getChildren().remove(controller.getPopup());
                     });
-                    mainContainer.getChildren().add(popupConfirm);
+                    mainContainer.getChildren().add(controller.getPopup());
                 }else{
                     error.setText("Não foi possivel realizar o emprestimo,"
                             + " verifique se o livro não pertence\n a outro emprestimo ou se "
@@ -97,8 +99,6 @@ public class RealizarEmprestimoController extends TelasController{
             }        
         }catch(SQLException ex){
             error.setText(ex.getMessage());
-        }catch (IOException ex) {
-            Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

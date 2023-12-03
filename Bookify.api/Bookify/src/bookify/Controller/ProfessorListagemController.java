@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +22,7 @@ import javafx.scene.input.KeyCode;
 public class ProfessorListagemController extends TelasProfessorController implements Initializable {
 
     private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
+    private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     private String currentEditProfessor;
     
@@ -96,18 +99,14 @@ public class ProfessorListagemController extends TelasProfessorController implem
         try {
             repositorio.delete("Usuario", String.format("id_usuario = %s", id));
             mainContainer.getChildren().remove(popup);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Popup-excluir-confirmar.fxml"));
-            Pane popupConfirm = loader.load();
-            PopupExcluirMsgController controller = loader.getController();
+            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupExcluirMsg");
             controller.setManipulador(()->{
-                mainContainer.getChildren().remove(popupConfirm);
+                mainContainer.getChildren().remove(controller.getPopup());
             });
-            mainContainer.getChildren().add(popupConfirm);
+            mainContainer.getChildren().add(controller.getPopup());
             buscar();
         } catch (SQLException ex) {
             controlador.erro();
-        } catch (IOException ex) {
-            Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
