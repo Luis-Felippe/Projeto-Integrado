@@ -14,8 +14,7 @@ public class Main extends Application {
         
         this.stage = primaryStage;
         TelasView tela = new TelasView();
-//        tela.trocarTela("login");
-        tela.trocarTela("home");
+        tela.trocarTela("login");
         stage.setResizable(false);
         stage.show();
     }

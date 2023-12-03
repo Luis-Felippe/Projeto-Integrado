@@ -1,12 +1,15 @@
 package bookify.Controller;
 
+import bookify.Controller.PopupMensagem.FabricaPopupMsg;
+import bookify.Controller.PopupAcao.FabricaPopupAcao;
+import bookify.Controller.Componentes.FabricaComponente;
 import bookify.Interface.IComponente;
 import bookify.Interface.IFabricaComponente;
 import bookify.Interface.IFabricaPopupAcao;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupAcao;
 import bookify.Interface.IPopupMsg;
-import bookify.model.dao.BookifyDatabase;
+import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

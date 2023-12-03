@@ -1,9 +1,10 @@
 package bookify.Controller;
 
+import bookify.Controller.PopupMensagem.FabricaPopupMsg;
 import bookify.Interface.ICadastrar;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
-import bookify.model.dao.BookifyDatabase;
+import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;

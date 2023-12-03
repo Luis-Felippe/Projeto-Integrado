@@ -1,5 +1,6 @@
 package bookify.Controller;
 
+import bookify.Controller.PopupMensagem.FabricaPopupMsg;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
 import java.io.IOException;
@@ -8,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import bookify.model.dao.BookifyDatabase;
+import bookify.Models.BookifyDatabase;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.time.LocalDate;
