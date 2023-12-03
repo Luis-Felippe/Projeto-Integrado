@@ -2,14 +2,12 @@ package bookify.Controller;
 
 import bookify.Interface.IButtonHandler;
 import bookify.Interface.IPopupMsg;
-import javafx.fxml.FXML;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 
 public class PopupCadastrarMsgController implements IPopupMsg{
-    Pane popup = null;
+    private Pane popup = null;
     private IButtonHandler event;
 
     public void setManipulador(IButtonHandler event) {

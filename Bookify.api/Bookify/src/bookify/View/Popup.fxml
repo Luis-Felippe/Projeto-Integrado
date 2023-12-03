@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.7);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.PopupController">
+<Pane fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.7);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.PopupProfessorController">
    <children>
       <Pane layoutX="429.0" layoutY="314.0" prefHeight="195.0" prefWidth="450.0" style="-fx-background-color: EEEEEE; -fx-border-radius: 20px;" styleClass="options-container" stylesheets="@styles.css">
          <children>

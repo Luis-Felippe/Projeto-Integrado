@@ -12,9 +12,9 @@ public class FabricaPopupMsg implements IFabricaPopupMsg{
 
     public IPopupMsg criaPopupMsg(String tipo) {
         IPopupMsg controller = null;
-        Pane popup = null;
         try {
             FXMLLoader loader = new FXMLLoader();
+            Pane popup;
             switch (tipo) {
                 case "PopupCadastrarMsg":
                     loader.setLocation(getClass().getResource("../View/Popup-cadastrar-confirmar.fxml"));

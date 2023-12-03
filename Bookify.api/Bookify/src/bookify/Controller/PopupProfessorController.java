@@ -6,13 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class PopupLivroController implements IPopupAcao{
+public class PopupProfessorController implements IPopupAcao{
     @FXML
     private Text errorText;
     
     private IButtonHandler eventCancel;
     private IButtonHandler eventConfirm;
-    
     private Pane popupFxml;
     
     
@@ -44,6 +43,7 @@ public class PopupLivroController implements IPopupAcao{
     
     @FXML
     public void erro(){
-        errorText.setText("❌ Não foi possível deletar o livro! Verifique os empréstimos ativos");
+        errorText.setText("❌ Não foi possível deletar o professor! Verifique os empréstimos ativos");
     }
+    
 }

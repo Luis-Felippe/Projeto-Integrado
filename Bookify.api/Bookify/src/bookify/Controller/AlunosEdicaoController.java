@@ -11,9 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class AlunosEdicaoController extends TelasAlunoController implements IEditar{
-    BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+    private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
-    Object params;
+    private Object params;
     
     @FXML
     private TextField aluTextCurso;
