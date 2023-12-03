@@ -2,7 +2,9 @@ package bookify.Controller;
 
 import bookify.Interface.IComponente;
 import bookify.Interface.IFabricaComponente;
+import bookify.Interface.IFabricaPopupAcao;
 import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupAcao;
 import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     private IFabricaComponente componenteFabrica = new FabricaComponente();
+    private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
     
     private String currentEditAluno;
     
@@ -76,29 +79,18 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     }
     
     private void deletarAlunoManipulador(String id, Pane mainContainer){
-        try {
-                
-                FXMLLoader loaderPopup = new FXMLLoader();
-                loaderPopup.setLocation(getClass().getResource("../View/Popup-aluno.fxml"));
-                Pane popup = loaderPopup.load();
-                
-                mainContainer.getChildren().add(popup);
-                
-                PopupAlunoController popupController = loaderPopup.getController();
-                
-                popupController.setCancelarManipulador(()->{
-                    cancelarManipulador(popup, mainContainer);
-                });
-                
-                popupController.setConfirmarManipulador(()->{
-                    confirmarManipulador(id, mainContainer, popupController, popup);
-                });
-            } catch (IOException ex) {
-                Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        IPopupAcao controller = popupAcaoFabrica.criaPopupAcao("PopupAluno");
+        Pane popup = controller.getFxml();
+        mainContainer.getChildren().add(popup);
+        controller.setCancelarManipulador(()->{
+            cancelarManipulador(popup, mainContainer);
+        });
+        controller.setConfirmarManipulador(()->{
+            confirmarManipulador(id, mainContainer, controller, popup);
+        });
     }
     
-    private void confirmarManipulador(String id, Pane mainContainer, PopupAlunoController controlador, Pane popup){
+    private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup){
         try {
             repositorio.delete("Usuario", String.format("id_usuario = %s", id));
             mainContainer.getChildren().remove(popup);

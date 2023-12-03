@@ -2,7 +2,9 @@ package bookify.Controller;
 
 import bookify.Interface.IComponente;
 import bookify.Interface.IFabricaComponente;
+import bookify.Interface.IFabricaPopupAcao;
 import bookify.Interface.IFabricaPopupMsg;
+import bookify.Interface.IPopupAcao;
 import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
@@ -15,7 +17,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -28,6 +29,7 @@ public class LivroListagemController extends TelasLivrosController implements In
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     private IFabricaComponente componenteFabrica = new FabricaComponente();
+    private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
     
     private String currentEditLivro;
     
@@ -77,28 +79,18 @@ public class LivroListagemController extends TelasLivrosController implements In
 
 
     private void deletarLivroManipulador(String id, Pane mainContainer){
-        try {
-            FXMLLoader loaderPopup = new FXMLLoader();
-            loaderPopup.setLocation(getClass().getResource("../View/Popup-livro.fxml"));
-            Pane popup = loaderPopup.load();
-
-            mainContainer.getChildren().add(popup);
-
-            PopupLivroController popupController = loaderPopup.getController();
-
-            popupController.setCancelarManipulador(()->{
-                cancelarManipulador(popup, mainContainer);
-            });
-
-            popupController.setConfirmarManipulador(()->{
-                confirmarManipulador(id, mainContainer, popupController, popup);
-            });
-        } catch (IOException ex) {
-            Logger.getLogger(LivroListagemController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        IPopupAcao controller = popupAcaoFabrica.criaPopupAcao("PopupLivro");
+        Pane popup = controller.getFxml();
+        mainContainer.getChildren().add(popup);
+        controller.setCancelarManipulador(()->{
+            cancelarManipulador(popup, mainContainer);
+        });
+        controller.setConfirmarManipulador(()->{
+            confirmarManipulador(id, mainContainer, controller, popup);
+        });
     }
     
-    private void confirmarManipulador(String id, Pane mainContainer, PopupLivroController controlador, Pane popup){
+    private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup){
         try {
             repositorio.delete("livro", String.format("num_registro = '%s'", id));
             mainContainer.getChildren().remove(popup);

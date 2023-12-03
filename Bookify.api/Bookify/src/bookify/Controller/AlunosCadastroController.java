@@ -74,7 +74,9 @@ public class AlunosCadastroController extends TelasAlunoController implements IC
                 erroText.setText("Erro: matricula já vinculada");
                 return;
             }
+            
             IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
+
             controller.setManipulador(()->{
                 mainContainer.getChildren().remove(controller.getPopup());
             });

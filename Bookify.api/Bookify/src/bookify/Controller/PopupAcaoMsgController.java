@@ -7,8 +7,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class PopupAcaoMsgController implements IPopupMsg{
-    IButtonHandler eventHandler;
-    Pane popup = null;
+    private IButtonHandler eventHandler;
+    private Pane popup = null;
     
     public Pane getPopup(){
         return this.popup;
