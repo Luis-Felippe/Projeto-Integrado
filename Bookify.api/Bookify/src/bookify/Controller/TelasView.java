@@ -70,13 +70,13 @@ public class TelasView{
             case "alunos/edicao":
                 fxmlloader.setLocation(getClass().getResource("../View/Aluno-edicao-window.fxml"));
                 teste = new Scene(fxmlloader.load());
-                AlunosEditController alunosController = fxmlloader.getController();
+                AlunosEdicaoController alunosController = fxmlloader.getController();
                 alunosController.setParametros(obj);
                 break;
             case "livros/edicao":
                 fxmlloader.setLocation(getClass().getResource("../View/Livros-edicao-window.fxml"));
                 teste = new Scene(fxmlloader.load());
-                LivrosEditController livrosController = fxmlloader.getController();
+                LivrosEdicaoController livrosController = fxmlloader.getController();
                 livrosController.setParametros(obj);
                 break;
             default:

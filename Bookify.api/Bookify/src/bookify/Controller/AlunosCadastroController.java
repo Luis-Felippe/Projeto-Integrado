@@ -1,5 +1,6 @@
 package bookify.Controller;
 
+import bookify.Interface.ICadastrar;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class AlunosCadastroController extends TelasAlunoController {
+public class AlunosCadastroController extends TelasAlunoController implements ICadastrar{
 
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
@@ -45,7 +46,7 @@ public class AlunosCadastroController extends TelasAlunoController {
     private TextField aluTextTelefone;
     
     @FXML
-    protected void cadastrarAluno(ActionEvent e) throws IOException {
+    public void cadastrar(ActionEvent evento) throws IOException {
         if (this.aluTextCurso.getText().isEmpty()
             || this.aluTextEmail.getText().isEmpty()
             || this.aluTextMatricula.getText().isEmpty()
