@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class AlunosEditController extends TelasAlunoController implements IEditar{
+public class AlunosEdicaoController extends TelasAlunoController implements IEditar{
     BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     Object params;
@@ -33,13 +33,13 @@ public class AlunosEditController extends TelasAlunoController implements IEdita
     @FXML
     private TextField aluTextTelefone;
     
-    protected void setParametros(Object obj){
+    public void setParametros(Object obj){
         this.params = obj;
         carregarInformacao();
     }
     
     @FXML
-    protected void atualizar() throws SQLException, IOException{
+    public void atualizar() throws SQLException, IOException{
         String [] values = {  aluTextCurso.getText(),
             aluTextEmail.getText(),
             aluTextMatricula.getText(),
@@ -53,8 +53,7 @@ public class AlunosEditController extends TelasAlunoController implements IEdita
         listarAluno();
     }
     
-   
-    private void carregarInformacao(){
+    public void carregarInformacao(){
         try {
             ResultSet result = repositorio.get("Usuario", "id_usuario = " + params);
             result.next();
@@ -68,11 +67,4 @@ public class AlunosEditController extends TelasAlunoController implements IEdita
             Logger.getLogger(ProfessorEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Override
-    public void editar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
 }

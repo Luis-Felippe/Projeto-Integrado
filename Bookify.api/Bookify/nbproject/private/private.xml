@@ -3,7 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/ProfessorCadastroController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/FabricaPopupMsg.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/PopupCadastrarMsgController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/AlunosCadastroController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Main.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/PopupAcaoMsgController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Interface/IButtonHandler.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/AlunoListagemController.java</file>
             <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/TelasController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/LivroListagemController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/AlunosEditController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/ProfessorListagemController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Interface/IPopupMsg.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/PopupExcluirMsgController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/RealizarEmprestimoController.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Interface/IEditar.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documentos/4%20semestre/Projeto%20integrado%201/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/AlunoComponenteController.java</file>
         </group>
     </open-files>
 </project-private>

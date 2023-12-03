@@ -1,5 +1,6 @@
 package bookify.Controller;
 
+import bookify.Interface.IEditar;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class LivrosEditController extends TelasLivrosController{
+public class LivrosEdicaoController extends TelasLivrosController implements IEditar{
     BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     private Object params;
@@ -48,13 +49,13 @@ public class LivrosEditController extends TelasLivrosController{
     @FXML
     private TextField livroTextVolume;
     
-    protected void setParametros(Object obj){
+    public void setParametros(Object obj){
         this.params = obj;
         carregarInformacao();
     }
     
     @FXML
-    protected void atualizar() throws SQLException, IOException{
+    public void atualizar() throws SQLException, IOException{
         String [] values = {   livroTextAnoPublicacao.getText(),
             livroTextAutor.getText(),
             livroTextData.getEditor().getText(),
@@ -74,12 +75,10 @@ public class LivrosEditController extends TelasLivrosController{
         listarLivro();
     }
     
-   
-    private void carregarInformacao(){
+    public void carregarInformacao(){
         try {
             ResultSet result = repositorio.get("Livro", String.format("num_registro = '%s'", params));
             result.next();
-
             livroTextAnoPublicacao.setText(result.getString("ano_publicacao"));
             livroTextAutor.setText(result.getString("autor"));
             livroTextData.getEditor().setText(result.getString("data"));
@@ -95,5 +94,4 @@ public class LivrosEditController extends TelasLivrosController{
             Logger.getLogger(ProfessorEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
