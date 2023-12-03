@@ -1,5 +1,6 @@
 package bookify.Controller;
 
+import bookify.Interface.IEditar;
 import bookify.model.dao.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -9,8 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class AlunosEditController extends TelasAlunoController
-{
+public class AlunosEditController extends TelasAlunoController implements IEditar{
     BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     Object params;
@@ -67,6 +67,11 @@ public class AlunosEditController extends TelasAlunoController
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void editar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
