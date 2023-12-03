@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IComponente;
+import bookify.Interface.IFabricaComponente;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
@@ -7,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +27,7 @@ public class LivroListagemController extends TelasLivrosController implements In
     
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
+    private IFabricaComponente componenteFabrica = new FabricaComponente();
     
     private String currentEditLivro;
     
@@ -45,17 +50,17 @@ public class LivroListagemController extends TelasLivrosController implements In
     }
     
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Livro-componente-window.fxml"));
-        Pane painel = loader.load();
-        LivroComponenteController componente = loader.getController();
-        componente.setTexto(res.getString("titulo"), 
-        res.getString("num_registro"), 
-        res.getString("autor"),
-        res.getString("volume"), 
-        res.getString("exemplar"), 
-        res.getString("data"),
-        res.getString("observacao"));
+        IComponente componente = componenteFabrica.criaComponente("LivroComponente");
+        Map<String, String> atributos = new HashMap<>();
+        atributos.put("titulo", res.getString("titulo"));
+        atributos.put("num_registro", res.getString("num_registro"));
+        atributos.put("autor", res.getString("autor"));
+        atributos.put("volume", res.getString("volume"));
+        atributos.put("exemplar", res.getString("exemplar"));
+        atributos.put("data", res.getString("data"));
+        atributos.put("observacao", res.getString("observacao"));
+        
+        componente.setTexto(atributos);
 
         String id = res.getString("num_registro");
         
@@ -67,7 +72,7 @@ public class LivroListagemController extends TelasLivrosController implements In
             deletarLivroManipulador(id, mainContainer);
         });
         
-        box.getChildren().add(painel);
+        box.getChildren().add(componente.getFxml());
     }
 
 

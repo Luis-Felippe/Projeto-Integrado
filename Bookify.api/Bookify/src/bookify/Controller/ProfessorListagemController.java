@@ -1,5 +1,7 @@
 package bookify.Controller;
 
+import bookify.Interface.IComponente;
+import bookify.Interface.IFabricaComponente;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
 import bookify.model.dao.BookifyDatabase;
@@ -16,6 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane; 
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
@@ -23,6 +27,8 @@ public class ProfessorListagemController extends TelasProfessorController implem
 
     private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
+    private IFabricaComponente componenteFabrica = new FabricaComponente();
+    
     
     private String currentEditProfessor;
     
@@ -49,15 +55,17 @@ public class ProfessorListagemController extends TelasProfessorController implem
     }
     
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Professor-componente-window.fxml"));
-        Pane painel = loader.load();
-        ProfessorComponenteController componente = loader.getController();
-        componente.setTexto(res.getString("nome"), 
-        res.getString("cpf"), 
-        res.getString("disciplina"), 
-        res.getString("telefone"), 
-        res.getString("email"));
+        IComponente componente = componenteFabrica.criaComponente("ProfessorComponente");
+        
+        
+        Map<String, String> atributos = new HashMap<>();
+        atributos.put("nome", res.getString("nome"));
+        atributos.put("cpf", res.getString("cpf"));
+        atributos.put("disciplina", res.getString("disciplina"));
+        atributos.put("telefone", res.getString("telefone"));
+        atributos.put("email", res.getString("email"));
+        
+        componente.setTexto(atributos);
         
         String id = res.getString("id_usuario");
         
@@ -70,7 +78,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
             
         });
         
-        box.getChildren().add(painel);
+        box.getChildren().add(componente.getFxml());
     }
 
     private void principalPopupManipulador(String id, Pane mainContainer){

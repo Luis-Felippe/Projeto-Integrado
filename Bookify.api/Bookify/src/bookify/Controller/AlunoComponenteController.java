@@ -1,13 +1,18 @@
 package bookify.Controller;
 
 import bookify.Interface.IButtonHandler;
+import bookify.Interface.IComponente;
+import java.util.Map;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class AlunoComponenteController{
+public class AlunoComponenteController implements IComponente{
     private IButtonHandler deleteEvent; 
     
-    IButtonHandler editEvent;
+    private IButtonHandler editEvent;
+    
+    private Pane componenteFxml;
     
     @FXML
     private Text cursoText;
@@ -24,32 +29,42 @@ public class AlunoComponenteController{
     @FXML
     private Text turmaText;
     
-    @FXML
-    protected void setTexto(String nome, String matricula, String curso, String telefone, String turma){
-        if(nome.length() > 49){
-            nome = nome.substring(0,49) + "...";
-        }
-        nomeText.setText(nome);
-        matriculaText.setText(matricula);
-        cursoText.setText(curso);
-        telefoneText.setText(telefone);
-        turmaText.setText(turma);
+    public void setFxml(Pane painel){
+        componenteFxml = painel;
     }
-    protected void setDeletarManipulador(IButtonHandler event){
+    
+    public Pane getFxml(){
+        return componenteFxml;
+    }
+    
+    @FXML
+    public void setTexto(Map<String, String> atributos){
+        if(atributos.get("nome").length() > 49){
+            String aux = atributos.get("nome");
+            aux = aux.substring(0,49) + "...";
+            atributos.replace("nome", aux);
+        }
+        nomeText.setText(atributos.get("nome"));
+        matriculaText.setText(atributos.get("matricula"));
+        cursoText.setText(atributos.get("curso"));
+        telefoneText.setText(atributos.get("telefone"));
+        turmaText.setText(atributos.get("turma"));
+    }
+    public void setDeletarManipulador(IButtonHandler event){
         this.deleteEvent = event;
     }
     
     @FXML
-    protected void deletar(){
+    public void deletar(){
         deleteEvent.handler();
     }
     
-    protected void setEditarManipulador(IButtonHandler event){
+    public void setEditarManipulador(IButtonHandler event){
         this.editEvent = event;
     }
     
     @FXML
-    protected void editar(){
+    public void editar(){
         editEvent.handler();
     }
     
