@@ -46,6 +46,7 @@ public class AlunosCadastroController extends TelasAlunoController implements IC
     @FXML
     private TextField aluTextTelefone;
     
+    // Cadastra o aluno no banco de dados
     @FXML
     public void cadastrar(ActionEvent evento) throws IOException {
         if (this.aluTextCurso.getText().isEmpty()

@@ -46,7 +46,8 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     @FXML
     private TextField pesquisarText;
     
-     private void editarAlunoManipulador(String id) {
+     // Recebe o id de um aluno para passar as informações do aluno para a tela de edição
+    private void editarAlunoManipulador(String id) {
         this.currentEditAluno = id;
         try {
             super.editarAluno(currentEditAluno);
@@ -55,6 +56,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         }
     }
     
+    // Adiciona o componente que mostra as informações do aluno e seta seus atributos e funções
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         
         IComponente componente = componenteFabrica.criaComponente("AlunoComponente");
@@ -81,6 +83,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         box.getChildren().add(componente.getFxml());
     }
     
+    // Cria popup de confirmação de exclusão
     private void deletarAlunoManipulador(String id, Pane mainContainer){
         IPopupAcao controller = popupAcaoFabrica.criaPopupAcao("PopupAluno");
         Pane popup = controller.getFxml();
@@ -93,6 +96,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         });
     }
     
+    // Chama a função de excluir e exibe a mensagem de exclusão realizada.
     private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup){
         try {
             repositorio.delete("Usuario", String.format("id_usuario = %s", id));
@@ -107,6 +111,8 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
             controlador.erro();
         }
     }
+    
+    // Fecha o popup
     private void cancelarManipulador(Pane popup, Pane mainContainer){
         mainContainer.getChildren().remove(popup);
     }
@@ -116,6 +122,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         buscar();
     }
     
+    // Pesquisa acionada pela tecla ENTER
     @FXML
     protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{
@@ -125,6 +132,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         });
     }
     
+    // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     protected void buscar(){
         render_box_elements.getChildren().clear();

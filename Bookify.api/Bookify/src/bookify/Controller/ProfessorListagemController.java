@@ -46,10 +46,12 @@ public class ProfessorListagemController extends TelasProfessorController implem
     @FXML
     private TextField pesquisarText;
     
+    // retorna o id do professor selecionado
     public String getIdAtualEditar(){
         return currentEditProfessor;
     }
     
+    // recebe o id de um professor e abre a tela de edição de professor
     private void editarProfessorManipulador(String id) {
         this.currentEditProfessor = id;
         try {
@@ -59,6 +61,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
         }
     }
     
+    // Adiciona o componente que mostra as informações do professor e seta seus atributos e funções
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         IComponente componente = componenteFabrica.criaComponente("ProfessorComponente");
         
@@ -86,6 +89,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
         box.getChildren().add(componente.getFxml());
     }
 
+    // abre o popup que confirma ou cancela a exclusão do professor
     private void principalPopupManipulador(String id, Pane mainContainer){
         IPopupAcao controller = popupAcaoFabrica.criaPopupAcao("PopupProfessor");
         Pane popup = controller.getFxml();
@@ -98,6 +102,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
         });
     }
     
+    // confirma a exclusão do professor
     private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup){
         try {
             repositorio.delete("Usuario", String.format("id_usuario = %s", id));
@@ -113,6 +118,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
         }
     }
     
+    // cancela a exclusão do professor
     private void cancelarManipulador(Pane popup, Pane mainContainer){
         mainContainer.getChildren().remove(popup);
     }
@@ -122,6 +128,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
         buscar();
     }
     
+    // Pesquisa acionada pela tecla ENTER
     @FXML
     protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{
@@ -131,6 +138,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
         });
     }
     
+    // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     public void buscar(){
         render_box_elements.getChildren().clear();

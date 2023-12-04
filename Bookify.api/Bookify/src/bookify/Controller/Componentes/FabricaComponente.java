@@ -9,7 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 public class FabricaComponente implements IFabricaComponente{
-
+    
+    // fabrica de componentes
     public IComponente criaComponente(String tipo) {
         IComponente componente = null;
         try {

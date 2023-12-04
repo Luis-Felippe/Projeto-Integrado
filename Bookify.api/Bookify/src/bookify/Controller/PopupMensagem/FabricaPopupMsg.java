@@ -9,7 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 public class FabricaPopupMsg implements IFabricaPopupMsg{
-
+    
+    // fabrica popup de mensagens
     public IPopupMsg criaPopupMsg(String tipo) {
         IPopupMsg controller = null;
         try {

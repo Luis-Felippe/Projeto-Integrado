@@ -37,6 +37,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
     @FXML
     private VBox render_box_elements;
     
+    // Adiciona o componente que mostra as informações do empréstimo e seta seus atributos e funções
     @FXML
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         FXMLLoader loader = new FXMLLoader();
@@ -77,6 +78,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
         box.getChildren().add(painel);
     }
     
+    // cria o popup de um empréstimo
     private void emprestimoManipulador(String id, Pane mainContainer, Map values){
         try {
                 FXMLLoader loaderPopup = new FXMLLoader();
@@ -107,6 +109,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
             }
     }
     
+    // Encerra o empréstimo
     private void encerrarManipulador(Pane popup, Pane mainContainer, String id, Map values) {
         String[] columns = {
             "data_emprestimo", 
@@ -136,6 +139,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
         }  
     }
     
+    // Renova um empréstimo
     private void renovarManipulador(Pane popup, Pane mainContainer, String id) {
         String[] values = {LocalDate.now().plusDays(5).toString()};
         String[] columns = {"data_devolucao"};
@@ -153,6 +157,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
         }
     }
 
+    // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     public void buscar(){
         render_box_elements.getChildren().clear();
@@ -184,6 +189,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
         }
     }
 
+    // Pesquisa acionada pela tecla ENTER
     @FXML
     protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{

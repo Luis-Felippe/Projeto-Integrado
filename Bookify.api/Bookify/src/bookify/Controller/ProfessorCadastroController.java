@@ -41,6 +41,7 @@ public class ProfessorCadastroController extends TelasProfessorController implem
     @FXML
     private TextField profTextTelefone;
 
+    // Cadastra o professor no banco de dados
     @FXML
     public void cadastrar(ActionEvent evento) throws IOException{
         if(this.profTextNome.getText().isEmpty() ||

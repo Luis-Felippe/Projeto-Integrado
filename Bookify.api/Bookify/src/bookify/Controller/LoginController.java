@@ -22,6 +22,7 @@ public class LoginController {
     @FXML
     private Label lblError;
     
+    // compara se as informações de login são iguais ao que o usuario escreveu
     @FXML
     protected void realizarLogin() throws IOException{
         if(user.equals(txtLogin.getText()) && password.equals(txtSenha.getText()) ){

@@ -44,6 +44,7 @@ public class LivroComponenteController implements IComponente{
         return componenteFxml;
     }
     
+    // seta as informações do componente livro
     @FXML
     public void setTexto(Map<String, String> atributos){
         if(atributos.get("titulo").length() > 51){

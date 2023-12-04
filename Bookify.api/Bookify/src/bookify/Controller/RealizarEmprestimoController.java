@@ -69,6 +69,7 @@ public class RealizarEmprestimoController extends TelasController{
     @FXML
     private TextField LivTextTitulo;
     
+    // cria e adiciona um empréstimo feito ao banco de dados
     @FXML
     protected void emprestar(){
        try{
@@ -103,6 +104,7 @@ public class RealizarEmprestimoController extends TelasController{
         }
     }
     
+    // Pega as informações do banco e mostra nos campos de texto 
     private void carregarInformacao(ResultSet resLiv, ResultSet resUser) throws SQLException{
         if(resLiv != null){
             resLiv.next();
@@ -137,6 +139,7 @@ public class RealizarEmprestimoController extends TelasController{
         }
     }
     
+    // aciona a função de busca após teclar ENTER
     @FXML
     protected void buscarTeclaPressionada(){
         LivTextCod.setOnKeyPressed(event->{
@@ -151,6 +154,7 @@ public class RealizarEmprestimoController extends TelasController{
         });
     }
     
+    // chama a função de buscar com os filtros definidos
     private void buscar(){
         ResultSet resultLiv = null, resultUser = null;
         String searchLivro = LivTextCod.getText().toUpperCase();

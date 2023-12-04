@@ -33,6 +33,7 @@ public class EmprestimoComponenteController {
     @FXML
     private Text clienteText;
     
+    // seta as informações mostradas no componente
     protected void setTexto(String titulo, String nome, String matricula, String cpf ,String dataInicio, String dataDevolucao){
         if(titulo.length() > 30){
             titulo= titulo.substring(0,30) + "...";
@@ -53,6 +54,7 @@ public class EmprestimoComponenteController {
           dataDevolucaoText.setText(dataDevolucao);
     }
 
+    // mostra o estado de um empréstimo, se ele está atrasado ou ativo
     protected void setStatus(boolean status){
         
             if(status){
@@ -71,7 +73,7 @@ public class EmprestimoComponenteController {
     public void setEvento(IButtonHandler event) {
         this.event = event;
     }
-    
+     
     @FXML
     protected void ManipuladorEvento(){
         event.handler();

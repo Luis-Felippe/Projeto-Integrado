@@ -56,6 +56,8 @@ public class PopupEmprestimoController {
     public void encerrar(ActionEvent event) {
         eventEncerrar.handler();
     }
+    
+    // seta as informações que serão mostradas no popup de empréstimo
     protected void setInfo(String titulo, String numReg, String autor, String matricula, String cpf, String responsavel, String dataIncio, String dataDevolucao){
         if(titulo.length() > 40){
             titulo =titulo.substring(0,40) + "...";

@@ -33,11 +33,13 @@ public class AlunosEdicaoController extends TelasAlunoController implements IEdi
     @FXML
     private TextField aluTextTelefone;
     
+    // seta a variável parâmetros contendo o id e chama carregarInformação()
     public void setParametros(Object obj){
         this.params = obj;
         carregarInformacao();
     }
     
+    // Pega as informações dos campos de texto da tela e chama a função de update do BD.
     @FXML
     public void atualizar() throws SQLException, IOException{
         String [] values = {  aluTextCurso.getText(),
@@ -53,6 +55,7 @@ public class AlunosEdicaoController extends TelasAlunoController implements IEdi
         listarAluno();
     }
     
+    // Pega as informações do banco e mostra nos campos de texto
     public void carregarInformacao(){
         try {
             ResultSet result = repositorio.get("Usuario", "id_usuario = " + params);

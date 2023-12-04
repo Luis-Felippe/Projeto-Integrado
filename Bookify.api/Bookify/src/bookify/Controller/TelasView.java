@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 public class TelasView{
     FXMLLoader fxmlloader = new FXMLLoader();
     
+    // função que está definindo os caminhos para as trocas de tela, set uma cena nova.
     public void trocarTela(String tela) throws IOException{
         switch(tela){
             case "alunos/cadastro":
@@ -58,6 +59,7 @@ public class TelasView{
         main.setCena(new Scene(fxmlloader.load()));
     }
     
+    // função que está definindo os caminhos para as trocas de tela, set uma cena nova passando um objeto.
     public void trocarTela(String tela, Object obj) throws IOException{
         Scene teste;
         switch (tela) {

@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 
 public class FabricaPopupAcao implements IFabricaPopupAcao{
 
+    // fabrica de popup de ação
     public IPopupAcao criaPopupAcao(String tipo) {
         IPopupAcao controller = null;
         

@@ -37,6 +37,7 @@ public class ProfessorComponenteController implements IComponente{
         return componenteFxml;
     }
     
+    // seta as informações do componente professor
     @FXML
     public void setTexto(Map<String, String> atributos){
         if(atributos.get("nome").length() > 32){

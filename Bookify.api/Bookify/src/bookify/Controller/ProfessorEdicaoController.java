@@ -30,11 +30,13 @@ public class ProfessorEdicaoController extends TelasProfessorController implemen
     @FXML
     private TextField profTextTelefone;
     
+    // seta a variável parâmetros contendo o id e chama carregarInformação()
     public void setParametros(Object obj){
         this.params = obj;
         carregarInformacao();
     }
 
+    // Pega as informações dos campos de texto da tela e chama a função de update do BD.
     @FXML
     public void atualizar() throws SQLException, IOException{
         String [] values = {profTextNome.getText(), 
@@ -49,6 +51,7 @@ public class ProfessorEdicaoController extends TelasProfessorController implemen
         listarProfessor();
     }
     
+    // Pega as informações do banco e mostra nos campos de texto
     public void carregarInformacao(){
         try {
             ResultSet result = repositorio.get("Usuario", "id_usuario = " + params);

@@ -45,6 +45,7 @@ public class LivroListagemController extends TelasLivrosController implements In
     @FXML
     private VBox render_box_elements;
     
+    // recebe o id de um livro e abre a tela de edição de livro
     private void editarLivroManipulador(String id) {
         this.currentEditLivro = id;
         try {
@@ -54,6 +55,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         }
     }
     
+    // Adiciona o componente que mostra as informações do aluno e seta seus atributos e funções
     private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
         IComponente componente = componenteFabrica.criaComponente("LivroComponente");
         Map<String, String> atributos = new HashMap<>();
@@ -80,7 +82,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         box.getChildren().add(componente.getFxml());
     }
 
-
+    // abre o popup de exclusão de livro
     private void deletarLivroManipulador(String id, Pane mainContainer){
         IPopupAcao controller = popupAcaoFabrica.criaPopupAcao("PopupLivro");
         Pane popup = controller.getFxml();
@@ -93,6 +95,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         });
     }
     
+    // confirma a exclusão de um livro
     private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup){
         try {
             repositorio.delete("livro", String.format("num_registro = '%s'", id));
@@ -108,6 +111,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         }
     }
     
+    // fecha o popup 
     private void cancelarManipulador(Pane popup, Pane mainContainer){
         mainContainer.getChildren().remove(popup);
     }
@@ -117,6 +121,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         buscar();
     }
     
+    // Pesquisa acionada pela tecla ENTER
     @FXML
     protected void buscarTeclaPressionada(){
         pesquisarText.setOnKeyPressed(event->{
@@ -126,6 +131,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         });
     }
     
+    // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     protected void buscar(){
         render_box_elements.getChildren().clear();

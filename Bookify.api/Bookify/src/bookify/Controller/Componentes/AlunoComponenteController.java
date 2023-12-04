@@ -37,6 +37,7 @@ public class AlunoComponenteController implements IComponente{
         return componenteFxml;
     }
     
+    // seta as informações do componente aluno
     @FXML
     public void setTexto(Map<String, String> atributos){
         if(atributos.get("nome").length() > 49){

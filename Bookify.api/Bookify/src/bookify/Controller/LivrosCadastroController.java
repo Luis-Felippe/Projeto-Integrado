@@ -59,6 +59,7 @@ public class LivrosCadastroController extends TelasLivrosController implements I
     @FXML
     private TextField livroTextObservacao;
     
+    // Cadastra um livro no banco de dados
     @FXML
     public void cadastrar(ActionEvent evento) throws IOException{
         if(this.livroTextNumReg.getText().isEmpty() ||
