@@ -95,6 +95,13 @@
             <VBox fx:id="render_box_elements" prefHeight="200.0" prefWidth="890.0" />
          </content>
       </ScrollPane>
-      <ToggleButton fx:id="professoresEmprestimosBtn" layoutX="368.0" layoutY="57.0" mnemonicParsing="false" onAction="#buscar" text="ToggleButton" />
+      <ToggleButton fx:id="professoresEmprestimosBtn" layoutX="1188.0" layoutY="56.0" mnemonicParsing="false" onAction="#buscar" styleClass="botao-redondo">
+         <graphic>
+            <ImageView fitHeight="72.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/livros.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
    </children>
 </Pane>

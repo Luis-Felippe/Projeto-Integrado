@@ -95,6 +95,13 @@
             <VBox fx:id="render_box_elements" prefHeight="200.0" prefWidth="890.0" />
          </content>
       </ScrollPane>
-      <ToggleButton fx:id="livrosEmprestadosBtn" layoutX="306.0" layoutY="57.0" mnemonicParsing="false" onAction="#buscar" text="DE KENNER" />
+      <ToggleButton fx:id="livrosEmprestadosBtn" layoutX="1188.0" layoutY="56.0" mnemonicParsing="false" onAction="#buscar" styleClass="botao-redondo">
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/livros.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
    </children>
 </Pane>
