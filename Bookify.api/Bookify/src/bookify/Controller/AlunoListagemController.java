@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 
 
@@ -36,6 +37,9 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
     
     private String currentEditAluno;
+    
+    @FXML
+    private ToggleButton alunosEmprestimosBtn;
     
     @FXML
     private Pane mainContainer;
@@ -135,6 +139,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     protected void buscar(){
+        ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
@@ -142,7 +147,11 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
                 + "(UPPER(email) LIKE '%%%s%%' )) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
-            var response = repositorio.get("Usuario", consult);
+            if(alunosEmprestimosBtn.isSelected()){
+                response = repositorio.get("alunos_com_emprestimos", consult);
+            } else{
+                response = repositorio.get("Usuario", consult);
+            }
             HBox box = null;
             boolean status = true;
             while(response.next()){

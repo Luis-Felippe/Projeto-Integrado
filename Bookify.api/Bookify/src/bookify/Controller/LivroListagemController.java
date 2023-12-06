@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -35,6 +36,9 @@ public class LivroListagemController extends TelasLivrosController implements In
     private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
     
     private String currentEditLivro;
+    
+    @FXML
+    private ToggleButton livrosEmprestadosBtn;
     
     @FXML
     private Pane mainContainer;
@@ -134,12 +138,17 @@ public class LivroListagemController extends TelasLivrosController implements In
     // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     protected void buscar(){
+        ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%') ORDER BY titulo ASC",searchBar, searchBar);
         
         try {
-            var response = repositorio.get("Livro", consult);
+            if(livrosEmprestadosBtn.isSelected()){
+                response = repositorio.get("livros_emprestados", consult);
+            } else{
+                response = repositorio.get("Livro", consult);
+            }
             HBox box = null;
             boolean status = true;
             while(response.next()){

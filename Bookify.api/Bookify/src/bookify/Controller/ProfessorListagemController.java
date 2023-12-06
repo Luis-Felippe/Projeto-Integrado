@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 
 public class ProfessorListagemController extends TelasProfessorController implements Initializable {
@@ -36,6 +37,9 @@ public class ProfessorListagemController extends TelasProfessorController implem
     private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
     
     private String currentEditProfessor;
+    
+    @FXML
+    private ToggleButton professoresEmprestimosBtn;
     
     @FXML
     private Pane mainContainer;
@@ -141,6 +145,7 @@ public class ProfessorListagemController extends TelasProfessorController implem
     // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     public void buscar(){
+        ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'P' AND ((UPPER(nome) LIKE '%%%s%%') OR"
@@ -148,7 +153,11 @@ public class ProfessorListagemController extends TelasProfessorController implem
                 + "(UPPER(email) LIKE '%%%s%%')) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
-            var response = repositorio.get("Usuario", consult);
+            if(professoresEmprestimosBtn.isSelected()){
+                response = repositorio.get("professores_com_emprestimos", consult);
+            } else{
+                response = repositorio.get("Usuario", consult);
+            }
             HBox box = null;
             boolean status = true;
             while(response.next()){
