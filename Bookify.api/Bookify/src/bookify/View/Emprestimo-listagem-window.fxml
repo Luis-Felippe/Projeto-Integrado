@@ -86,6 +86,16 @@
             <VBox fx:id="render_box_elements" prefHeight="200.0" prefWidth="890.0" />
          </content>
       </ScrollPane>
-      <ToggleButton fx:id="atrasadosBtn" layoutX="225.0" layoutY="83.0" mnemonicParsing="false" onAction="#buscar" text="DE KENNER" />
+      <ToggleButton fx:id="atrasadosBtn" layoutX="1188.0" layoutY="53.0" mnemonicParsing="false" onAction="#buscar" styleClass="botao-redondo">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="59.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/atraso.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
    </children>
 </Pane>
