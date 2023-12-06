@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 public class LivrosEdicaoController extends TelasLivrosController implements IEditar{
     BookifyDatabase repositorio = BookifyDatabase.getInstancia();
@@ -18,6 +19,9 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
     
     @FXML
     private TextField livroTextAnoPublicacao;
+    
+    @FXML
+    private Text erro;
 
     @FXML
     private TextField livroTextAutor;
@@ -57,7 +61,7 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
     
     // Pega as informações dos campos de texto da tela e chama a função de update do BD.
     @FXML
-    public void atualizar() throws SQLException, IOException{
+    public void atualizar() throws IOException{
         String [] values = {   livroTextAnoPublicacao.getText(),
             livroTextAutor.getText(),
             livroTextData.getEditor().getText(),
@@ -73,8 +77,13 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
         String [] columns = {"ano_publicacao", "autor", "data", "editora", "exemplar", "forma_aquisicao",
                             "local", "num_registro", "observacao", "titulo", "volume"};
         
-        repositorio.update("livro", columns, values, String.format("num_registro = '%s'", params));
-        listarLivro();
+        try {
+            repositorio.update("livro", columns, values, String.format("num_registro = '%s'", params));
+            listarLivro();
+        } catch (SQLException ex) {
+            erro.setText("Não é possível alterar o número de registro do livro enquanto estiver emprestado.");
+            //Logger.getLogger(LivrosEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // Pega as informações do banco e mostra nos campos de texto
