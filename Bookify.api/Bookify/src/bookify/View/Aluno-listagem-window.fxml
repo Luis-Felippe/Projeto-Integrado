@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -90,5 +91,6 @@
             <VBox fx:id="render_box_elements" prefHeight="200.0" prefWidth="890.0" />
          </content>
       </ScrollPane>
+      <ToggleButton fx:id="alunosEmprestimosBtn" layoutX="373.0" layoutY="70.0" mnemonicParsing="false" onAction="#buscar" text="DE KENNER" />
    </children>
 </Pane>

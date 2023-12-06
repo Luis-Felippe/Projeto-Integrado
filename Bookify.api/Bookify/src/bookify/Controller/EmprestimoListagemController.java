@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -27,6 +28,9 @@ public class EmprestimoListagemController extends TelasController implements Ini
     
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
+    
+    @FXML
+    private ToggleButton atrasadosBtn;
     
     @FXML
     private Pane mainContainer;
@@ -160,6 +164,7 @@ public class EmprestimoListagemController extends TelasController implements Ini
     // Faz uma busca no banco de dados, de acordo com o filtro
     @FXML
     public void buscar(){
+        ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("JOIN emprestimo e ON e.num_registro_livro = l.num_registro\n" +
@@ -168,9 +173,13 @@ public class EmprestimoListagemController extends TelasController implements Ini
                 + "ORDER BY data_inicio asc",searchBar, searchBar);
         
         try {
-            var response = repositorio.get("l.titulo, u.nome, u.matricula, u.cpf ,"
-                    + "e.data_inicio, e.data_devolucao, l.num_registro,"
-                    + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
+            if(atrasadosBtn.isSelected()){
+                response = repositorio.get("emprestimos_atrasados"); 
+            }else {
+                response = repositorio.get("l.titulo, u.nome, u.matricula, u.cpf ,"
+                + "e.data_inicio, e.data_devolucao, l.num_registro,"
+                + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
+            }
             HBox box = null;
             boolean status = true;
             while(response.next()){
