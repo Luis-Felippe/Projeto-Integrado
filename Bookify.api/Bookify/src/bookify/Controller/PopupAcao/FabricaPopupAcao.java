@@ -37,6 +37,12 @@ public class FabricaPopupAcao implements IFabricaPopupAcao{
                     controller = loader.getController();
                     controller.setFxml(popup);
                     break;
+                case "PopupAtualizarTurma":
+                    loader.setLocation(getClass().getResource("../../View/PopupAcao/Popup-atualizar.fxml"));
+                    popup = loader.load();
+                    controller = loader.getController();
+                    controller.setFxml(popup);
+                    break;
                 default:
                     throw new AssertionError();
             }
