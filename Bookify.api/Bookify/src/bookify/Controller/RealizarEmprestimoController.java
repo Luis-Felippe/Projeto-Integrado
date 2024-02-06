@@ -69,6 +69,9 @@ public class RealizarEmprestimoController extends TelasController{
     @FXML
     private TextField LivTextTitulo;
     
+    @FXML
+    private TextField LivTextTurma;
+    
     // cria e adiciona um empréstimo feito ao banco de dados
     @FXML
     protected void emprestar(){
@@ -110,7 +113,7 @@ public class RealizarEmprestimoController extends TelasController{
             resLiv.next();
             LivTextTitulo.setText(resLiv.getString("titulo"));
             LivTextAutor.setText(resLiv.getString("autor"));
-            LivTextEditora.setText(resLiv.getString("editora"));
+            LivTextEditora.setText(resLiv.getString("volume"));
             LivTextObservacao.setText(resLiv.getString("observacao"));
             LivTextExemplar.setText(resLiv.getString("exemplar"));
             currentLiv = resLiv.getString("num_registro");
@@ -127,6 +130,12 @@ public class RealizarEmprestimoController extends TelasController{
             LivTextNome.setText(resUser.getString("nome"));
             LivTextTelefone.setText(resUser.getString("telefone"));
             LocalDate localdate = LocalDate.now();  
+            if(resUser.getString("turma") == null){
+                LivTextTurma.setText("PROFESSOR!");
+            }
+            else{
+                LivTextTurma.setText(resUser.getString("turma"));
+            }
             LivDateInicio.setValue(localdate);
             LivDateDevolucao.setValue(localdate.plusDays(5));
             currentUser = resUser.getString("id_usuario");
