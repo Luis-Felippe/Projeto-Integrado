@@ -25,6 +25,7 @@ import javafx.scene.layout.Pane;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
@@ -49,7 +50,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
     
     @FXML
     private TextField pesquisarText;
-    
+
      // Recebe o id de um aluno para passar as informações do aluno para a tela de edição
     private void editarAlunoManipulador(String id) {
         this.currentEditAluno = id;
