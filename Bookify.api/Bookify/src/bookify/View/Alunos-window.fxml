@@ -44,7 +44,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.TelasAlunoController">
+<Pane fx:id="mainContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-styles" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookify.Controller.TelasAlunoController">
    <children>
       <Pane layoutY="-15.0" prefHeight="51.0" prefWidth="1280.0" style="-fx-background-color: #164C64;">
          <children>
@@ -134,6 +134,18 @@
                <styleClass>
                   <String fx:value="button-on-container" />
                   <String fx:value="button-on-container-text" />
+               </styleClass>
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnAtualizarTurmas" mnemonicParsing="false" onAction="#teste" prefHeight="45.0" prefWidth="350.0" text="ATUALIZAR TURMAS">
+               <styleClass>
+                  <String fx:value="button-atualizar-container" />
+                  <String fx:value="button-atualizar-container-text" />
                </styleClass>
                <font>
                   <Font size="18.0" />

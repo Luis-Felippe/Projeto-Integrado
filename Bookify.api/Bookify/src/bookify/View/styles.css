@@ -153,3 +153,25 @@
     -fx-spacing: 10px; 
     -fx-align-self: stretch;
 }
+
+.button-atualizar-container {
+    -fx-display: flex;
+    -fx-padding: 10px 60px;
+    -fx-justify-content: center;
+    -fx-align-items: center;
+    -fx-gap: 10px;
+    -fx-align-self: stretch;
+    -fx-border-radius: 10px;
+    -fx-background-color: #ED8975;
+    -fx-background-radius: 10px;
+    -fx-font-size: 16px;
+    -fx-transition: 1s;
+}
+
+.button-atualizar-container-text {
+    -fx-text-fill: #EEE;
+    -fx-font-family: "Inter";
+    -fx-font-style: normal;
+    -fx-font-weight: 700;
+    -fx-line-spacing: 0;
+}
