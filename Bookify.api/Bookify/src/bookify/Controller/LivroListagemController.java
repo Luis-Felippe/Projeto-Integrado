@@ -14,11 +14,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -36,7 +39,7 @@ public class LivroListagemController extends TelasLivrosController implements In
     private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
     
     private String currentEditLivro;
-    
+
     @FXML
     private ToggleButton livrosEmprestadosBtn;
     
@@ -67,49 +70,76 @@ public class LivroListagemController extends TelasLivrosController implements In
         atributos.put("num_registro", res.getString("num_registro"));
         atributos.put("autor", res.getString("autor"));
         atributos.put("volume", res.getString("volume"));
-        atributos.put("exemplar", res.getString("exemplar"));
         atributos.put("data", res.getString("data"));
         atributos.put("observacao", res.getString("observacao"));
         
+        String id = res.getString("num_registro");
+        String volume = res.getString("volume");
+        List<String> gambiarra = new ArrayList<String>();
+        gambiarra.add("TODOS");
+        int cont = 0;
+        do{
+            if(atributos.get("num_registro").equals(res.getString("num_registro")) && atributos.get("volume").equals(res.getString("volume"))){
+                gambiarra.add(res.getString("exemplar"));
+                cont++;
+            }
+            else {
+                break;
+            }
+        }while(res.next());
+        
+        atributos.put("exemplar", String.valueOf(cont));
+        
+        
         componente.setTexto(atributos);
 
-        String id = res.getString("num_registro");
-        
         componente.setEditarManipulador(()->{
             editarLivroManipulador(id);    
         });
 
         componente.setDeletarManipulador(()->{
-            deletarLivroManipulador(id, mainContainer);
+            deletarLivroManipulador(id, mainContainer, gambiarra, volume);
         });
         
         box.getChildren().add(componente.getFxml());
     }
 
     // abre o popup de exclusão de livro
-    private void deletarLivroManipulador(String id, Pane mainContainer){
+    private void deletarLivroManipulador(String id, Pane mainContainer, List<String> lista, String volume){
         IPopupAcao controller = popupAcaoFabrica.criaPopupAcao("PopupLivro");
         Pane popup = controller.getFxml();
         mainContainer.getChildren().add(popup);
+        controller.preencherExemplares(lista);
         controller.setCancelarManipulador(()->{
             cancelarManipulador(popup, mainContainer);
         });
         controller.setConfirmarManipulador(()->{
-            confirmarManipulador(id, mainContainer, controller, popup);
+            confirmarManipulador(id, mainContainer, controller, popup, volume);
         });
+        
     }
     
     // confirma a exclusão de um livro
-    private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup){
+    private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup, String volume){
         try {
-            repositorio.delete("livro", String.format("num_registro = '%s'", id));
-            mainContainer.getChildren().remove(popup);
-            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupExcluirMsg");
-            controller.setManipulador(()->{
-                mainContainer.getChildren().remove(controller.getPopup());
-            });
-            mainContainer.getChildren().add(controller.getPopup());
-            buscar();
+            if(controlador.getExemplar().equals("NENHUM")){
+                System.out.println("SEleciona ai paezin");
+            } else {
+                if(controlador.getExemplar().equals("TODOS")){
+                    repositorio.delete("livro", String.format("num_registro = '%s' and volume = '%s'", id, volume));
+                }
+                else{
+                    repositorio.delete("livro", String.format("num_registro = '%s' and volume = '%s' and exemplar = '%s'", id, volume, controlador.getExemplar()));
+                }
+                mainContainer.getChildren().remove(popup);
+                IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupExcluirMsg");
+                controller.setManipulador(()->{
+                    mainContainer.getChildren().remove(controller.getPopup());
+                });
+                mainContainer.getChildren().add(controller.getPopup());
+                buscar();
+            }
+           
         } catch (SQLException ex) {
             controlador.erro();
         }
@@ -141,7 +171,8 @@ public class LivroListagemController extends TelasLivrosController implements In
         ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
-        String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%') ORDER BY titulo ASC",searchBar, searchBar);
+        String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%') ORDER BY titulo ASC, "
+                + "num_registro ASC, volume ASC, exemplar ASC",searchBar, searchBar);
         
         try {
             if(livrosEmprestadosBtn.isSelected()){
@@ -151,17 +182,21 @@ public class LivroListagemController extends TelasLivrosController implements In
             }
             HBox box = null;
             boolean status = true;
-            while(response.next()){
-                if(status){
-                   box = new HBox();
-                   render_box_elements.getChildren().add(box);
-                   status = false;
-                   adicionarComponente(box, response);
-                } else{
-                   status = true;
-                   adicionarComponente(box, response);
+            if(response.next()){
+                while(!response.isAfterLast()){
+                    if(status){
+                        box = new HBox();
+                        render_box_elements.getChildren().add(box);
+                        status = false;
+                        adicionarComponente(box, response);
+                    } else{
+                        status = true;
+                        adicionarComponente(box, response);
+                    }
                 }
             }
+            
+            
         } 
         catch (SQLException | IOException ex) {
             Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);

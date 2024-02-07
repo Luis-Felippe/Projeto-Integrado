@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -24,7 +25,9 @@ public class RealizarEmprestimoController extends TelasController{
 
     private String currentUser = "";
     
-    private String currentLiv = "";
+    private String currentLiv = "";    
+    private String currentLivSelected = "";
+
     
     private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
     
@@ -34,10 +37,16 @@ public class RealizarEmprestimoController extends TelasController{
     private Pane mainContainer;
     
     @FXML
+    private Text error_livro;
+    
+    @FXML
     private DatePicker LivDateDevolucao;
 
     @FXML
     private DatePicker LivDateInicio;
+    
+    @FXML
+    private Text error_usuario;
     
     @FXML
     private Text error;
@@ -49,10 +58,10 @@ public class RealizarEmprestimoController extends TelasController{
     private TextField LivTextCod;
 
     @FXML
-    private TextField LivTextEditora;
-
+    private ChoiceBox<String> volume;
+    
     @FXML
-    private TextField LivTextExemplar;
+    private ChoiceBox<String> exemplar;
 
     @FXML
     private TextField LivTextMatricula;
@@ -76,14 +85,14 @@ public class RealizarEmprestimoController extends TelasController{
     @FXML
     protected void emprestar(){
        try{
-            if(!currentLiv.isEmpty() && !currentUser.isEmpty()){
-                var result = repositorio.get("emprestimo",String.format("num_registro_livro = '%s' OR id_usuario = '%s'", currentLiv, currentUser));
+            if(!currentLiv.isEmpty() && !currentUser.isEmpty() && !volume.getValue().equals("Selecione o volume") && !exemplar.getValue().equals("Selecione o exemplar")){
+                var result = repositorio.get("emprestimo",String.format("id_usuario = '%s'", currentUser));
                 if(!result.next()){
                     String[] values = {currentLiv, currentUser, 
-                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText()
+                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText(), volume.getValue(), exemplar.getValue()
                     };
                     String [] columns = {"num_registro_livro","id_usuario",
-                        "data_inicio","data_devolucao"
+                        "data_inicio","data_devolucao", "volume_livro", "exemplar_livro"
                     };
                     repositorio.save("emprestimo", columns, values);
                     carregarInformacao(null, null);
@@ -96,8 +105,7 @@ public class RealizarEmprestimoController extends TelasController{
                     mainContainer.getChildren().add(controller.getPopup());
                 }else{
                     error.setText("Não foi possivel realizar o emprestimo,"
-                            + " verifique se o livro não pertence\n a outro emprestimo ou se "
-                            + "o usuário já possui empréstimo vinculado");
+                            + " verifique se o usuário já possui empréstimo vinculado");
                 }
             }else{
                 error.setText("Preencha todos os campos!");
@@ -107,44 +115,78 @@ public class RealizarEmprestimoController extends TelasController{
         }
     }
     
-    // Pega as informações do banco e mostra nos campos de texto 
-    private void carregarInformacao(ResultSet resLiv, ResultSet resUser) throws SQLException{
-        if(resLiv != null){
-            resLiv.next();
-            LivTextTitulo.setText(resLiv.getString("titulo"));
-            LivTextAutor.setText(resLiv.getString("autor"));
-            LivTextEditora.setText(resLiv.getString("volume"));
-            LivTextObservacao.setText(resLiv.getString("observacao"));
-            LivTextExemplar.setText(resLiv.getString("exemplar"));
-            currentLiv = resLiv.getString("num_registro");
-        }else{
+    private void limparInformacoes(boolean livro, boolean usuario){
+        if(livro){
             LivTextTitulo.setText("");
             LivTextAutor.setText("");
-            LivTextEditora.setText("");
+            volume.getItems().clear();
             LivTextObservacao.setText("");
-            LivTextExemplar.setText("");
+            exemplar.getItems().clear();
             currentLiv = "";
+            currentLivSelected = "";
         }
-        if(resUser != null){
-            resUser.next();
-            LivTextNome.setText(resUser.getString("nome"));
-            LivTextTelefone.setText(resUser.getString("telefone"));
-            LocalDate localdate = LocalDate.now();  
-            if(resUser.getString("turma") == null){
-                LivTextTurma.setText("PROFESSOR!");
-            }
-            else{
-                LivTextTurma.setText(resUser.getString("turma"));
-            }
-            LivDateInicio.setValue(localdate);
-            LivDateDevolucao.setValue(localdate.plusDays(5));
-            currentUser = resUser.getString("id_usuario");
-        }else{
+        if(usuario){
             LivTextNome.setText("");
             LivTextTelefone.setText("");
+            LivTextTurma.setText("");
             LivDateInicio.setValue(null);
             LivDateDevolucao.setValue(null);
             currentUser = "";
+        }
+    }
+    
+    // Pega as informações do banco e mostra nos campos de texto 
+    private void carregarInformacao(ResultSet resLiv, ResultSet resUser) throws SQLException{
+        if(resLiv != null){
+            if(resLiv.next()){
+                if(!currentLivSelected.equals(resLiv.getString("num_registro"))){
+                    volume.getItems().clear();
+                    exemplar.getItems().clear();
+                    error_livro.setText("");
+                    LivTextTitulo.setText(resLiv.getString("titulo"));
+                    LivTextAutor.setText(resLiv.getString("autor"));
+                    volume.setValue("Selecione o volume");
+                    LivTextObservacao.setText(resLiv.getString("observacao"));
+                    exemplar.setValue("Selecione o exemplar");
+                    currentLiv = resLiv.getString("num_registro");
+                    do{
+                        volume.getItems().add(resLiv.getString("volume"));
+                        exemplar.getItems().add(resLiv.getString("exemplar"));
+                    } while(resLiv.next());
+                    currentLivSelected = currentLiv;
+                }
+                
+            }else{
+                error_livro.setText("O livro pesquisado não possui mais exemplares disponives");
+                limparInformacoes(true, false);
+            }
+        }else{
+            limparInformacoes(true, false);
+            error_livro.setText("");
+        }
+        if(resUser != null){
+            if(resUser.next()){
+                error_usuario.setText("");
+                LivTextNome.setText(resUser.getString("nome"));
+                LivTextTelefone.setText(resUser.getString("telefone"));
+                LocalDate localdate = LocalDate.now();  
+                if(resUser.getString("turma") == null){
+                    LivTextTurma.setText("PROFESSOR!");
+                }
+                else{
+                    LivTextTurma.setText(resUser.getString("turma"));
+                }
+                LivDateInicio.setValue(localdate);
+                LivDateDevolucao.setValue(localdate.plusDays(5));
+                currentUser = resUser.getString("id_usuario");    
+            }else{
+                error_usuario.setText("Usuário não encontrado!");
+                limparInformacoes(false, true);
+            }
+            
+        }else{
+            limparInformacoes(false, true);
+            error_usuario.setText("");
         }
     }
     
@@ -171,7 +213,7 @@ public class RealizarEmprestimoController extends TelasController{
         try {
             if(!searchLivro.isEmpty()){
                 resultLiv = repositorio.get("livro",
-                    String.format("num_registro = '%s'",
+                    String.format("num_registro = '%s' and disponibilidade = 'true'",
                     searchLivro));
             }
             if(!searchUsuario.isEmpty()){
@@ -180,8 +222,9 @@ public class RealizarEmprestimoController extends TelasController{
                     searchUsuario, searchUsuario));
             }
             carregarInformacao(resultLiv, resultUser);
-            error.setText("");
+//            error.setText("");
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             error.setText("Verifique se as informações Cód.Livro e CPF/MATRICULA estão corretas");
         }
     }

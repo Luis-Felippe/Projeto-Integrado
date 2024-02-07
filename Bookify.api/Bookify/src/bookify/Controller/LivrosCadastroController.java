@@ -77,7 +77,7 @@ public class LivrosCadastroController extends TelasLivrosController implements I
         } else {
             String [] columns = {
                 "num_registro", "titulo", "autor", "volume", "exemplar", "local", "data", "editora", 
-                "ano_publicacao", "forma_aquisicao", "observacao"
+                "ano_publicacao", "forma_aquisicao", "observacao", "disponibilidade"
             };
             String [] values = {
                 this.livroTextNumReg.getText(),
@@ -90,7 +90,8 @@ public class LivrosCadastroController extends TelasLivrosController implements I
                 this.livroTextEditora.getText(),
                 this.livroTextAnoPublicacao.getText(),
                 this.livroTextFormaAquisicao.getText(),
-                this.livroTextObservacao.getText()
+                this.livroTextObservacao.getText(),
+                "true"
            };
             try {
                 repositorio.save("livro",columns, values);
