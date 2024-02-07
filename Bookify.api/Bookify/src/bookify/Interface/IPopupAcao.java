@@ -1,5 +1,6 @@
 package bookify.Interface;
 
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -22,4 +23,8 @@ public interface IPopupAcao {
     
     @FXML
     public void erro();
+    
+    public void preencherExemplares(List<String> res);
+    
+    public String getExemplar();
 }

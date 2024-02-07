@@ -18,11 +18,11 @@
       <Text layoutX="25.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Num Registro:" />
       <Text layoutX="165.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor(a):" />
       <Text layoutX="25.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Volume:" />
-      <Text layoutX="162.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplar:" />
+      <Text layoutX="162.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplares:" />
       <Text fx:id="numRegText" layoutX="109.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000000" />
       <Text fx:id="autorText" layoutX="216.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clarisse Lispector" />
       <Text fx:id="volumeText" layoutX="74.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
-      <Text fx:id="exemplarText" layoutX="216.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
+      <Text fx:id="exemplarText" layoutX="236.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
       <Button layoutX="524.0" layoutY="48.0" mnemonicParsing="false" onAction="#deletar" styleClass="botao-redondo" stylesheets="@../styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
