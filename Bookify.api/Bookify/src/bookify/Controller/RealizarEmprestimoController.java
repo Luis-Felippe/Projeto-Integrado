@@ -89,10 +89,14 @@ public class RealizarEmprestimoController extends TelasController{
                 var result = repositorio.get("emprestimo",String.format("id_usuario = '%s'", currentUser));
                 if(!result.next()){
                     String[] values = {currentLiv, currentUser, 
-                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText(), volume.getValue(), exemplar.getValue()
+                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText(), volume.getValue(), exemplar.getValue(),
+                        LivTextTitulo.getText(), LivTextNome.getText(), LivTextTurma.getText(), LivTextTelefone.getText(), 
+                        LivTextMatricula.getText(), LivTextAutor.getText()
+                            
                     };
                     String [] columns = {"num_registro_livro","id_usuario",
-                        "data_inicio","data_devolucao", "volume_livro", "exemplar_livro"
+                        "data_inicio","data_devolucao", "volume_livro", "exemplar_livro", "titulo_livro", "nome_usuario", "turma_usuario",
+                        "telefone_usuario", "identificador_usuario", "autor_livro"
                     };
                     repositorio.save("emprestimo", columns, values);
                     carregarInformacao(null, null);
@@ -149,8 +153,13 @@ public class RealizarEmprestimoController extends TelasController{
                     LivTextObservacao.setText(resLiv.getString("observacao"));
                     exemplar.setValue("Selecione o exemplar");
                     currentLiv = resLiv.getString("num_registro");
+                    String currentVolume = resLiv.getString("volume");
+                    volume.getItems().add(currentVolume);
                     do{
-                        volume.getItems().add(resLiv.getString("volume"));
+                        if(!currentVolume.equals(resLiv.getString("volume"))){
+                            volume.getItems().add(currentVolume);
+                            currentVolume = resLiv.getString("volume");
+                        }
                         exemplar.getItems().add(resLiv.getString("exemplar"));
                     } while(resLiv.next());
                     currentLivSelected = currentLiv;

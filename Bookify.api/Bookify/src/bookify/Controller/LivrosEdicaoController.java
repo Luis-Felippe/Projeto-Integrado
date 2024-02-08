@@ -5,9 +5,11 @@ import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -16,6 +18,11 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
     BookifyDatabase repositorio = BookifyDatabase.getInstancia();
     
     private Object params;
+    private Object params2;
+    
+    
+    @FXML
+    private ChoiceBox<String> exemplar;
     
     @FXML
     private TextField livroTextAnoPublicacao;
@@ -54,9 +61,34 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
     private TextField livroTextVolume;
     
     // seta a variável parâmetros contendo o id e chama carregarInformação()
+    public void setParametros(Object obj, Object obj2){
+        this.params = obj;
+        this.params2 = obj2;
+        carregarExemplares(obj, obj2);
+        carregarInformacao();
+        exemplar.setOnAction(event ->{
+            carregarInformacao();
+        });
+    }
+    
     public void setParametros(Object obj){
         this.params = obj;
         carregarInformacao();
+    }
+    
+    
+    private void carregarExemplares(Object obj, Object obj2){
+        try {
+            ResultSet result = repositorio.get("Livro", String.format("num_registro = '%s' and volume = '%s' ORDER BY exemplar ASC", obj, obj2));
+            exemplar.getItems().add("TODOS");
+            exemplar.setValue("TODOS");
+            
+            while(result.next()){
+                exemplar.getItems().add(result.getString("exemplar"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LivrosEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // Pega as informações dos campos de texto da tela e chama a função de update do BD.
@@ -66,7 +98,6 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
             livroTextAutor.getText(),
             livroTextData.getEditor().getText(),
             livroTextEditora.getText(),
-            livroTextExemplar.getText(),
             livroTextFormaAquisicao.getText(),
             livroTextLocal.getText(),
             livroTextNumReg.getText(),
@@ -74,11 +105,15 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
             livroTextTitulo.getText(),
             livroTextVolume.getText(),};
         
-        String [] columns = {"ano_publicacao", "autor", "data", "editora", "exemplar", "forma_aquisicao",
+        String [] columns = {"ano_publicacao", "autor", "data", "editora", "forma_aquisicao",
                             "local", "num_registro", "observacao", "titulo", "volume"};
         
         try {
-            repositorio.update("livro", columns, values, String.format("num_registro = '%s'", params));
+            if(exemplar.getValue().equals("TODOS")){
+                repositorio.update("livro", columns, values, String.format("num_registro = '%s' and volume = '%s'", params,params2));
+            } else {
+                repositorio.update("livro", columns, values, String.format("num_registro = '%s' and volume = '%s' and exemplar = '%s'", params, params2, exemplar.getValue()));
+            }
             listarLivro();
         } catch (SQLException ex) {
             erro.setText("Não é possível alterar o número de registro do livro enquanto estiver emprestado.");
@@ -89,19 +124,22 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
     // Pega as informações do banco e mostra nos campos de texto
     public void carregarInformacao(){
         try {
-            ResultSet result = repositorio.get("Livro", String.format("num_registro = '%s'", params));
-            result.next();
-            livroTextAnoPublicacao.setText(result.getString("ano_publicacao"));
-            livroTextAutor.setText(result.getString("autor"));
-            livroTextData.getEditor().setText(result.getString("data"));
-            livroTextEditora.setText(result.getString("editora"));
-            livroTextExemplar.setText(result.getString("exemplar"));
-            livroTextFormaAquisicao.setText(result.getString("forma_aquisicao"));
-            livroTextLocal.setText(result.getString("local"));
-            livroTextNumReg.setText(result.getString("num_registro"));
-            livroTextObservacao.setText(result.getString("observacao"));
-            livroTextTitulo.setText(result.getString("titulo"));
-            livroTextVolume.setText(result.getString("volume"));
+            ResultSet result = repositorio.get("Livro", String.format("num_registro = '%s' and volume = '%s'", params, params2));
+            while(result.next()){
+                if(exemplar.getValue().equals(result.getString("exemplar")) || exemplar.getValue().equals("TODOS")){
+                    livroTextAnoPublicacao.setText(result.getString("ano_publicacao"));
+                    livroTextAutor.setText(result.getString("autor"));
+                    livroTextData.getEditor().setText(result.getString("data"));
+                    livroTextEditora.setText(result.getString("editora"));
+                    livroTextFormaAquisicao.setText(result.getString("forma_aquisicao"));
+                    livroTextLocal.setText(result.getString("local"));
+                    livroTextNumReg.setText(result.getString("num_registro"));
+                    livroTextObservacao.setText(result.getString("observacao"));
+                    livroTextTitulo.setText(result.getString("titulo"));
+                    livroTextVolume.setText(result.getString("volume"));
+                    break;
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
         }

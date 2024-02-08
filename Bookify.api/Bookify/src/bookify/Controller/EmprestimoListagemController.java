@@ -48,10 +48,10 @@ public class EmprestimoListagemController extends TelasController implements Ini
         loader.setLocation(getClass().getResource("../View/Emprestimo-componente-window.fxml"));
         Pane painel = loader.load();
         EmprestimoComponenteController componente = loader.getController();
-        componente.setTexto(res.getString("titulo"), 
-        res.getString("nome"),
-        res.getString("matricula"), 
-        res.getString("cpf"),
+        componente.setTexto(res.getString("titulo_livro"), 
+        res.getString("nome_usuario"),
+        res.getString("identificador_usuario"), 
+        res.getString("identificador_usuario"),
         res.getString("data_inicio"), 
         res.getString("data_devolucao"));
         
@@ -61,12 +61,12 @@ public class EmprestimoListagemController extends TelasController implements Ini
         values.put("data_inicio",res.getString("data_inicio"));
         values.put("data_devolucao",res.getString("data_devolucao"));
         values.put("id_usuario",res.getString("id_usuario"));
-        values.put("num_registro",res.getString("num_registro"));
-        values.put("nome",res.getString("nome"));
-        values.put("titulo",res.getString("titulo"));
-        values.put("autor",res.getString("autor"));
-        values.put("cpf",res.getString("cpf"));
-        values.put("matricula",res.getString("matricula"));
+        values.put("num_registro",res.getString("num_registro_livro"));
+        values.put("nome",res.getString("nome_usuario"));
+        values.put("titulo",res.getString("titulo_livro"));
+        values.put("autor",res.getString("autor_livro"));
+        values.put("cpf",res.getString("identificador_usuario"));
+        values.put("matricula",res.getString("identificador_usuario"));
         
         if(values.get("cpf") == null) values.replace("cpf", values.get("matricula"));
         else values.replace("matricula", values.get("cpf"));
@@ -176,9 +176,10 @@ public class EmprestimoListagemController extends TelasController implements Ini
             if(atrasadosBtn.isSelected()){
                 response = repositorio.get("emprestimos_atrasados"); 
             }else {
-                response = repositorio.get("l.titulo, u.nome, u.matricula, u.cpf ,"
-                + "e.data_inicio, e.data_devolucao, l.num_registro,"
-                + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
+//                response = repositorio.get("l.titulo, u.nome, u.matricula, u.cpf ,"
+//                + "e.data_inicio, e.data_devolucao, l.num_registro,"
+//                + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
+                  response = repositorio.get("emprestimo");
             }
             HBox box = null;
             boolean status = true;

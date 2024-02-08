@@ -53,10 +53,10 @@ public class LivroListagemController extends TelasLivrosController implements In
     private VBox render_box_elements;
     
     // recebe o id de um livro e abre a tela de edição de livro
-    private void editarLivroManipulador(String id) {
+    private void editarLivroManipulador(String id, String volume) {
         this.currentEditLivro = id;
         try {
-            super.editarLivro(currentEditLivro);
+            super.editarLivro(id,volume);
         } catch (IOException ex) {
             Logger.getLogger(ProfessorListagemController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,7 +94,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         componente.setTexto(atributos);
 
         componente.setEditarManipulador(()->{
-            editarLivroManipulador(id);    
+            editarLivroManipulador(id, volume);    
         });
 
         componente.setDeletarManipulador(()->{
