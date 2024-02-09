@@ -2,6 +2,9 @@ package bookify.Controller.Componentes;
 
 import bookify.Interface.IButtonHandler;
 import bookify.Interface.IComponente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
@@ -47,6 +50,7 @@ public class LivroComponenteController implements IComponente{
     // seta as informações do componente livro
     @FXML
     public void setTexto(Map<String, String> atributos){
+       
         if(atributos.get("titulo").length() > 51){
             String aux = atributos.get("titulo");
             aux = aux.substring(0,51) + "...";
@@ -57,10 +61,25 @@ public class LivroComponenteController implements IComponente{
         autorText.setText(atributos.get("autor"));
         volumeText.setText(atributos.get("volume"));
         exemplarText.setText(atributos.get("exemplar"));
-        dataText.setText(atributos.get("data"));
+        dataText.setText(formataData(atributos));
         observacaoText.setText(atributos.get("observacao"));
+ 
     }
     
+    private String formataData(Map<String, String> atributos){
+        SimpleDateFormat formatoAtual = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat novoFormato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data;
+        String novaData = "";
+        try{
+            data = formatoAtual.parse(atributos.get("data"));
+            novaData = novoFormato.format(data);
+            
+        } catch(ParseException e){
+            e.printStackTrace();
+        }
+        return novaData;
+    }
 
     public void setEditarManipulador(IButtonHandler event){
         this.editEvent = event;

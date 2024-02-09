@@ -1,6 +1,11 @@
 package bookify.Controller;
 
 import bookify.Interface.IButtonHandler;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -77,12 +82,25 @@ public class PopupEmprestimoController {
         } else{
             idText.setText(matricula);
         }
-        dataInicioText.setText(dataIncio);
-        dataDevolucaoText.setText(dataDevolucao);
+        dataInicioText.setText(formataData(dataIncio));
+        dataDevolucaoText.setText(formataData(dataDevolucao));
     }
     
     @FXML
     public void fechar(ActionEvent event){
         eventClose.handler();
+    }
+    
+    private String formataData(String info){
+        SimpleDateFormat formatoAtual = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat novoFormato = new SimpleDateFormat("dd/MM/yyyy");
+        String novaData = "";
+        try{
+            Date data = formatoAtual.parse(info);
+            novaData = novoFormato.format(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(EmprestimoComponenteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return novaData;
     }
 }

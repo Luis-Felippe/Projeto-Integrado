@@ -88,4 +88,20 @@ public class TelasView{
         main.setCena(teste);
     }
     
+        public void trocarTela(String tela, Object obj, Object obj2) throws IOException{
+        Scene teste;
+        switch (tela) {
+            case "livros/edicao":
+                fxmlloader.setLocation(getClass().getResource("../View/Livros-edicao-window.fxml"));
+                teste = new Scene(fxmlloader.load());
+                LivrosEdicaoController livrosController = fxmlloader.getController();
+                livrosController.setParametros(obj, obj2);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        Main main = new Main();
+        main.setCena(teste);
+    }
+    
 }

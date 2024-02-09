@@ -10,18 +10,21 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import bookify.Models.BookifyDatabase;
+import java.net.URL;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class RealizarEmprestimoController extends TelasController{
+public class RealizarEmprestimoController extends TelasController implements Initializable {
 
     private String currentUser = "";
     
@@ -85,14 +88,18 @@ public class RealizarEmprestimoController extends TelasController{
     @FXML
     protected void emprestar(){
        try{
-            if(!currentLiv.isEmpty() && !currentUser.isEmpty() && !volume.getValue().equals("Selecione o volume") && !exemplar.getValue().equals("Selecione o exemplar")){
+            if(!currentLiv.isEmpty() && !currentUser.isEmpty() && !(volume.getValue() == null) && !(exemplar.getValue() == null)){
                 var result = repositorio.get("emprestimo",String.format("id_usuario = '%s'", currentUser));
                 if(!result.next()){
                     String[] values = {currentLiv, currentUser, 
-                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText(), volume.getValue(), exemplar.getValue()
+                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText(), volume.getValue(), exemplar.getValue(),
+                        LivTextTitulo.getText(), LivTextNome.getText(), LivTextTurma.getText(), LivTextTelefone.getText(), 
+                        LivTextMatricula.getText(), LivTextAutor.getText()
+                            
                     };
                     String [] columns = {"num_registro_livro","id_usuario",
-                        "data_inicio","data_devolucao", "volume_livro", "exemplar_livro"
+                        "data_inicio","data_devolucao", "volume_livro", "exemplar_livro", "titulo_livro", "nome_usuario", "turma_usuario",
+                        "telefone_usuario", "identificador_usuario", "autor_livro"
                     };
                     repositorio.save("emprestimo", columns, values);
                     carregarInformacao(null, null);
@@ -145,13 +152,18 @@ public class RealizarEmprestimoController extends TelasController{
                     error_livro.setText("");
                     LivTextTitulo.setText(resLiv.getString("titulo"));
                     LivTextAutor.setText(resLiv.getString("autor"));
-                    volume.setValue("Selecione o volume");
-                    LivTextObservacao.setText(resLiv.getString("observacao"));
-                    exemplar.setValue("Selecione o exemplar");
+//                    volume.setValue("Selecione o volume");
+//                    LivTextObservacao.setText(resLiv.getString("observacao"));
+//                    exemplar.setValue("Selecione o exemplar");
                     currentLiv = resLiv.getString("num_registro");
+                    String currentVolume = resLiv.getString("volume");
+                    volume.getItems().add(currentVolume);
                     do{
-                        volume.getItems().add(resLiv.getString("volume"));
-                        exemplar.getItems().add(resLiv.getString("exemplar"));
+                        if(!currentVolume.equals(resLiv.getString("volume"))){
+                            currentVolume = resLiv.getString("volume");
+                            volume.getItems().add(currentVolume);
+                        }
+//                        exemplar.getItems().add(resLiv.getString("exemplar"));
                     } while(resLiv.next());
                     currentLivSelected = currentLiv;
                 }
@@ -213,7 +225,7 @@ public class RealizarEmprestimoController extends TelasController{
         try {
             if(!searchLivro.isEmpty()){
                 resultLiv = repositorio.get("livro",
-                    String.format("num_registro = '%s' and disponibilidade = 'true'",
+                    String.format("num_registro = '%s' and disponibilidade = 'true' ORDER BY volume ASC, exemplar ASC",
                     searchLivro));
             }
             if(!searchUsuario.isEmpty()){
@@ -227,5 +239,46 @@ public class RealizarEmprestimoController extends TelasController{
             System.out.println(ex.getMessage());
             error.setText("Verifique se as informações Cód.Livro e CPF/MATRICULA estão corretas");
         }
+    }
+    
+    private void carregarExemplares(){
+        try {
+            if(volume.getItems().isEmpty()) return;
+            ResultSet busca = repositorio.get("livro", String.format("num_registro = '%s' and volume = '%s' and disponibilidade = 'true' "
+                    + "ORDER BY exemplar ASC", LivTextCod.getText(), volume.getValue()));
+            exemplar.getItems().clear();
+            while(busca.next()){
+                exemplar.getItems().add(busca.getString("exemplar"));
+            }
+            exemplar.setValue(exemplar.getItems().getFirst());
+        } catch (SQLException ex) {
+            Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void carregarInformacoes(){
+        try {
+            if(exemplar.getItems().isEmpty()) {
+                LivTextObservacao.clear();
+                return;
+            }
+            ResultSet busca = repositorio.get("livro", String.format("num_registro = '%s' and volume = '%s' and disponibilidade = 'true' "
+                    + " and exemplar = '%s' ORDER BY exemplar ASC", LivTextCod.getText(), volume.getValue(), exemplar.getValue()));
+            
+            if(busca.next()) LivTextObservacao.setText(busca.getString("observacao"));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        volume.setOnAction(event ->{
+            carregarExemplares();
+        });
+        exemplar.setOnAction(event ->{
+            carregarInformacoes();
+        });
     }
 }

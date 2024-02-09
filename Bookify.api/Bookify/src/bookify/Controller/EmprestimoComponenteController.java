@@ -1,6 +1,11 @@
 package bookify.Controller;
 
 import bookify.Interface.IButtonHandler;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -50,8 +55,8 @@ public class EmprestimoComponenteController {
             idText.setText(matricula);
             clienteText.setText("Aluno:");
           }
-          dataInicioText.setText(dataInicio);
-          dataDevolucaoText.setText(dataDevolucao);
+          dataInicioText.setText(formataData(dataInicio));
+          dataDevolucaoText.setText(formataData(dataDevolucao));
     }
 
     // mostra o estado de um empréstimo, se ele está atrasado ou ativo
@@ -77,6 +82,19 @@ public class EmprestimoComponenteController {
     @FXML
     protected void ManipuladorEvento(){
         event.handler();
+    }
+    
+    private String formataData(String info){
+        SimpleDateFormat formatoAtual = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat novoFormato = new SimpleDateFormat("dd/MM/yyyy");
+        String novaData = "";
+        try{
+            Date data = formatoAtual.parse(info);
+            novaData = novoFormato.format(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(EmprestimoComponenteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return novaData;
     }
 
 }

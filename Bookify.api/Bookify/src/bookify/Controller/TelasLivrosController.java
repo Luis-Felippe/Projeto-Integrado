@@ -23,7 +23,7 @@ public class TelasLivrosController extends TelasController {
     }
     // troca para a tela de edição de livros
     @FXML
-    protected void editarLivro(Object obj) throws  IOException{
-        tela.trocarTela("livros/edicao", obj);
+    protected void editarLivro(Object obj, Object obj2) throws  IOException{
+        tela.trocarTela("livros/edicao", obj, obj2);
     }
 }
