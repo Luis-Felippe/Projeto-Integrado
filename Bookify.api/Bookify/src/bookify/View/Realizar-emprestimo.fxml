@@ -93,7 +93,7 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Text layoutX="54.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplar">
+      <Text layoutX="54.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Volume">
          <font>
             <Font size="16.0" />
          </font></Text>
@@ -135,7 +135,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Text layoutX="54.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Volume">
+      <Text layoutX="54.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemplar">
          <font>
             <Font size="16.0" />
          </font></Text>
@@ -184,8 +184,8 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="exemplar" layoutX="54.0" layoutY="362.0" prefHeight="30.0" prefWidth="129.0" />
-      <ChoiceBox fx:id="volume" layoutX="54.0" layoutY="421.0" prefHeight="30.0" prefWidth="129.0" />
+      <ChoiceBox fx:id="exemplar" layoutX="54.0" layoutY="419.0" prefHeight="30.0" prefWidth="129.0" />
+      <ChoiceBox fx:id="volume" layoutX="54.0" layoutY="361.0" prefHeight="30.0" prefWidth="129.0" />
       <Text fx:id="error_livro" fill="#ff0303" layoutX="219.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="12.0" />

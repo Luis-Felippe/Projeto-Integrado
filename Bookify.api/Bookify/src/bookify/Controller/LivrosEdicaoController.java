@@ -5,7 +5,10 @@ import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -129,7 +132,7 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
                 if(exemplar.getValue().equals(result.getString("exemplar")) || exemplar.getValue().equals("TODOS")){
                     livroTextAnoPublicacao.setText(result.getString("ano_publicacao"));
                     livroTextAutor.setText(result.getString("autor"));
-                    livroTextData.getEditor().setText(result.getString("data"));
+                    livroTextData.getEditor().setText(formataData(result));
                     livroTextEditora.setText(result.getString("editora"));
                     livroTextFormaAquisicao.setText(result.getString("forma_aquisicao"));
                     livroTextLocal.setText(result.getString("local"));
@@ -143,5 +146,20 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private String formataData(ResultSet res){
+        SimpleDateFormat formatoAtual = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat novoFormato = new SimpleDateFormat("dd/MM/yyyy");
+        String novaData = "";
+        try{
+            Date data = formatoAtual.parse(res.getString("data"));
+            novaData = novoFormato.format(data);
+        } catch(ParseException e){
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(LivrosEdicaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return novaData;
     }
 }

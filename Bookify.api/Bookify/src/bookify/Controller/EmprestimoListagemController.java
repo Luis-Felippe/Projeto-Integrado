@@ -67,6 +67,10 @@ public class EmprestimoListagemController extends TelasController implements Ini
         values.put("autor",res.getString("autor_livro"));
         values.put("cpf",res.getString("identificador_usuario"));
         values.put("matricula",res.getString("identificador_usuario"));
+        values.put("turma", res.getString("turma_usuario"));
+        values.put("volume", res.getString("volume_livro"));
+        values.put("exemplar", res.getString("exemplar_livro"));
+        values.put("telefone", res.getString("telefone_usuario"));
         
         if(values.get("cpf") == null) values.replace("cpf", values.get("matricula"));
         else values.replace("matricula", values.get("cpf"));
@@ -119,13 +123,25 @@ public class EmprestimoListagemController extends TelasController implements Ini
             "data_emprestimo", 
             "data_devolucao",
             "id_usuario",
-            "num_registro_livro"
+            "num_registro_livro",
+            "titulo_livro",
+            "volume_livro",
+            "exemplar_livro",
+            "nome_usuario",
+            "turma_usuario",
+            "telefone_usuario"
         };
         String [] valuesSave = {
             values.get("data_inicio").toString(),
             LocalDate.now().toString(),
             values.get("id_usuario").toString(),
             values.get("num_registro").toString(),
+            values.get("titulo").toString(),
+            values.get("volume").toString(),
+            values.get("exemplar").toString(),
+            values.get("nome").toString(),
+            values.get("turma").toString(),
+            values.get("telefone").toString()
         };
         
         try {
@@ -167,19 +183,14 @@ public class EmprestimoListagemController extends TelasController implements Ini
         ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
-        String consult = String.format("JOIN emprestimo e ON e.num_registro_livro = l.num_registro\n" +
-            "JOIN usuario u ON u.id_usuario = e.id_usuario "
-                + "WHERE UPPER(u.nome) like '%%%s%%' OR UPPER(l.titulo) like '%%%s%%'"
-                + "ORDER BY data_inicio asc",searchBar, searchBar);
+        String consult = String.format( "UPPER(nome_usuario) like '%%%s%%' OR UPPER(titulo_livro) like '%%%s%%'"
+                + "ORDER BY data_devolucao asc",searchBar, searchBar);
         
         try {
             if(atrasadosBtn.isSelected()){
-                response = repositorio.get("emprestimos_atrasados"); 
+                response = repositorio.get("emprestimos_atrasados", consult); 
             }else {
-//                response = repositorio.get("l.titulo, u.nome, u.matricula, u.cpf ,"
-//                + "e.data_inicio, e.data_devolucao, l.num_registro,"
-//                + "u.id_usuario, e.id_emprestimo, l.autor", "livro l", consult);
-                  response = repositorio.get("emprestimo");
+                  response = repositorio.get("emprestimo", consult);
             }
             HBox box = null;
             boolean status = true;
