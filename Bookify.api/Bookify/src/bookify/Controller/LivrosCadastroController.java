@@ -39,6 +39,9 @@ public class LivrosCadastroController extends TelasLivrosController implements I
     private TextField livroTextVolume;
     
     @FXML
+    private TextField livroTextCategoria;
+    
+    @FXML
     private TextField livroTextExemplar;
     
     @FXML
@@ -72,13 +75,16 @@ public class LivrosCadastroController extends TelasLivrosController implements I
            this.livroTextEditora.getText().isEmpty() ||
            this.livroTextAnoPublicacao.getText().isEmpty() ||
            this.livroTextFormaAquisicao.getText().isEmpty() ||
-           this.livroTextObservacao.getText().isEmpty()){
+           this.livroTextCategoria.getText().isEmpty()){
            this.erroText.setText("Preencha todos os campos !");
         } else {
             String [] columns = {
                 "num_registro", "titulo", "autor", "volume", "exemplar", "local", "data", "editora", 
-                "ano_publicacao", "forma_aquisicao", "observacao", "disponibilidade"
+                "ano_publicacao", "forma_aquisicao", "observacao", "disponibilidade", "categoria"
             };
+            
+            String obs = "";
+            if(!(this.livroTextObservacao.getText() == null)) obs = this.livroTextObservacao.getText();
             String [] values = {
                 this.livroTextNumReg.getText(),
                 this.livroTextTitulo.getText(),
@@ -90,8 +96,9 @@ public class LivrosCadastroController extends TelasLivrosController implements I
                 this.livroTextEditora.getText(),
                 this.livroTextAnoPublicacao.getText(),
                 this.livroTextFormaAquisicao.getText(),
-                this.livroTextObservacao.getText(),
-                "true"
+                obs,
+                "true",
+                this.livroTextCategoria.getText()
            };
             try {
                 repositorio.save("livro",columns, values);

@@ -170,22 +170,22 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Text layoutX="739.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forma Aquisição">
+      <Text layoutX="739.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forma Aquisição">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="livroTextFormaAquisicao" layoutX="739.0" layoutY="360.0" prefHeight="30.0" prefWidth="440.0" promptText="Doação">
+      <TextField fx:id="livroTextFormaAquisicao" layoutX="739.0" layoutY="431.0" prefHeight="30.0" prefWidth="440.0" promptText="Doação">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Text layoutX="739.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observação">
+      <Text layoutX="739.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observação">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="livroTextObservacao" layoutX="740.0" layoutY="428.0" prefHeight="30.0" prefWidth="440.0" promptText="---">
+      <TextField fx:id="livroTextObservacao" layoutX="739.0" layoutY="496.0" prefHeight="30.0" prefWidth="440.0" promptText="---">
          <font>
             <Font size="14.0" />
          </font>
@@ -196,5 +196,15 @@
          </font>
       </Text>
       <ChoiceBox fx:id="exemplar" layoutX="55.0" layoutY="431.0" prefHeight="30.0" prefWidth="134.0" />
+      <Text layoutX="739.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="livroTextCategoria" layoutX="740.0" layoutY="360.0" prefHeight="30.0" prefWidth="440.0" promptText="Romance">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
    </children>
 </Pane>
