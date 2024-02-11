@@ -37,6 +37,9 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
     private TextField livroTextAutor;
 
     @FXML
+    private TextField livroTextCategoria;
+    
+    @FXML
     private DatePicker livroTextData;
 
     @FXML
@@ -106,10 +109,11 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
             livroTextNumReg.getText(),
             livroTextObservacao.getText(),
             livroTextTitulo.getText(),
-            livroTextVolume.getText(),};
+            livroTextVolume.getText(),
+            livroTextCategoria.getText()};
         
         String [] columns = {"ano_publicacao", "autor", "data", "editora", "forma_aquisicao",
-                            "local", "num_registro", "observacao", "titulo", "volume"};
+                            "local", "num_registro", "observacao", "titulo", "volume", "categoria"};
         
         try {
             if(exemplar.getValue().equals("TODOS")){
@@ -140,6 +144,7 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
                     livroTextObservacao.setText(result.getString("observacao"));
                     livroTextTitulo.setText(result.getString("titulo"));
                     livroTextVolume.setText(result.getString("volume"));
+                    livroTextCategoria.setText(result.getString("categoria"));
                     break;
                 }
             }

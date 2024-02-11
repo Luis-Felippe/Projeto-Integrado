@@ -152,9 +152,6 @@ public class RealizarEmprestimoController extends TelasController implements Ini
                     error_livro.setText("");
                     LivTextTitulo.setText(resLiv.getString("titulo"));
                     LivTextAutor.setText(resLiv.getString("autor"));
-//                    volume.setValue("Selecione o volume");
-//                    LivTextObservacao.setText(resLiv.getString("observacao"));
-//                    exemplar.setValue("Selecione o exemplar");
                     currentLiv = resLiv.getString("num_registro");
                     String currentVolume = resLiv.getString("volume");
                     volume.getItems().add(currentVolume);
@@ -163,7 +160,6 @@ public class RealizarEmprestimoController extends TelasController implements Ini
                             currentVolume = resLiv.getString("volume");
                             volume.getItems().add(currentVolume);
                         }
-//                        exemplar.getItems().add(resLiv.getString("exemplar"));
                     } while(resLiv.next());
                     currentLivSelected = currentLiv;
                 }

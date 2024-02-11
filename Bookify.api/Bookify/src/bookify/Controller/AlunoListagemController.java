@@ -143,7 +143,7 @@ public class AlunoListagemController extends TelasAlunoController implements Ini
         String searchBar = pesquisarText.getText().toUpperCase();
         String consult = String.format("Tipo = 'A' AND ((UPPER(nome) LIKE '%%%s%%') OR"
                 + " (UPPER(curso) LIKE '%%%s%%') OR (UPPER(turma) LIKE '%%%s%%') OR "
-                + "(UPPER(email) LIKE '%%%s%%' )) ORDER BY nome ASC",searchBar, searchBar, searchBar, searchBar );
+                + "(UPPER(email) LIKE '%%%s%%' )) ORDER BY turma ASC, nome ASC",searchBar, searchBar, searchBar, searchBar );
         
         try {
             if(alunosEmprestimosBtn.isSelected()){

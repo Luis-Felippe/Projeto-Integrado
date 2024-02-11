@@ -171,8 +171,8 @@ public class LivroListagemController extends TelasLivrosController implements In
         ResultSet response;
         render_box_elements.getChildren().clear();
         String searchBar = pesquisarText.getText().toUpperCase();
-        String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%') ORDER BY titulo ASC, "
-                + "num_registro ASC, volume ASC, exemplar ASC",searchBar, searchBar);
+        String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%') OR (UPPER (categoria) like '%%%s%%') "
+                + "ORDER BY titulo ASC,num_registro ASC, volume ASC, exemplar ASC",searchBar, searchBar, searchBar);
         
         try {
             if(livrosEmprestadosBtn.isSelected()){
