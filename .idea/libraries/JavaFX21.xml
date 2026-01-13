@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="JavaFX21">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.fxml.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.controls.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.web.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.graphics.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.media.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx-swt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/JavaFX21/javafx.base.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
