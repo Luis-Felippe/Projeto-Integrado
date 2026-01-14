@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="postgresql-42.6.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/lib/postgresql-42.6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

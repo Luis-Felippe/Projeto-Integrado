@@ -1,23 +1,23 @@
 package bookify.Controller;
 
 import bookify.Controller.PopupMensagem.FabricaPopupMsg;
+import bookify.DAO.LivroDAO;
 import bookify.Interface.ICadastrar;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
-import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.sql.SQLException;
+
+import bookify.Models.Livro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class LivrosCadastroController extends TelasLivrosController implements ICadastrar{
-    
-    private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
+    private LivroDAO livroDAO = new LivroDAO();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     @FXML
@@ -78,40 +78,32 @@ public class LivrosCadastroController extends TelasLivrosController implements I
            this.livroTextCategoria.getText().isEmpty()){
            this.erroText.setText("Preencha todos os campos !");
         } else {
-            String [] columns = {
-                "num_registro", "titulo", "autor", "volume", "exemplar", "local", "data", "editora", 
-                "ano_publicacao", "forma_aquisicao", "observacao", "disponibilidade", "categoria"
-            };
-            
-            String obs = "";
-            if(!(this.livroTextObservacao.getText() == null)) obs = this.livroTextObservacao.getText();
-            String [] values = {
-                this.livroTextNumReg.getText(),
-                this.livroTextTitulo.getText(),
-                this.livroTextAutor.getText(),
-                this.livroTextVolume.getText(),
-                this.livroTextExemplar.getText(),
-                this.livroTextLocal.getText(),
-                this.livroTextData.getEditor().getText(),
-                this.livroTextEditora.getText(),
-                this.livroTextAnoPublicacao.getText(),
-                this.livroTextFormaAquisicao.getText(),
-                obs,
-                "true",
-                this.livroTextCategoria.getText()
-           };
             try {
-                repositorio.save("livro",columns, values);
+                Livro novoLivro = new Livro.Builder(livroTextNumReg.getText(), livroTextTitulo.getText())
+                        .autor(livroTextAutor.getText())
+                        .volume(livroTextVolume.getText())
+                        .exemplar(livroTextExemplar.getText())
+                        .lugar(livroTextLocal.getText())
+                        .dataLivro(livroTextData.getEditor().getText())
+                        .editora(livroTextEditora.getText())
+                        .anoPublicacao(livroTextAnoPublicacao.getText())
+                        .formaAquisicao(livroTextFormaAquisicao.getText())
+                        .observacao(livroTextObservacao.getText())
+                        .categoria(livroTextCategoria.getText())
+                        .build();
+
+                livroDAO.salvar(novoLivro);
+
+                IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
+                controller.setManipulador(()->{
+                    mainContainer.getChildren().remove(controller.getPopup());
+                });
+                mainContainer.getChildren().add(controller.getPopup());
+                this.erroText.setText("");
+
             } catch (SQLException ex) {
                 erroText.setText("Erro: código do livro já existe");
-                return;
             }
-            IPopupMsg controller =  MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
-            controller.setManipulador(()->{
-                mainContainer.getChildren().remove(controller.getPopup());
-            });
-            mainContainer.getChildren().add(controller.getPopup());
-            this.erroText.setText("");
         }
     }
 }
