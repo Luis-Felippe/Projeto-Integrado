@@ -29,9 +29,6 @@ public class DatabasePostgreSQL {
         con = null;
         return getConnection();
       }
-//    } catch (ClassNotFoundException e) {
-//      System.out.println(e.getMessage());
-//      e.printStackTrace();
     } catch (SQLException e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
