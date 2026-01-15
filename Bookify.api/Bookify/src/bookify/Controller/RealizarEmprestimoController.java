@@ -3,26 +3,28 @@ package bookify.Controller;
 import bookify.Controller.PopupMensagem.FabricaPopupMsg;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
-import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import bookify.Models.BookifyDatabase;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+
+import bookify.service.EmprestimoDTO;
+import bookify.service.EmprestimoService;
+import bookify.service.BuscaEmprestimoService;
+import bookify.service.EmprestimoInfoService;
+import bookify.dto.LivroDTO;
+import bookify.dto.UsuarioDTO;
 
 public class RealizarEmprestimoController extends TelasController implements Initializable {
 
@@ -35,6 +37,12 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     private BookifyDatabase repositorio =  BookifyDatabase.getInstancia();
     
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
+    
+    private final EmprestimoService emprestimoService = new EmprestimoService();
+    private final BuscaEmprestimoService buscaService = new BuscaEmprestimoService();
+    private final EmprestimoInfoService infoService = new EmprestimoInfoService();
+    
+    private String tipoUsuario = "A"; //A = aluno e P = Professor
     
     @FXML
     private Pane mainContainer;
@@ -84,41 +92,25 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     @FXML
     private TextField LivTextTurma;
     
-    // cria e adiciona um empréstimo feito ao banco de dados
     @FXML
     protected void emprestar(){
-       try{
-            if(!currentLiv.isEmpty() && !currentUser.isEmpty() && !(volume.getValue() == null) && !(exemplar.getValue() == null)){
-                var result = repositorio.get("emprestimo",String.format("id_usuario = '%s'", currentUser));
-                if(!result.next()){
-                    String[] values = {currentLiv, currentUser, 
-                        LivDateInicio.getEditor().getText(), LivDateDevolucao.getEditor().getText(), volume.getValue(), exemplar.getValue(),
-                        LivTextTitulo.getText(), LivTextNome.getText(), LivTextTurma.getText(), LivTextTelefone.getText(), 
-                        LivTextMatricula.getText(), LivTextAutor.getText()
-                            
-                    };
-                    String [] columns = {"num_registro_livro","id_usuario",
-                        "data_inicio","data_devolucao", "volume_livro", "exemplar_livro", "titulo_livro", "nome_usuario", "turma_usuario",
-                        "telefone_usuario", "identificador_usuario", "autor_livro"
-                    };
-                    repositorio.save("emprestimo", columns, values);
-                    carregarInformacao(null, null);
-                    LivTextCod.setText("");
-                    LivTextMatricula.setText("");
-                    IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupAcaoMsg");
-                    controller.setManipulador(()->{
-                        mainContainer.getChildren().remove(controller.getPopup());
-                    });
-                    mainContainer.getChildren().add(controller.getPopup());
-                }else{
-                    error.setText("Não foi possivel realizar o emprestimo,"
-                            + " verifique se o usuário já possui empréstimo vinculado");
-                }
-            }else{
-                error.setText("Preencha todos os campos!");
-            }        
-        }catch(SQLException ex){
-            error.setText(ex.getMessage());
+        try{            
+            EmprestimoDTO dto = montarDTO();
+            
+            emprestimoService.realizarEmprestimo(dto);
+            
+            limparTelaAposEmprestimo();
+            mostrarPopupSucesso();
+            
+        } catch (IllegalArgumentException e){
+            error.setText(e.getMessage());
+            
+        } catch (IllegalStateException e){
+            error.setText(e.getMessage());
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            error.setText("Erro ao realizar emprestimo");
         }
     }
     
@@ -141,61 +133,46 @@ public class RealizarEmprestimoController extends TelasController implements Ini
             currentUser = "";
         }
     }
+
     
-    // Pega as informações do banco e mostra nos campos de texto 
     private void carregarInformacao(ResultSet resLiv, ResultSet resUser) throws SQLException{
-        if(resLiv != null){
-            if(resLiv.next()){
-                if(!currentLivSelected.equals(resLiv.getString("num_registro"))){
-                    volume.getItems().clear();
-                    exemplar.getItems().clear();
-                    error_livro.setText("");
-                    LivTextTitulo.setText(resLiv.getString("titulo"));
-                    LivTextAutor.setText(resLiv.getString("autor"));
-                    currentLiv = resLiv.getString("num_registro");
-                    String currentVolume = resLiv.getString("volume");
-                    volume.getItems().add(currentVolume);
-                    do{
-                        if(!currentVolume.equals(resLiv.getString("volume"))){
-                            currentVolume = resLiv.getString("volume");
-                            volume.getItems().add(currentVolume);
-                        }
-                    } while(resLiv.next());
-                    currentLivSelected = currentLiv;
-                }
-                
-            }else{
-                error_livro.setText("O livro pesquisado não possui mais exemplares disponives");
-                limparInformacoes(true, false);
-            }
-        }else{
+        carregarLivro(infoService.montarLivro(resLiv));
+        carregarUsuario(infoService.montarUsuario(resUser));
+    }
+    
+    private void carregarLivro(LivroDTO livro){
+        if(livro == null){
+//            error_livro.setText("Livro nao disponivel");
             limparInformacoes(true, false);
-            error_livro.setText("");
+            return;
         }
-        if(resUser != null){
-            if(resUser.next()){
-                error_usuario.setText("");
-                LivTextNome.setText(resUser.getString("nome"));
-                LivTextTelefone.setText(resUser.getString("telefone"));
-                LocalDate localdate = LocalDate.now();  
-                if(resUser.getString("turma") == null){
-                    LivTextTurma.setText("PROFESSOR!");
-                }
-                else{
-                    LivTextTurma.setText(resUser.getString("turma"));
-                }
-                LivDateInicio.setValue(localdate);
-                LivDateDevolucao.setValue(localdate.plusDays(5));
-                currentUser = resUser.getString("id_usuario");    
-            }else{
-                error_usuario.setText("Usuário não encontrado!");
-                limparInformacoes(false, true);
-            }
-            
-        }else{
+        
+        error_livro.setText("");
+        LivTextTitulo.setText(livro.getTitulo());
+        LivTextAutor.setText(livro.getAutor());
+        volume.getItems().setAll(livro.getVolumes());
+        
+        currentLiv = livro.getCodigo();
+        currentLivSelected = currentLiv;
+        
+    }
+    
+    private void carregarUsuario(UsuarioDTO usuario){
+        if(usuario == null){
+//            error_usuario.setText("Usuario nao encontrado");
             limparInformacoes(false, true);
-            error_usuario.setText("");
+            return;
         }
+        
+        error_usuario.setText("");
+        LivTextNome.setText(usuario.getNome());
+        LivTextTelefone.setText(usuario.getTelefone());
+        LivTextTurma.setText(usuario.getTurma());
+        LivDateInicio.setValue(usuario.getDataInicio());
+        LivDateDevolucao.setValue(usuario.getDataDevolucao());
+        
+        currentUser = usuario.getId();
+        
     }
     
     // aciona a função de busca após teclar ENTER
@@ -213,56 +190,105 @@ public class RealizarEmprestimoController extends TelasController implements Ini
         });
     }
     
-    // chama a função de buscar com os filtros definidos
     private void buscar(){
-        ResultSet resultLiv = null, resultUser = null;
-        String searchLivro = LivTextCod.getText().toUpperCase();
-        String searchUsuario = LivTextMatricula.getText().toUpperCase();
-        try {
-            if(!searchLivro.isEmpty()){
-                resultLiv = repositorio.get("livro",
-                    String.format("num_registro = '%s' and disponibilidade = 'true' ORDER BY volume ASC, exemplar ASC",
-                    searchLivro));
-            }
-            if(!searchUsuario.isEmpty()){
-                resultUser = repositorio.get("usuario", 
-                    String.format("cpf = '%s' or matricula = '%s'",
-                    searchUsuario, searchUsuario));
-            }
+        try{
+            ResultSet resultLiv = buscaService.buscarLivroDisponivel(LivTextCod.getText());
+            ResultSet resultUser = buscaService.buscarUsuario(LivTextMatricula.getText());
+            
             carregarInformacao(resultLiv, resultUser);
-//            error.setText("");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            error.setText("Verifique se as informações Cód.Livro e CPF/MATRICULA estão corretas");
+            error.setText("");
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            error.setText("Verifique se as informcoes Cod Livro e CPF/Matricula estao corretas");
         }
     }
     
-    private void carregarExemplares(){
+    private void carregarExemplares() {
         try {
-            if(volume.getItems().isEmpty()) return;
-            ResultSet busca = repositorio.get("livro", String.format("num_registro = '%s' and volume = '%s' and disponibilidade = 'true' "
-                    + "ORDER BY exemplar ASC", LivTextCod.getText(), volume.getValue()));
-            exemplar.getItems().clear();
-            while(busca.next()){
-                exemplar.getItems().add(busca.getString("exemplar"));
-            }
-            exemplar.setValue(exemplar.getItems().getFirst());
-        } catch (SQLException ex) {
-            Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void carregarInformacoes(){
-        try {
-            if(exemplar.getItems().isEmpty()) {
+            if (volume.getItems().isEmpty() || volume.getValue() == null) {
+                exemplar.getItems().clear();
                 LivTextObservacao.clear();
                 return;
             }
-            ResultSet busca = repositorio.get("livro", String.format("num_registro = '%s' and volume = '%s' and disponibilidade = 'true' "
-                    + " and exemplar = '%s' ORDER BY exemplar ASC", LivTextCod.getText(), volume.getValue(), exemplar.getValue()));
-            
-            if(busca.next()) LivTextObservacao.setText(busca.getString("observacao"));
-            
+
+            String codigoLivro = LivTextCod.getText();
+            String volumeSelecionado = volume.getValue();
+
+            if (codigoLivro == null || codigoLivro.isEmpty() || volumeSelecionado == null) {
+                exemplar.getItems().clear();
+                LivTextObservacao.clear();
+                return;
+            }
+
+            ResultSet busca = repositorio.get("livro", 
+                String.format("num_registro = '%s' and volume = '%s' and disponibilidade = 'true' " +
+                             "ORDER BY exemplar ASC", 
+                             codigoLivro, volumeSelecionado));
+
+            exemplar.getItems().clear();
+            LivTextObservacao.clear();
+
+            boolean encontrouExemplares = false;
+
+            while (busca.next()) {
+                exemplar.getItems().add(busca.getString("exemplar"));
+                encontrouExemplares = true;
+            }
+
+            if (encontrouExemplares) {
+                exemplar.setValue(exemplar.getItems().get(0));
+                error_livro.setText(""); // Limpa mensagem de erro
+            } else {
+              
+                exemplar.setValue(null);
+                exemplar.getItems().add("Nenhum exemplar disponível");
+                exemplar.setDisable(true); // Opcional: desabilita a escolha
+                error_livro.setText("Este volume não possui exemplares disponíveis para empréstimo");
+                LivTextObservacao.clear();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
+            error_livro.setText("Erro ao buscar exemplares");
+        }
+    }
+    
+    private void carregarInformacoes() {
+        try {
+            if (exemplar.getItems().isEmpty() || exemplar.getValue() == null) {
+                LivTextObservacao.clear();
+                return;
+            }
+
+            String valorExemplar = exemplar.getValue();
+
+            // Se for a mensagem de "nenhum exemplar disponível", não busca
+            if ("Nenhum exemplar disponível".equals(valorExemplar)) {
+                LivTextObservacao.clear();
+                return;
+            }
+
+            String codigoLivro = LivTextCod.getText();
+            String volumeSelecionado = volume.getValue();
+
+            if (codigoLivro == null || codigoLivro.isEmpty() || 
+                volumeSelecionado == null || valorExemplar == null) {
+                LivTextObservacao.clear();
+                return;
+            }
+
+            ResultSet busca = repositorio.get("livro", 
+                String.format("num_registro = '%s' and volume = '%s' and disponibilidade = 'true' " +
+                             "and exemplar = '%s'", 
+                             codigoLivro, volumeSelecionado, valorExemplar));
+
+            if (busca.next()) {
+                LivTextObservacao.setText(busca.getString("observacao"));
+            } else {
+                LivTextObservacao.clear();
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(RealizarEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -276,5 +302,40 @@ public class RealizarEmprestimoController extends TelasController implements Ini
         exemplar.setOnAction(event ->{
             carregarInformacoes();
         });
+    }
+    
+    private EmprestimoDTO montarDTO(){
+        EmprestimoDTO dto = new EmprestimoDTO();
+        
+        dto.setNumRegistroLivro(currentLiv);
+        dto.setIdUsuario(currentUser);
+        dto.setDataInicio(LivDateInicio.getEditor().getText());
+        dto.setDataDevolucao(LivDateDevolucao.getEditor().getText());
+        dto.setVolume(volume.getValue());
+        dto.setExemplar(exemplar.getValue());
+        
+        dto.setTituloLivro(LivTextTitulo.getText());
+        dto.setNomeUsuario(LivTextNome.getText());
+        dto.setTurmaUsuario(LivTextTurma.getText());
+        dto.setTelefoneUsuario(LivTextTelefone.getText());
+        dto.setIdentificadorUsuario(LivTextMatricula.getText());
+        dto.setAutorLivro(LivTextAutor.getText());
+        
+        return dto;
+    }
+    
+    private void limparTelaAposEmprestimo() throws SQLException{
+        carregarInformacao(null, null);
+        LivTextCod.clear();
+        LivTextMatricula.clear();
+        error.setText("");
+    }
+    
+    private void mostrarPopupSucesso(){
+        IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupAcaoMsg");
+        controller.setManipulador(() -> {
+            mainContainer.getChildren().remove(controller.getPopup());
+        });
+        mainContainer.getChildren().add(controller.getPopup());
     }
 }
