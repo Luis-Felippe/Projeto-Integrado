@@ -1,4 +1,4 @@
-package bookify.DAO;
+package bookify.Repository;
 
 import bookify.Models.BookifyDatabase;
 import bookify.Models.Livro;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LivroDAO {
+public class LivroRepository {
     private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
 
     public void salvar(Livro livro) throws SQLException {

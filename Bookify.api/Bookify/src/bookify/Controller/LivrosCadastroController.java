@@ -1,7 +1,7 @@
 package bookify.Controller;
 
 import bookify.Controller.PopupMensagem.FabricaPopupMsg;
-import bookify.DAO.LivroDAO;
+import bookify.Repository.LivroRepository;
 import bookify.Interface.ICadastrar;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class LivrosCadastroController extends TelasLivrosController implements ICadastrar{
-    private LivroDAO livroDAO = new LivroDAO();
+    private LivroRepository livroRepository = new LivroRepository();
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     @FXML
@@ -92,7 +92,7 @@ public class LivrosCadastroController extends TelasLivrosController implements I
                         .categoria(livroTextCategoria.getText())
                         .build();
 
-                livroDAO.salvar(novoLivro);
+                livroRepository.salvar(novoLivro);
 
                 IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
                 controller.setManipulador(()->{

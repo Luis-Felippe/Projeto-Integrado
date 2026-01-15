@@ -3,7 +3,7 @@ package bookify.Controller;
 import bookify.Controller.PopupMensagem.FabricaPopupMsg;
 import bookify.Controller.PopupAcao.FabricaPopupAcao;
 import bookify.Controller.Componentes.FabricaComponente;
-import bookify.DAO.LivroDAO;
+import bookify.Repository.LivroRepository;
 import bookify.Interface.IComponente;
 import bookify.Interface.IFabricaComponente;
 import bookify.Interface.IFabricaPopupAcao;
@@ -32,7 +32,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class LivroListagemController extends TelasLivrosController implements Initializable {
-    private LivroDAO livroDAO = new LivroDAO();
+    private LivroRepository livroRepository = new LivroRepository();
 
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     private IFabricaComponente componenteFabrica = new FabricaComponente();
@@ -108,7 +108,7 @@ public class LivroListagemController extends TelasLivrosController implements In
                 return;
             }
 
-            livroDAO.deletar(id, volume, exemplarSelecionado);
+            livroRepository.deletar(id, volume, exemplarSelecionado);
 
             mainContainer.getChildren().remove(popup);
             exibirPopupSucesso("PopupExcluirMsg");
@@ -146,7 +146,7 @@ public class LivroListagemController extends TelasLivrosController implements In
         String termo = pesquisarText.getText().toUpperCase();
 
         try {
-            List<Livro> registrosRaw = livroDAO.buscar(termo, livrosEmprestadosBtn.isSelected());
+            List<Livro> registrosRaw = livroRepository.buscar(termo, livrosEmprestadosBtn.isSelected());
 
             if (registrosRaw.isEmpty()) return;
 

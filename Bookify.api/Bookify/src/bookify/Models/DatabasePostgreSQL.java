@@ -28,8 +28,7 @@ public class DatabasePostgreSQL {
       } else if (con.isClosed()) {
         con = null;
         return getConnection();
-      }
-    } catch (SQLException e) {
+      }    } catch (SQLException e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
     }

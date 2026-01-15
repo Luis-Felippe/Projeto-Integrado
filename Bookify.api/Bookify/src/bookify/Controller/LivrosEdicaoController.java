@@ -1,6 +1,6 @@
 package bookify.Controller;
 
-import bookify.DAO.LivroDAO;
+import bookify.Repository.LivroRepository;
 import bookify.Interface.IEditar;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class LivrosEdicaoController extends TelasLivrosController implements IEditar{
-    private LivroDAO livroDAO = new LivroDAO();
+    private LivroRepository livroRepository = new LivroRepository();
     
     private Object params;
     private Object params2;
@@ -85,7 +85,7 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
             exemplar.getItems().add("TODOS");
             exemplar.setValue("TODOS");
 
-            List<String> lista = livroDAO.buscarExemplares(id, volume);
+            List<String> lista = livroRepository.buscarExemplares(id, volume);
             exemplar.getItems().addAll(lista);
 
         } catch (SQLException ex) {
@@ -109,7 +109,7 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
                     .categoria(livroTextCategoria.getText())
                     .build();
 
-            livroDAO.atualizar(livroEditado,
+            livroRepository.atualizar(livroEditado,
                     params.toString(),
                     params2.toString(),
                     exemplar.getValue());
@@ -124,7 +124,7 @@ public class LivrosEdicaoController extends TelasLivrosController implements IEd
 
     public void carregarInformacao(){
         try {
-            Livro livro = livroDAO.buscarPorId(params.toString(), params2.toString(), exemplar.getValue());
+            Livro livro = livroRepository.buscarPorId(params.toString(), params2.toString(), exemplar.getValue());
 
             if (livro != null) {
                 preencherCampos(livro);
