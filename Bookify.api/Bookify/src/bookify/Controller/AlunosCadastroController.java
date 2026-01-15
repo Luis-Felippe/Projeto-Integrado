@@ -5,6 +5,8 @@ import bookify.Interface.ICadastrar;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupMsg;
 import bookify.Models.BookifyDatabase;
+import bookify.Service.AlunoService;
+import bookify.Service.AlunoValidator;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,18 +24,18 @@ import javafx.scene.text.Text;
 
 public class AlunosCadastroController extends TelasAlunoController implements Initializable, ICadastrar {
 
-    private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+    private AlunoService alunoService;
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
-    
+
     @FXML
     private Text erroText;
-    
+
     @FXML
     private ChoiceBox<String> Turma;
-    
+
     @FXML
     private Pane mainContainer;
-    
+
     @FXML
     private TextField aluTextCurso;
 
@@ -54,11 +56,15 @@ public class AlunosCadastroController extends TelasAlunoController implements In
 
     @FXML
     private TextField aluTextTelefone;
-    
-    public void preecherTurmas(){
+
+    private void inicializarService() {
+        this.alunoService = new AlunoService(BookifyDatabase.getInstancia());
+    }
+
+    public void preecherTurmas() {
         Turma.getItems().clear();
         Turma.getItems().add("1-A");
-        Turma.getItems().add("1-B");;
+        Turma.getItems().add("1-B");
         Turma.getItems().add("1-C");
         Turma.getItems().add("1-D");
         Turma.getItems().add("2-A");
@@ -68,59 +74,60 @@ public class AlunosCadastroController extends TelasAlunoController implements In
         Turma.getItems().add("3-A");
         Turma.getItems().add("3-B");
         Turma.getItems().add("3-C");
-        Turma.getItems().add("3-D");        
+        Turma.getItems().add("3-D");
     }
-    
-    // Cadastra o aluno no banco de dados
+
     @FXML
     public void cadastrar(ActionEvent evento) throws IOException {
-        if (this.aluTextCurso.getText().isEmpty()
-            || this.aluTextEmail.getText().isEmpty()
-            || this.aluTextMatricula.getText().isEmpty()
-            || this.aluTextNome.getText().isEmpty()
-            || this.Turma.getValue() == null
-            || this.aluTextTelefone.getText().isEmpty()) {
-            this.erroText.setText("Preencha todos os campos !");   
-        } else {
-            String[] columns = {
-                "nome", "telefone", "tipo", "matricula", "turma", "curso", "email"
-            };
-            String[] values = {
-                this.aluTextNome.getText(),
-                this.aluTextTelefone.getText(),
-                "A",
-                this.aluTextMatricula.getText(),
-                this.Turma.getValue(),
-                this.aluTextCurso.getText(),
-                this.aluTextEmail.getText()
-            };
+        String nome = this.aluTextNome.getText();
+        String telefone = this.aluTextTelefone.getText();
+        String matricula = this.aluTextMatricula.getText();
+        String curso = this.aluTextCurso.getText();
+        String turma = this.Turma.getValue();
+        String email = this.aluTextEmail.getText();
 
-            try {
-                repositorio.save("usuario", columns, values);
-            } catch (SQLException ex) {
-                erroText.setText("Erro: matricula já vinculada");
-                return;
-            }
-            
-            IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
-
-            controller.setManipulador(()->{
-                mainContainer.getChildren().remove(controller.getPopup());
-            });
-            mainContainer.getChildren().add(controller.getPopup());
-            
-            this.aluTextNome.setText("");
-            this.aluTextTelefone.setText("");
-            this.aluTextMatricula.setText("");
-            this.aluTextCurso.setText("");
-            this.aluTextEmail.setText("");
-            this.erroText.setText("");
-
+        if (!AlunoValidator.validarCamposObrigatorios(nome, telefone, matricula, curso, turma, email)) {
+            this.erroText.setText("Preencha todos os campos !");
+            return;
         }
+
+        try {
+            alunoService.cadastrarAluno(nome, telefone, matricula, turma, curso, email);
+
+            exibirMensagemSucesso();
+
+            limparCampos();
+
+        } catch (SQLException ex) {
+            exibirErroMatriculaDuplicada();
+        }
+    }
+
+  
+    private void exibirMensagemSucesso() {
+        IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupCadastrarMsg");
+        controller.setManipulador(() -> {
+            mainContainer.getChildren().remove(controller.getPopup());
+        });
+        mainContainer.getChildren().add(controller.getPopup());
+    }
+
+    private void exibirErroMatriculaDuplicada() {
+        this.erroText.setText("Erro: matricula já vinculada");
+    }
+
+    private void limparCampos() {
+        this.aluTextNome.setText("");
+        this.aluTextTelefone.setText("");
+        this.aluTextMatricula.setText("");
+        this.aluTextCurso.setText("");
+        this.aluTextEmail.setText("");
+        this.erroText.setText("");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       preecherTurmas();
+        inicializarService();
+        preecherTurmas();
     }
 }
