@@ -1,94 +1,109 @@
-package bookify.service;
+package bookify.Service;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import bookify.repository.*;
-import bookify.repository.impl.EmprestimoRepositoryImpl;
-import bookify.repository.impl.LivroRepositoryImpl;
-import bookify.repository.impl.UsuarioRepositoryImpl;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import bookify.Exception.EmprestimoException;
+import bookify.Models.BookifyDatabase;
+import bookify.dto.EmprestimoDTO;
 
-/**
- *
- * @author renan-almeida
- */
 public class EmprestimoService {
-    private final EmprestimoRepository emprestimoRepo;
-    private final UsuarioRepository usuarioRepo;
-    private final LivroRepository livroRepo;
+    private static final int DIAS_RENOVACAO = 5;
+    private static final String TABELA_EMPRESTIMO = "emprestimo";
+    private static final String TABELA_EMPRESTIMO_ENCERRADO = "emprestimos_encerrados";
+    private static final String TABELA_EMPRESTIMOS_ATRASADOS = "emprestimos_atrasados";
+    
+    private final BookifyDatabase repositorio;
     
     public EmprestimoService(){
-        this.emprestimoRepo = new EmprestimoRepositoryImpl();
-        this.usuarioRepo = new UsuarioRepositoryImpl();
-        this.livroRepo = new LivroRepositoryImpl();
+        this.repositorio = BookifyDatabase.getInstancia();
     }
     
-    // Construtor alternativo para testes
-    public EmprestimoService(EmprestimoRepository emprestimoRepo, 
-                             UsuarioRepository usuarioRepo,
-                             LivroRepository livroRepo
-                             ) {
-        this.emprestimoRepo = emprestimoRepo;
-        this.usuarioRepo = usuarioRepo;
-        this.livroRepo = livroRepo;
+    public EmprestimoService(BookifyDatabase repositorio) {
+        this.repositorio = repositorio;
     }
     
-    public void realizarEmprestimo(EmprestimoDTO dto) throws SQLException {
-        if(!dadosValidos(dto)){
-            throw new IllegalArgumentException("Preencha todos os campos obrigatórios");
+    public List<EmprestimoDTO> listarEmprestimos(String filtro, boolean apenasAtrasados) 
+            throws EmprestimoException {
+        try {
+            String filtroUpper = filtro != null ? filtro.toUpperCase() : "";
+            String consulta = String.format(
+                "UPPER(nome_usuario) like '%%%s%%' OR UPPER(titulo_livro) like '%%%s%%' " +
+                "ORDER BY data_devolucao asc",
+                filtroUpper, filtroUpper
+            );
+            
+            String tabela = apenasAtrasados ? TABELA_EMPRESTIMOS_ATRASADOS : TABELA_EMPRESTIMO;
+            ResultSet resultSet = repositorio.get(tabela, consulta);
+            
+            return converterResultSetParaLista(resultSet);
+            
+        } catch (SQLException ex) {
+            throw new EmprestimoException("Erro ao listar empréstimos", ex);
         }
-        
-        var usuarioResult = usuarioRepo.buscarPorIdentificador(dto.getIdentificadorUsuario());
-        if(!usuarioResult.next()) {
-            throw new IllegalArgumentException("Usuario nao encontrado");
-        }
-        usuarioResult.close();
-        
-        var livroResult = livroRepo.buscarDisponiveisPorCodigo(dto.getNumRegistroLivro());
-        boolean livroEncontrado = false;
-        while(livroResult.next()) {
-            if(livroResult.getString("volume").equals(dto.getVolume()) && livroResult.getString("exemplar").equals(dto.getExemplar())){
-                livroEncontrado = true;
-                break;
-            }
-        }
-        
-        livroResult.close();
-        
-        if(!livroEncontrado){
-            throw new IllegalArgumentException("Livro nao disponivel para emprestimo");
-        }
-        
-        if(emprestimoRepo.usuarioPossuiEmprestimo(dto.getIdUsuario())){
-            throw new IllegalStateException("Usuario ja possui emprestimo ativo");
-        }
-        
-        String[] columns = {
-            "num_registro_livro", "id_usuario", "data_inicio", "data_devolucao",
-            "volume_livro", "exemplar_livro", "titulo_livro", "nome_usuario",
-            "turma_usuario", "telefone_usuario", "identificador_usuario", "autor_livro"
-        };
-        
-        String[] values = {
-            dto.getNumRegistroLivro(),
-            dto.getIdUsuario(),
-            dto.getDataInicio(),
-            dto.getDataDevolucao(),
-            dto.getVolume(),
-            dto.getExemplar(),
-            dto.getTituloLivro(),
-            dto.getNomeUsuario(),
-            dto.getTurmaUsuario(),
-            dto.getTelefoneUsuario(),
-            dto.getIdentificadorUsuario(),
-            dto.getAutorLivro()
-        };
-        
-        emprestimoRepo.salvarEmprestimo(columns, values);
     }
     
-    private boolean dadosValidos(EmprestimoDTO dto){
-        return dto != null && dto.getIdUsuario() != null
-                && dto.getNumRegistroLivro() != null
-                && dto.getVolume() != null
-                && dto.getExemplar() != null;
+    public void renovarEmprestimo(String idEmprestimo) throws EmprestimoException {
+        try {
+            LocalDate novaDataDevolucao = LocalDate.now().plusDays(DIAS_RENOVACAO);
+            String[] colunas = {"data_devolucao"};
+            String[] valores = {novaDataDevolucao.toString()};
+            String condicao = String.format("id_emprestimo = '%s'", idEmprestimo);
+            
+            repositorio.update(TABELA_EMPRESTIMO, colunas, valores, condicao);
+            
+        } catch (SQLException ex) {
+            throw new EmprestimoException("Erro ao renovar empréstimo", ex);
+        }
+    }
+    
+    public void encerrarEmprestimo(String idEmprestimo, EmprestimoDTO dadosEmprestimo) 
+            throws EmprestimoException {
+        try {
+            String[] colunas = {
+                "data_emprestimo", 
+                "data_devolucao",
+                "id_usuario",
+                "num_registro_livro",
+                "titulo_livro",
+                "volume_livro",
+                "exemplar_livro",
+                "nome_usuario",
+                "turma_usuario",
+                "telefone_usuario"
+            };
+            
+            String[] valores = {
+                dadosEmprestimo.getDataInicio().toString(),
+                LocalDate.now().toString(),
+                dadosEmprestimo.getIdUsuario(),
+                dadosEmprestimo.getNumRegistroLivro(),
+                dadosEmprestimo.getTituloLivro(),
+                dadosEmprestimo.getVolumeLivro(),
+                dadosEmprestimo.getExemplarLivro(),
+                dadosEmprestimo.getNomeUsuario(),
+                dadosEmprestimo.getTurmaUsuario(),
+                dadosEmprestimo.getTelefoneUsuario()
+            };
+            
+            repositorio.save(TABELA_EMPRESTIMO_ENCERRADO, colunas, valores);
+            repositorio.delete(TABELA_EMPRESTIMO, String.format("id_emprestimo = '%s'", idEmprestimo));
+            
+        } catch (SQLException ex) {
+            throw new EmprestimoException("Erro ao encerrar empréstimo", ex);
+        }
+    }
+    
+    private List<EmprestimoDTO> converterResultSetParaLista(ResultSet resultSet) 
+            throws SQLException {
+        List<EmprestimoDTO> emprestimos = new ArrayList<>();
+        
+        while (resultSet.next()) {
+            emprestimos.add(EmprestimoDTO.fromResultSet(resultSet));
+        }
+        
+        return emprestimos;
     }
 }
