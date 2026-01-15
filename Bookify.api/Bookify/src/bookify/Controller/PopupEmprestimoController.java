@@ -40,15 +40,15 @@ public class PopupEmprestimoController {
     @FXML
     private Text tituloText;
 
-    protected void setRenovarManipulador(IButtonHandler event){
+    public void setRenovarManipulador(IButtonHandler event){
         this.eventRenovar = event;
     }
     
-    protected void setEncerrarManipulador(IButtonHandler event){
+    public void setEncerrarManipulador(IButtonHandler event){
         this.eventEncerrar = event;
     }
     
-    protected void setFecharManipulador(IButtonHandler event){
+    public void setFecharManipulador(IButtonHandler event){
         this.eventClose = event;
     }
     
@@ -62,8 +62,7 @@ public class PopupEmprestimoController {
         eventEncerrar.handler();
     }
     
-    // seta as informações que serão mostradas no popup de empréstimo
-    protected void setInfo(String titulo, String numReg, String autor, String matricula, String cpf, String responsavel, String dataIncio, String dataDevolucao){
+    public void setInfo(String titulo, String numReg, String autor, String matricula, String cpf, String responsavel, String dataIncio, String dataDevolucao){
         if(titulo.length() > 40){
             titulo =titulo.substring(0,40) + "...";
         }
