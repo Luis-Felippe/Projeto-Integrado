@@ -45,6 +45,39 @@ public class EmprestimoService {
         }
     }
     
+    public void realizarEmprestimo(EmprestimoDTO dto) throws SQLException, IllegalArgumentException {
+        if (dto == null || dto.getIdUsuario() == null || dto.getNumRegistroLivro() == null) {
+            throw new IllegalArgumentException("Dados do empréstimo inválidos");
+        }
+        
+        if (dto.getVolume() == null || dto.getExemplar() == null) {
+            throw new IllegalArgumentException("Volume e exemplar são obrigatórios");
+        }
+        
+        String[] columns = {
+            "num_registro_livro", "id_usuario", "data_inicio", "data_devolucao",
+            "volume_livro", "exemplar_livro", "titulo_livro", "nome_usuario",
+            "turma_usuario", "telefone_usuario", "identificador_usuario", "autor_livro"
+        };
+        
+        String[] values = {
+            dto.getNumRegistroLivro(),
+            dto.getIdUsuario(),
+            dto.getDataInicio().toString(),
+            dto.getDataDevolucao().toString(),
+            dto.getVolume(),
+            dto.getExemplar(),
+            dto.getTituloLivro(),
+            dto.getNomeUsuario(),
+            dto.getTurmaUsuario(),
+            dto.getTelefoneUsuario(),
+            dto.getIdentificadorUsuario(),
+            dto.getAutorLivro()
+        };
+        
+        repositorio.save(TABELA_EMPRESTIMO, columns, values);
+    }
+    
     public void renovarEmprestimo(String idEmprestimo) throws EmprestimoException {
         try {
             LocalDate novaDataDevolucao = LocalDate.now().plusDays(DIAS_RENOVACAO);

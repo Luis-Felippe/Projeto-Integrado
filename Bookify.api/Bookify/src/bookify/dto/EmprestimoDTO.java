@@ -164,4 +164,32 @@ public class EmprestimoDTO {
     public String getMatricula() {
         return identificadorUsuario;
     }
+    
+    public String getVolume() {
+        return volumeLivro;
+    }
+    
+    public void setVolume(String volume) {
+        this.volumeLivro = volume;
+    }
+    
+    public String getExemplar() {
+        return exemplarLivro;
+    }
+    
+    public void setExemplar(String exemplar) {
+        this.exemplarLivro = exemplar;
+    }
+    
+    public void setDataInicio(String dataInicio) {
+        if (dataInicio != null && !dataInicio.isEmpty()) {
+            this.dataInicio = LocalDate.parse(dataInicio);
+        }
+    }
+    
+    public void setDataDevolucao(String dataDevolucao) {
+        if (dataDevolucao != null && !dataDevolucao.isEmpty()) {
+            this.dataDevolucao = LocalDate.parse(dataDevolucao);
+        }
+    }
 }

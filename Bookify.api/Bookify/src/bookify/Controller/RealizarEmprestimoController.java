@@ -10,6 +10,8 @@ import bookify.Models.BookifyDatabase;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +21,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import bookify.service.EmprestimoDTO;
-import bookify.service.EmprestimoService;
-import bookify.service.BuscaEmprestimoService;
-import bookify.service.EmprestimoInfoService;
+import bookify.dto.EmprestimoDTO;
+import bookify.Service.EmprestimoService;
 import bookify.dto.LivroDTO;
 import bookify.dto.UsuarioDTO;
 
@@ -39,8 +39,6 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     
     private final EmprestimoService emprestimoService = new EmprestimoService();
-    private final BuscaEmprestimoService buscaService = new BuscaEmprestimoService();
-    private final EmprestimoInfoService infoService = new EmprestimoInfoService();
     
     private String tipoUsuario = "A"; //A = aluno e P = Professor
     
@@ -136,8 +134,8 @@ public class RealizarEmprestimoController extends TelasController implements Ini
 
     
     private void carregarInformacao(ResultSet resLiv, ResultSet resUser) throws SQLException{
-        carregarLivro(infoService.montarLivro(resLiv));
-        carregarUsuario(infoService.montarUsuario(resUser));
+        carregarLivro(montarLivroDTO(resLiv));
+        carregarUsuario(montarUsuarioDTO(resUser));
     }
     
     private void carregarLivro(LivroDTO livro){
@@ -192,8 +190,8 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     
     private void buscar(){
         try{
-            ResultSet resultLiv = buscaService.buscarLivroDisponivel(LivTextCod.getText());
-            ResultSet resultUser = buscaService.buscarUsuario(LivTextMatricula.getText());
+            ResultSet resultLiv = buscarLivroDisponivel(LivTextCod.getText());
+            ResultSet resultUser = buscarUsuario(LivTextMatricula.getText());
             
             carregarInformacao(resultLiv, resultUser);
             error.setText("");
@@ -337,5 +335,57 @@ public class RealizarEmprestimoController extends TelasController implements Ini
             mainContainer.getChildren().remove(controller.getPopup());
         });
         mainContainer.getChildren().add(controller.getPopup());
+    }
+    
+    private LivroDTO montarLivroDTO(ResultSet res) throws SQLException {
+        if (res == null || !res.next()) {
+            return null;
+        }
+        
+        String codigo = res.getString("num_registro");
+        String titulo = res.getString("titulo");
+        String autor = res.getString("autor");
+        
+        ResultSet volumesRes = repositorio.get("livros", String.format("num_registro = '%s'", codigo));
+        List<String> volumes = new ArrayList<>();
+        while (volumesRes.next()) {
+            volumes.add(volumesRes.getString("volume"));
+        }
+        volumesRes.close();
+        
+        return new LivroDTO(codigo, titulo, autor, volumes);
+    }
+    
+    private UsuarioDTO montarUsuarioDTO(ResultSet res) throws SQLException {
+        if (res == null || !res.next()) {
+            return null;
+        }
+        
+        String id = res.getString("id");
+        String nome = res.getString("nome");
+        String telefone = res.getString("telefone");
+        String turma = res.getString("turma");
+        
+        return new UsuarioDTO(id, nome, telefone, turma);
+    }
+    
+    private ResultSet buscarLivroDisponivel(String codigo) throws SQLException {
+        String query = String.format(
+            "num_registro = '%s' AND num_registro NOT IN " +
+            "(SELECT num_registro_livro FROM emprestimo)",
+            codigo
+        );
+        return repositorio.get("livros", query);
+    }
+    
+    private ResultSet buscarUsuario(String identificador) throws SQLException {
+        String query;
+        if (tipoUsuario.equals("A")) {
+            query = String.format("matricula = '%s'", identificador);
+            return repositorio.get("alunos", query);
+        } else {
+            query = String.format("cpf = '%s'", identificador);
+            return repositorio.get("professores", query);
+        }
     }
 }
