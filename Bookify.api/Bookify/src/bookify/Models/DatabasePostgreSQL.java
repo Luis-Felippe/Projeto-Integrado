@@ -19,20 +19,16 @@ public class DatabasePostgreSQL {
 
     url = dataBasePrefix + hostName + ":" + dabaBasePort + "/" + dataBaseName;
   }
-  
+
   public Connection getConnection() {
     try {
       if (con == null) {
-        Class.forName(jdbcDriver);
+//        Class.forName(jdbcDriver);
         con = DriverManager.getConnection(url, userName, password);
       } else if (con.isClosed()) {
         con = null;
         return getConnection();
-      }
-    } catch (ClassNotFoundException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-    } catch (SQLException e) {
+      }    } catch (SQLException e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
     }
