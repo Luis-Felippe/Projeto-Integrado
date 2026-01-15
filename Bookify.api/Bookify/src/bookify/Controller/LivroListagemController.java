@@ -3,16 +3,15 @@ package bookify.Controller;
 import bookify.Controller.PopupMensagem.FabricaPopupMsg;
 import bookify.Controller.PopupAcao.FabricaPopupAcao;
 import bookify.Controller.Componentes.FabricaComponente;
+import bookify.Repository.LivroRepository;
 import bookify.Interface.IComponente;
 import bookify.Interface.IFabricaComponente;
 import bookify.Interface.IFabricaPopupAcao;
 import bookify.Interface.IFabricaPopupMsg;
 import bookify.Interface.IPopupAcao;
 import bookify.Interface.IPopupMsg;
-import bookify.Models.BookifyDatabase;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +20,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
+
+import bookify.Models.Livro;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -32,13 +32,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class LivroListagemController extends TelasLivrosController implements Initializable {
-    
-    private BookifyDatabase repositorio = BookifyDatabase.getInstancia();
+    private LivroRepository livroRepository = new LivroRepository();
+
     private IFabricaPopupMsg MsgFabrica = new FabricaPopupMsg();
     private IFabricaComponente componenteFabrica = new FabricaComponente();
     private IFabricaPopupAcao popupAcaoFabrica = new FabricaPopupAcao();
-    
-    private String currentEditLivro;
 
     @FXML
     private ToggleButton livrosEmprestadosBtn;
@@ -54,7 +52,6 @@ public class LivroListagemController extends TelasLivrosController implements In
     
     // recebe o id de um livro e abre a tela de edição de livro
     private void editarLivroManipulador(String id, String volume) {
-        this.currentEditLivro = id;
         try {
             super.editarLivro(id,volume);
         } catch (IOException ex) {
@@ -63,44 +60,28 @@ public class LivroListagemController extends TelasLivrosController implements In
     }
     
     // Adiciona o componente que mostra as informações do aluno e seta seus atributos e funções
-    private void adicionarComponente(HBox box, ResultSet res) throws IOException, SQLException{
+    private void adicionarComponente(HBox box, Livro livro, List<String> exemplares) throws IOException {
         IComponente componente = componenteFabrica.criaComponente("LivroComponente");
+
         Map<String, String> atributos = new HashMap<>();
-        atributos.put("titulo", res.getString("titulo"));
-        atributos.put("num_registro", res.getString("num_registro"));
-        atributos.put("autor", res.getString("autor"));
-        atributos.put("volume", res.getString("volume"));
-        atributos.put("data", res.getString("data"));
-        atributos.put("observacao", res.getString("observacao"));
-        
-        String id = res.getString("num_registro");
-        String volume = res.getString("volume");
-        List<String> gambiarra = new ArrayList<String>();
-        gambiarra.add("TODOS");
-        int cont = 0;
-        do{
-            if(atributos.get("num_registro").equals(res.getString("num_registro")) && atributos.get("volume").equals(res.getString("volume"))){
-                gambiarra.add(res.getString("exemplar"));
-                cont++;
-            }
-            else {
-                break;
-            }
-        }while(res.next());
-        
-        atributos.put("exemplar", String.valueOf(cont));
-        
-        
+        atributos.put("titulo", livro.getTitulo());
+        atributos.put("num_registro", livro.getNumRegistro());
+        atributos.put("autor", livro.getAutor());
+        atributos.put("volume", livro.getVolume());
+        atributos.put("data", livro.getDataLivro());
+        atributos.put("observacao", livro.getObservacao());
+        atributos.put("exemplar", String.valueOf(exemplares.size() - 1));
+
         componente.setTexto(atributos);
 
-        componente.setEditarManipulador(()->{
-            editarLivroManipulador(id, volume);    
+        componente.setEditarManipulador(() -> {
+            editarLivroManipulador(livro.getNumRegistro(), livro.getVolume());
         });
 
-        componente.setDeletarManipulador(()->{
-            deletarLivroManipulador(id, mainContainer, gambiarra, volume);
+        componente.setDeletarManipulador(() -> {
+            deletarLivroManipulador(livro.getNumRegistro(), mainContainer, exemplares, livro.getVolume());
         });
-        
+
         box.getChildren().add(componente.getFxml());
     }
 
@@ -110,46 +91,40 @@ public class LivroListagemController extends TelasLivrosController implements In
         Pane popup = controller.getFxml();
         mainContainer.getChildren().add(popup);
         controller.preencherExemplares(lista);
-        controller.setCancelarManipulador(()->{
-            cancelarManipulador(popup, mainContainer);
+
+        controller.setCancelarManipulador(() -> mainContainer.getChildren().remove(popup));
+
+        controller.setConfirmarManipulador(() -> {
+            confirmarExclusao(id, popup, controller, volume);
         });
-        controller.setConfirmarManipulador(()->{
-            confirmarManipulador(id, mainContainer, controller, popup, volume);
-        });
-        
     }
-    
-    // confirma a exclusão de um livro
-    private void confirmarManipulador(String id, Pane mainContainer, IPopupAcao controlador, Pane popup, String volume){
+
+    private void confirmarExclusao(String id, Pane popup, IPopupAcao controlador, String volume){
         try {
-            if(controlador.getExemplar().equals("NENHUM")){
-                System.out.println("SEleciona ai paezin");
-            } else {
-                if(controlador.getExemplar().equals("TODOS")){
-                    repositorio.delete("livro", String.format("num_registro = '%s' and volume = '%s'", id, volume));
-                }
-                else{
-                    repositorio.delete("livro", String.format("num_registro = '%s' and volume = '%s' and exemplar = '%s'", id, volume, controlador.getExemplar()));
-                }
-                mainContainer.getChildren().remove(popup);
-                IPopupMsg controller = MsgFabrica.criaPopupMsg("PopupExcluirMsg");
-                controller.setManipulador(()->{
-                    mainContainer.getChildren().remove(controller.getPopup());
-                });
-                mainContainer.getChildren().add(controller.getPopup());
-                buscar();
+            String exemplarSelecionado = controlador.getExemplar();
+
+            if (exemplarSelecionado == null || exemplarSelecionado.equals("NENHUM")){
+                System.out.println("Selecione um exemplar");
+                return;
             }
-           
-        } catch (SQLException ex) {
+
+            livroRepository.deletar(id, volume, exemplarSelecionado);
+
+            mainContainer.getChildren().remove(popup);
+            exibirPopupSucesso("PopupExcluirMsg");
+            buscar();
+
+        } catch (SQLException | IOException ex) {
             controlador.erro();
         }
     }
-    
-    // fecha o popup 
-    private void cancelarManipulador(Pane popup, Pane mainContainer){
-        mainContainer.getChildren().remove(popup);
+
+    private void exibirPopupSucesso(String nomePopup) throws IOException {
+        IPopupMsg controller = MsgFabrica.criaPopupMsg(nomePopup);
+        controller.setManipulador(() -> mainContainer.getChildren().remove(controller.getPopup()));
+        mainContainer.getChildren().add(controller.getPopup());
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buscar();
@@ -164,42 +139,58 @@ public class LivroListagemController extends TelasLivrosController implements In
             }
         });
     }
-    
-    // Faz uma busca no banco de dados, de acordo com o filtro
+
     @FXML
-    protected void buscar(){
-        ResultSet response;
+    protected void buscar() {
         render_box_elements.getChildren().clear();
-        String searchBar = pesquisarText.getText().toUpperCase();
-        String consult = String.format("(UPPER (autor) like '%%%s%%' ) OR (UPPER(titulo) like '%%%s%%') OR (UPPER (categoria) like '%%%s%%') "
-                + "ORDER BY titulo ASC,num_registro ASC, volume ASC, exemplar ASC",searchBar, searchBar, searchBar);
-        
+        String termo = pesquisarText.getText().toUpperCase();
+
         try {
-            if(livrosEmprestadosBtn.isSelected()){
-                response = repositorio.get("livros_emprestados", consult);
-            } else{
-                response = repositorio.get("Livro", consult);
+            List<Livro> registrosRaw = livroRepository.buscar(termo, livrosEmprestadosBtn.isSelected());
+
+            if (registrosRaw.isEmpty()) return;
+
+            class LivroAgrupado {
+                Livro livro;
+                List<String> exemplares = new ArrayList<>();
+                LivroAgrupado(Livro l) { this.livro = l; this.exemplares.add("TODOS"); }
             }
-            HBox box = null;
-            boolean status = true;
-            if(response.next()){
-                while(!response.isAfterLast()){
-                    if(status){
-                        box = new HBox();
-                        render_box_elements.getChildren().add(box);
-                        status = false;
-                        adicionarComponente(box, response);
-                    } else{
-                        status = true;
-                        adicionarComponente(box, response);
-                    }
+
+            List<LivroAgrupado> listaParaRenderizar = new ArrayList<>();
+            LivroAgrupado atual = null;
+            String chaveAnterior = "";
+
+            for (Livro reg : registrosRaw) {
+                String chaveAtual = reg.getNumRegistro() + "-" + reg.getVolume();
+
+                if (!chaveAtual.equals(chaveAnterior)) {
+                    atual = new LivroAgrupado(reg);
+                    listaParaRenderizar.add(atual);
+                    chaveAnterior = chaveAtual;
+                }
+                atual.exemplares.add(reg.getExemplar());
+            }
+
+            HBox linha = null;
+            int itensNaLinha = 0;
+
+            for (LivroAgrupado item : listaParaRenderizar) {
+                if (itensNaLinha == 0) {
+                    linha = new HBox();
+
+                    render_box_elements.getChildren().add(linha);
+                }
+
+                adicionarComponente(linha, item.livro, item.exemplares);
+
+                itensNaLinha++;
+                if (itensNaLinha == 2) {
+                    itensNaLinha = 0;
                 }
             }
-            
-            
-        } 
-        catch (SQLException | IOException ex) {
-            Logger.getLogger(AlunoListagemController.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException | IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

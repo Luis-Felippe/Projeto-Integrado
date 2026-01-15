@@ -11,28 +11,24 @@ public class DatabasePostgreSQL {
 
     hostName = "localhost";
     userName = "postgres";
-    password = "postgres";
+    password = "root";
     jdbcDriver = "org.postgresql.Driver";
-    dataBaseName = "bookify";
+    dataBaseName = "Bookify";
     dataBasePrefix = "jdbc:postgresql://";
     dabaBasePort = "5432";
 
     url = dataBasePrefix + hostName + ":" + dabaBasePort + "/" + dataBaseName;
   }
-  
+
   public Connection getConnection() {
     try {
       if (con == null) {
-        Class.forName(jdbcDriver);
+//        Class.forName(jdbcDriver);
         con = DriverManager.getConnection(url, userName, password);
       } else if (con.isClosed()) {
         con = null;
         return getConnection();
-      }
-    } catch (ClassNotFoundException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-    } catch (SQLException e) {
+      }    } catch (SQLException e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
     }
