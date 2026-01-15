@@ -40,7 +40,7 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     
     private final EmprestimoService emprestimoService = new EmprestimoService();
     
-    private String tipoUsuario = "A"; //A = aluno e P = Professor
+    private String tipoUsuario = "A";
     
     @FXML
     private Pane mainContainer;
@@ -140,7 +140,6 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     
     private void carregarLivro(LivroDTO livro){
         if(livro == null){
-//            error_livro.setText("Livro nao disponivel");
             limparInformacoes(true, false);
             return;
         }
@@ -157,7 +156,6 @@ public class RealizarEmprestimoController extends TelasController implements Ini
     
     private void carregarUsuario(UsuarioDTO usuario){
         if(usuario == null){
-//            error_usuario.setText("Usuario nao encontrado");
             limparInformacoes(false, true);
             return;
         }
@@ -236,12 +234,12 @@ public class RealizarEmprestimoController extends TelasController implements Ini
 
             if (encontrouExemplares) {
                 exemplar.setValue(exemplar.getItems().get(0));
-                error_livro.setText(""); // Limpa mensagem de erro
+                error_livro.setText("");
             } else {
               
                 exemplar.setValue(null);
                 exemplar.getItems().add("Nenhum exemplar disponível");
-                exemplar.setDisable(true); // Opcional: desabilita a escolha
+                exemplar.setDisable(true);
                 error_livro.setText("Este volume não possui exemplares disponíveis para empréstimo");
                 LivTextObservacao.clear();
             }
@@ -261,7 +259,6 @@ public class RealizarEmprestimoController extends TelasController implements Ini
 
             String valorExemplar = exemplar.getValue();
 
-            // Se for a mensagem de "nenhum exemplar disponível", não busca
             if ("Nenhum exemplar disponível".equals(valorExemplar)) {
                 LivTextObservacao.clear();
                 return;
