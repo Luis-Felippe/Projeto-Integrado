@@ -13,7 +13,7 @@ public class DatabasePostgreSQL {
     userName = "postgres";
     password = "12345";
     jdbcDriver = "org.postgresql.Driver";
-    dataBaseName = "bookify";
+    dataBaseName = "bookify2";
     dataBasePrefix = "jdbc:postgresql://";
     dabaBasePort = "5432";
 
