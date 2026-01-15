@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="bookify">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/Bookify.api/Bookify/dist/bookify.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
