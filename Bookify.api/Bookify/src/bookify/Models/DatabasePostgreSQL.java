@@ -11,9 +11,9 @@ public class DatabasePostgreSQL {
 
     hostName = "localhost";
     userName = "postgres";
-    password = "postgres";
+    password = "salve";
     jdbcDriver = "org.postgresql.Driver";
-    dataBaseName = "bookify";
+    dataBaseName = "bookify2";
     dataBasePrefix = "jdbc:postgresql://";
     dabaBasePort = "5432";
 

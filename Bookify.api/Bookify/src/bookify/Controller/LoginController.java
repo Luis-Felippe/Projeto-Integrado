@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
 
-    private TelasView tela = new TelasView();
+    private TelasView tela = TelasView.getInstance();
     private String user = "biblioteca";
     private String password = "bookify";
     

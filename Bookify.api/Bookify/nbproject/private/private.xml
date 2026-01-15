@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/home/luisfelippe/Documentos/faculdade/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/TelasView.java</file>
+            <file>file:/home/luisfelippe/Documentos/faculdade/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/LoginController.java</file>
+            <file>file:/home/luisfelippe/Documentos/faculdade/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/TelasController.java</file>
+            <file>file:/home/luisfelippe/Documentos/faculdade/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Main.java</file>
+=======
             <file>file:/home/renan-almeida/Documentos/8%20semestre/8%20semestre/Reuso%20de%20Software/trabalho%20final/Projeto-Integrado/Bookify.api/Bookify/src/bookify/Controller/RealizarEmprestimoController.java</file>
+>>>>>>> 703462008c49e45602735b4ae1b0c9802778a4a7
         </group>
     </open-files>
 </project-private>
