@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         this.stage = primaryStage;
-        TelasView tela = new TelasView();
+        TelasView tela = TelasView.getInstance();
 //        tela.trocarTela("login");
         tela.trocarTela("home");
         stage.setResizable(false);

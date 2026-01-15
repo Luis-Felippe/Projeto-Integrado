@@ -5,7 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public abstract class TelasController {
-    protected TelasView tela = new TelasView();
+    protected TelasView tela = TelasView.getInstance();
     
     // logout do sistema
     @FXML
