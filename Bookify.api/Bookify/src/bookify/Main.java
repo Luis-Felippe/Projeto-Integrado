@@ -5,13 +5,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Main extends Application {
     
     private static Stage stage;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+
         this.stage = primaryStage;
         TelasView tela = TelasView.getInstance();
 //        tela.trocarTela("login");
